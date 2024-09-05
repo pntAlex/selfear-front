@@ -3,16 +3,16 @@
   --cursor-mouse-y: 50%;
   --dark-bg: #111;
   --lightgray-border: lightgray;
-  --text-color: white
+  --text-color: white;
 
-  font-family: "Neue Metana";
+  font-family: Neue Metana;
+  color: var(--text-color);
 }
 
 body {
   margin: 0;
   position: relative;
   font-weight: normal;
-  color: var(--text-color);
   background-color: var(--dark-bg);
 
   &::-webkit-scrollbar {

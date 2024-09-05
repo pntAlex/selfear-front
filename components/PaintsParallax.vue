@@ -21,38 +21,45 @@ const ROOT_CLASS = "paints-parallax"
 
         <ul :class="ROOT_CLASS + '__wrapper'">
             <li>
-                <img alt="'radioactiv' - peinture acrylique Fluo | 56x56cm - naperon en coton | selfear 2022"
-                    data-speed="1.2" src="~/assets/images/radioactiv/main.png" />
+                <NuxtImg loading="lazy"
+                    alt="'radioactiv' - peinture acrylique Fluo - 56x56cm - naperon en coton | selfear 2022"
+                    data-speed="1.2" src="/images/radioactiv/main.png" />
             </li>
 
             <li>
-                <img alt="'spiraal' - peinture acrylique Fluo | 40x40cm - toile en coton | selfear 2023"
-                    data-speed="0.9" src="~/assets/images/spiraal/main.jpg" />
+                <NuxtImg loading="lazy"
+                    alt="'spiraal' - peinture acrylique Fluo - 40x40cm - toile en coton | selfear 2023" data-speed="0.9"
+                    src="/images/spiraal/main.jpg" />
             </li>
 
             <li>
-                <img alt="'knowledge' - peinture acrylique Fluo & Phospho | 30x30cm - disque vinyle 33tpm | selfear 2023"
-                    data-speed="1.1" src="~/assets/images/knowledge/main-uv.png" />
+                <NuxtImg loading="lazy"
+                    alt="'knowledge' - peinture acrylique Fluo & Phospho - 30x30cm - disque vinyle 33tpm | selfear 2023"
+                    data-speed="1.1" src="/images/knowledge/main-uv.png" />
             </li>
 
             <li>
-                <img alt="'staar' - peinture acrylique Fluo | 40x40cm - toile en coton | selfear 2022" data-speed="0.85"
-                    src="~/assets/images/staar/main-2.jpg" />
+                <NuxtImg loading="lazy"
+                    alt="'staar' - peinture acrylique Fluo - 40x40cm - toile en coton | selfear 2022" data-speed="0.85"
+                    src="/images/staar/main-2.jpg" />
             </li>
 
             <li>
-                <img alt="'eclectic' - peinture acrylique Fluo & Phospho | 17.5x17.5cm - disque vinyle 45tpm | selfear 2024"
-                    data-speed="0.9" src="~/assets/images/eclectic/main.png" />
+                <NuxtImg loading="lazy"
+                    alt="'eclectic' - peinture acrylique Fluo & Phospho - 17.5x17.5cm - disque vinyle 45tpm | selfear 2024"
+                    data-speed="0.9" src="/images/eclectic/main.png" />
             </li>
 
             <li>
-                <img alt="'self' - peinture acrylique Fluo & Phospho | 17.5x17.5cm - disque vinyle 45tpm | selfear 2024"
-                    data-speed="0.85" src="~/assets/images/self/uv.png" />
+                <NuxtImg loading="lazy"
+                    alt="'self' - peinture acrylique Fluo & Phospho - 17.5x17.5cm - disque vinyle 45tpm | selfear 2024"
+                    data-speed="0.85" src="/images/self/uv.png" />
             </li>
 
             <li>
-                <img alt="'penrose chaos' - peinture acrylique Fluo & Phospho | 40x40cm - toile en coton | selfear 2024"
-                    data-speed="0.85" src="~/assets/images/penrose-chaos/main-uv.jpeg" />
+                <NuxtImg loading="lazy"
+                    alt="'penrose chaos' - peinture acrylique Fluo & Phospho - 40x40cm - toile en coton | selfear 2024"
+                    data-speed="0.85" src="/images/penrose-chaos/main-uv.jpeg" />
             </li>
         </ul>
     </section>
@@ -150,27 +157,18 @@ const ROOT_CLASS = "paints-parallax"
                 width: 100%;
                 height: 100%;
                 object-fit: contain;
-                transition: scale 0.4s, filter 0.4s;
             }
 
             &:nth-of-type(1),
             &:nth-of-type(2),
             &:nth-of-type(3) {
                 left: 5%;
-
-                img {
-                    transform-origin: left;
-                }
             }
 
             &:nth-of-type(4),
             &:nth-of-type(5),
             &:nth-of-type(6) {
                 right: 5%;
-
-                img {
-                    transform-origin: right;
-                }
             }
 
             &:nth-of-type(1) {

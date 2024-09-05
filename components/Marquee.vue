@@ -9,7 +9,7 @@ const { title } = defineProps({
     link: String
 })
 
-const cursorPath = ref(`url("~/assets/images/eclectic/cursor.png")`)
+const cursorPath = ref(`url("/images/${title}/cursor.png")`)
 
 </script>
 
@@ -80,8 +80,8 @@ const cursorPath = ref(`url("~/assets/images/eclectic/cursor.png")`)
         display: block;
         width: 1em;
 
-        // background-image: url("~/assets/images/eclectic/cursor.png");
-        // background: v-bind('cursorPath') center;
+        // background-image: url("/images/eclectic/cursor.png");
+        background: v-bind('cursorPath') center;
         background-size: contain;
         background-repeat: no-repeat;
     }

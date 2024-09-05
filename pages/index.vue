@@ -22,8 +22,8 @@ useSeoMeta({
                 <span></span>
             </span>
             <!-- <h2>UV/Night light painter</h2> -->
-            <img :class="ROOT_CLASS + '__loader__image'" data-alpha="0" src="~/assets/images/fluid/main-2.jpg"
-                alt="fluid - peinture UV fluid-art | Selfear" />
+            <img :class="ROOT_CLASS + '__loader__image'" data-alpha="0" src="/images/fluid/main-2.jpg"
+                alt="'fluid' - peinture acrylique Fluo - 20x14cm - toile en coton | selfear 2022" />
         </section>
 
         <PaintsParallax />
