@@ -1,0 +1,63 @@
+@font-face {
+  font-family: "Neue Metana";
+  src: url("../fonts/NewMetana-Regular.otf") format("otf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neue Metana";
+  src: url("../fonts/NewMetana-Bold.otf");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --cursor-mouse-x: 50%;
+  --cursor-mouse-y: 50%;
+  --dark-bg: #111;
+  --lightgray-border: lightgray;
+}
+
+body {
+  position: relative;
+  font-family: "Neue Metana";
+  font-weight: normal;
+  color: white;
+  background-color: var(--dark-bg);
+  margin: 0;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.column-border {
+  --border-color: var(--dark-bg);
+
+  &-gray {
+    --border-color: var(--lightgray-border);
+  }
+
+  &:after,
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    opacity: 0.15;
+    width: calc(1 / 6 * 100vw);
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    pointer-events: none;
+  }
+
+  &:before {
+    inset: 0 auto 0 5%;
+  }
+
+  &:after {
+    inset: 0 5% 0 auto;
+  }
+}

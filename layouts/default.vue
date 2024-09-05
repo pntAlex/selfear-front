@@ -1,15 +1,10 @@
 <template>
+    <LightSwitcher />
+
     <main>
         <slot />
     </main>
 
+    <Cursor />
     <Footer />
 </template>
-
-<style scoped lang="scss">
-main {
-    &::-webkit-scrollbar {
-        display: none;
-    }
-}
-</style>

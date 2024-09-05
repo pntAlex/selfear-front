@@ -1,5 +1,10 @@
+<script setup>
+const ROOT_CLASS = "light-switcher"
+</script>
+
 <template>
-    <div class="light-switcher">
+    <!-- TODO - Switch to Toggle button input -->
+    <div :class="ROOT_CLASS">
         <span>A</span>
         <span>B</span>
     </div>
@@ -11,7 +16,7 @@
     top: 2vh;
     transform: translateY(-200%);
     align-self: center;
-    border: 1px solid lightgray;
+    border: 1px solid var(--lightgray-border);
     background-color: var(--dark-bg);
     border-radius: 2ch;
     width: 10ch;

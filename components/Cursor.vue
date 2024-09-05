@@ -1,11 +1,15 @@
+<script setup>
+const ROOT_CLASS = 'cursor';
+</script>
+
 <template>
-    <div class="image__cursor">
+    <div :class="ROOT_CLASS">
         <img aria-hidden="true" />
     </div>
 </template>
 
 <style lang="scss" scoped>
-.image__cursor {
+.cursor {
     position: absolute;
     top: 0;
     left: 0;

@@ -40,9 +40,9 @@
       line-height: 1;
 
       span {
-        color: lightgray;
+        color: var(--lightgray-border);
         -webkit-text-stroke-width: 1px;
-        -webkit-text-stroke-color: lightgray;
+        -webkit-text-stroke-color: var(--lightgray-border);
         color: transparent;
       }
     }
@@ -74,7 +74,7 @@
       }
 
       a {
-        color: lightgray;
+        color: var(--lightgray-border);
         text-decoration: none;
 
         svg {
@@ -103,7 +103,7 @@
     line-height: 1em;
 
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: lightgray;
+    -webkit-text-stroke-color: var(--lightgray-border);
     color: transparent;
   }
 
