@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Neue Metana";
-  src: url("~/assets/fonts/NewMetana-Regular.otf") format("otf");
+  src: url("../fonts/NewMetana-Regular.otf") format("otf");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: "Neue Metana";
-  src: url("~/assets/fonts/NewMetana-Bold.otf") format("otf");
+  src: url("../fonts/NewMetana-Bold.otf");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
