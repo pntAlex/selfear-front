@@ -21,36 +21,38 @@ const ROOT_CLASS = "paints-parallax"
 
         <ul :class="ROOT_CLASS + '__wrapper'">
             <li>
-                <a href="">
-                    <img data-speed="1.2" src="~/assets/images/radioactiv/main.png" alt="" srcset="" />
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <img data-speed="0.9" src="~/assets/images/spiraal/main.jpg" alt="" srcset="" />
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <img data-speed="1.1" src="~/assets/images/knowledge/main-uv.png" alt="" srcset="" />
-                </a>
+                <img alt="'radioactiv' - peinture acrylique Fluo | 56x56cm - naperon en coton | selfear 2022"
+                    data-speed="1.2" src="~/assets/images/radioactiv/main.png" />
             </li>
 
             <li>
-                <a href="">
-                    <img data-speed="0.85" src="~/assets/images/staar/main-2.jpg" alt="" srcset="" />
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <img data-speed="0.9" src="~/assets/images/eclectic/main.png" alt="" srcset="" />
-                </a>
+                <img alt="'spiraal' - peinture acrylique Fluo | 40x40cm - toile en coton | selfear 2023"
+                    data-speed="0.9" src="~/assets/images/spiraal/main.jpg" />
             </li>
 
             <li>
-                <a href="">
-                    <img data-speed="0.85" src="~/assets/images/self/uv.png" alt="" srcset="" />
-                </a>
+                <img alt="'knowledge' - peinture acrylique Fluo & Phospho | 30x30cm - disque vinyle 33tpm | selfear 2023"
+                    data-speed="1.1" src="~/assets/images/knowledge/main-uv.png" />
+            </li>
+
+            <li>
+                <img alt="'staar' - peinture acrylique Fluo | 40x40cm - toile en coton | selfear 2022" data-speed="0.85"
+                    src="~/assets/images/staar/main-2.jpg" />
+            </li>
+
+            <li>
+                <img alt="'eclectic' - peinture acrylique Fluo & Phospho | 17.5x17.5cm - disque vinyle 45tpm | selfear 2024"
+                    data-speed="0.9" src="~/assets/images/eclectic/main.png" />
+            </li>
+
+            <li>
+                <img alt="'self' - peinture acrylique Fluo & Phospho | 17.5x17.5cm - disque vinyle 45tpm | selfear 2024"
+                    data-speed="0.85" src="~/assets/images/self/uv.png" />
+            </li>
+
+            <li>
+                <img alt="'penrose chaos' - peinture acrylique Fluo & Phospho | 40x40cm - toile en coton | selfear 2024"
+                    data-speed="0.85" src="~/assets/images/penrose-chaos/main-uv.jpeg" />
             </li>
         </ul>
     </section>
@@ -138,6 +140,7 @@ const ROOT_CLASS = "paints-parallax"
         justify-content: center;
         padding: 0;
         margin: 0;
+        list-style: none;
 
         li {
             position: absolute;
@@ -148,12 +151,6 @@ const ROOT_CLASS = "paints-parallax"
                 height: 100%;
                 object-fit: contain;
                 transition: scale 0.4s, filter 0.4s;
-                // filter: brightness(0.6) grayscale(1);
-
-                &:hover {
-                    scale: 1.015 !important;
-                    // filter: brightness(1) grayscale(0);
-                }
             }
 
             &:nth-of-type(1),

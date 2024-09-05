@@ -1,5 +1,10 @@
 <script setup>
 const ROOT_CLASS = "index";
+
+useSeoMeta({
+    title: "Selfear | Peintre Fluo-Phosphorescent",
+    description: "Explorez l'univers captivant de Selfear, artiste amateur en peinture fluo-phosphorescente. Plongez dans un spectacle de couleurs éblouissant et admirez la splendeur de l'exposition lumineuse !"
+})
 </script>
 
 <template>
@@ -17,7 +22,8 @@ const ROOT_CLASS = "index";
                 <span></span>
             </span>
             <!-- <h2>UV/Night light painter</h2> -->
-            <img :class="ROOT_CLASS + '__loader__image'" data-alpha="0" src="~/assets/images/fluid/main-2.jpg" />
+            <img :class="ROOT_CLASS + '__loader__image'" data-alpha="0" src="~/assets/images/fluid/main-2.jpg"
+                alt="fluid - peinture UV fluid-art | Selfear" />
         </section>
 
         <PaintsParallax />
