@@ -9,13 +9,15 @@ const ROOT_CLASS = "footer";
                 &copy; 2024 all rights reserved.<br />Selfear
             </p>
             <span>For any inquiries&nbsp;:</span>
-            <a :class="ROOT_CLASS + '__contact__mail'"
-                href="mailto:contact@selfear.uv"><span>contact</span>@selfear.uv</a>
+            <NuxtLink :class="ROOT_CLASS + '__contact__mail'" to="mailto:contact@selfear.uv">
+                <span>contact</span>@selfear.uv
+            </NuxtLink>
             <nav :class="ROOT_CLASS + '__contact__nav'">
                 <ul>
                     <li>
-                        <a href="https://www.instagram.com/selfearuv"><svg xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50">
+                        <NuxtLink to="https://www.instagram.com/selfearuv" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                viewBox="0 0 50 50">
                                 <path style="
                       fill: none;
                       stroke: var(--lightgray-border);
@@ -29,7 +31,8 @@ const ROOT_CLASS = "footer";
                       stroke-miterlimit: 10;
                     " cx="25" cy="25" r="10" />
                                 <circle cx="37" cy="13" r="2" />
-                            </svg></a>
+                            </svg>
+                        </NuxtLink>
                     </li>
                 </ul>
             </nav>

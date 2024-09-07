@@ -3,10 +3,10 @@ import { ref } from 'vue'
 
 const ROOT_CLASS = "marquee"
 
-const { title } = defineProps({
+const { title, item, link } = defineProps({
     title: String,
     item: Boolean,
-    link: String
+    link: String,
 })
 
 const cursorPath = ref(`url("/images/${title}/cursor.png")`)
@@ -14,8 +14,8 @@ const cursorPath = ref(`url("/images/${title}/cursor.png")`)
 </script>
 
 <template>
-    <component :is="item ? 'li' : 'div'" :class="ROOT_CLASS" :data-cursor="title">
-        <a :class="ROOT_CLASS + '__link'" :href="link">{{ title }}</a>
+    <component ref="marqueeItem" :is="item ? 'li' : 'div'" :class="ROOT_CLASS" :data-cursor="title">
+        <NuxtLink :class="ROOT_CLASS + '__link'" :to="link">{{ title }}</NuxtLink>
         <div :class="ROOT_CLASS + '__wrapper'" aria-hidden="true">
             <ul :class="ROOT_CLASS + '__content'">
                 <li>{{ title }}</li>

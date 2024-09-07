@@ -1,5 +1,43 @@
 <script setup>
 const ROOT_CLASS = "paints-parallax"
+
+const PAINTS = [
+    {
+        alt: "'radioactiv' - peinture acrylique Fluo - 56x56cm - naperon en coton | selfear 2022",
+        src: "/images/radioactiv/main.png",
+        speed: Math.random() * (2.8 - 1.2) + 1.2
+    },
+    {
+        alt: "'spiraal' - peinture acrylique Fluo - 40x40cm - toile en coton | selfear 2023",
+        src: "/images/spiraal/main.jpg",
+        speed: Math.random() * (2.8 - 1.2) + 1.2
+    },
+    {
+        alt: "'knowledge' - peinture acrylique Fluo & Phospho - 30x30cm - disque vinyle 33tpm | selfear 2023",
+        src: "/images/knowledge/main-uv.png",
+        speed: Math.random() * (2.8 - 1.2) + 1.2
+    },
+    {
+        alt: "'staar' - peinture acrylique Fluo - 40x40cm - toile en coton | selfear 2022",
+        src: "/images/staar/main-2.jpg",
+        speed: Math.random() * (2.8 - 1.2) + 1.2
+    },
+    {
+        alt: "'eclectic' - peinture acrylique Fluo & Phospho - 17.5x17.5cm - disque vinyle 45tpm | selfear 2024",
+        src: "/images/eclectic/main.png",
+        speed: Math.random() * (2.8 - 1.2) + 1.2
+    },
+    {
+        alt: "'self' - peinture acrylique Fluo & Phospho - 17.5x17.5cm - disque vinyle 45tpm | selfear 2024",
+        src: "/images/self/uv.png",
+        speed: Math.random() * (2.8 - 1.2) + 1.2
+    },
+    {
+        alt: "'penrose chaos' - peinture acrylique Fluo & Phospho - 40x40cm - toile en coton | selfear 2024",
+        src: "/images/penrose-chaos/main-uv.jpeg",
+        speed: Math.random() * (2.8 - 1.2) + 1.2
+    }
+]
 </script>
 
 <template>
@@ -20,46 +58,8 @@ const ROOT_CLASS = "paints-parallax"
         </p>
 
         <ul :class="ROOT_CLASS + '__wrapper'">
-            <li>
-                <NuxtImg loading="lazy"
-                    alt="'radioactiv' - peinture acrylique Fluo - 56x56cm - naperon en coton | selfear 2022"
-                    data-speed="1.2" src="/images/radioactiv/main.png" />
-            </li>
-
-            <li>
-                <NuxtImg loading="lazy"
-                    alt="'spiraal' - peinture acrylique Fluo - 40x40cm - toile en coton | selfear 2023" data-speed="0.9"
-                    src="/images/spiraal/main.jpg" />
-            </li>
-
-            <li>
-                <NuxtImg loading="lazy"
-                    alt="'knowledge' - peinture acrylique Fluo & Phospho - 30x30cm - disque vinyle 33tpm | selfear 2023"
-                    data-speed="1.1" src="/images/knowledge/main-uv.png" />
-            </li>
-
-            <li>
-                <NuxtImg loading="lazy"
-                    alt="'staar' - peinture acrylique Fluo - 40x40cm - toile en coton | selfear 2022" data-speed="0.85"
-                    src="/images/staar/main-2.jpg" />
-            </li>
-
-            <li>
-                <NuxtImg loading="lazy"
-                    alt="'eclectic' - peinture acrylique Fluo & Phospho - 17.5x17.5cm - disque vinyle 45tpm | selfear 2024"
-                    data-speed="0.9" src="/images/eclectic/main.png" />
-            </li>
-
-            <li>
-                <NuxtImg loading="lazy"
-                    alt="'self' - peinture acrylique Fluo & Phospho - 17.5x17.5cm - disque vinyle 45tpm | selfear 2024"
-                    data-speed="0.85" src="/images/self/uv.png" />
-            </li>
-
-            <li>
-                <NuxtImg loading="lazy"
-                    alt="'penrose chaos' - peinture acrylique Fluo & Phospho - 40x40cm - toile en coton | selfear 2024"
-                    data-speed="0.85" src="/images/penrose-chaos/main-uv.jpeg" />
+            <li v-for="(paint, index) in PAINTS" :key="index">
+                <NuxtImg loading="lazy" :alt="paint.alt" :data-speed="paint.speed" :src="paint.src" />
             </li>
         </ul>
     </section>

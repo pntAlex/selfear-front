@@ -1,10 +1,43 @@
 <script setup>
+import { defineProps, watch } from 'vue';
+const { $gsap } = useNuxtApp()
+
 const ROOT_CLASS = 'cursor';
+
+const cursorImage = ref(null); // Default cursor image
+const props = defineProps(['image']);
+
+onMounted(() => {
+    cursor()
+})
+
+watch(() => props.image, (newImage) => {
+    cursorImage.value = `/images/${newImage}/cursor.png`; // Update cursor image based on type
+});
+
+const cursor = () => {
+    let posX = null;
+    let posY = null;
+
+    const initPos = ({ pageX, pageY }) => {
+        posX = pageX || posX;
+        posY = pageY || posY;
+
+        $gsap.to(`.${ROOT_CLASS}`, {
+            translateX: posX,
+            translateY: posY,
+            duration: 0.05,
+        });
+    }
+
+    document.addEventListener("pointermove", initPos);
+    document.addEventListener("scroll", initPos);
+}
 </script>
 
 <template>
     <div :class="ROOT_CLASS">
-        <img aria-hidden="true" />
+        <NuxtImg :src="cursorImage" aria-hidden="true" />
     </div>
 </template>
 

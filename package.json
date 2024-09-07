@@ -16,6 +16,7 @@
     "vue": "latest"
   },
   "devDependencies": {
+    "@hypernym/nuxt-gsap": "^2.4.3",
     "sass": "^1.77.8"
   }
 }
