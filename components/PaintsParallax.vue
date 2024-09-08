@@ -1,47 +1,11 @@
 <script setup>
-const ROOT_CLASS = "paints-parallax"
+import paints from '~/assets/data/paints.json'
 
-const PAINTS = [
-    {
-        alt: "'radioactiv' - peinture acrylique Fluo - 56x56cm - naperon en coton | selfear 2022",
-        src: "/images/radioactiv/main.png",
-        speed: Math.random() * (2.8 - 1.2) + 1.2
-    },
-    {
-        alt: "'spiraal' - peinture acrylique Fluo - 40x40cm - toile en coton | selfear 2023",
-        src: "/images/spiraal/main.jpg",
-        speed: Math.random() * (2.8 - 1.2) + 1.2
-    },
-    {
-        alt: "'knowledge' - peinture acrylique Fluo & Phospho - 30x30cm - disque vinyle 33tpm | selfear 2023",
-        src: "/images/knowledge/main-uv.png",
-        speed: Math.random() * (2.8 - 1.2) + 1.2
-    },
-    {
-        alt: "'staar' - peinture acrylique Fluo - 40x40cm - toile en coton | selfear 2022",
-        src: "/images/staar/main-2.jpg",
-        speed: Math.random() * (2.8 - 1.2) + 1.2
-    },
-    {
-        alt: "'eclectic' - peinture acrylique Fluo & Phospho - 17.5x17.5cm - disque vinyle 45tpm | selfear 2024",
-        src: "/images/eclectic/main.png",
-        speed: Math.random() * (2.8 - 1.2) + 1.2
-    },
-    {
-        alt: "'self' - peinture acrylique Fluo & Phospho - 17.5x17.5cm - disque vinyle 45tpm | selfear 2024",
-        src: "/images/self/uv.png",
-        speed: Math.random() * (2.8 - 1.2) + 1.2
-    },
-    {
-        alt: "'penrose chaos' - peinture acrylique Fluo & Phospho - 40x40cm - toile en coton | selfear 2024",
-        src: "/images/penrose-chaos/main-uv.jpeg",
-        speed: Math.random() * (2.8 - 1.2) + 1.2
-    }
-]
+const ROOT_CLASS = "paints-parallax"
 </script>
 
 <template>
-    <section :class="ROOT_CLASS">
+    <section :class="`${ROOT_CLASS} column-border`">
         <p data-alpha="0" data-scroll-start="0" data-scroll-end="35">
             I'm a <strong>fluo and phospho</strong> <br />acrylic painter, based
             in<br />
@@ -57,9 +21,10 @@ const PAINTS = [
             All is <strong>relative</strong>.
         </p>
 
-        <ul :class="ROOT_CLASS + '__wrapper'">
-            <li v-for="(paint, index) in PAINTS" :key="index">
-                <NuxtImg loading="lazy" :alt="paint.alt" :data-speed="paint.speed" :src="paint.src" />
+        <ul :class="`${ROOT_CLASS}__wrapper`">
+            <li v-for="(paint, index) in paints" :key="index">
+                <NuxtImg loading="lazy" :alt="paint.alt" :data-speed="Math.random() * (2 - 1.2) + 1.2"
+                    :src="paint.src" />
             </li>
         </ul>
     </section>
@@ -67,18 +32,13 @@ const PAINTS = [
 
 <style scoped lang="scss">
 .paints-parallax {
-    --border-color: var(--dark-bg);
-    --mouse-x-1: 50%;
-    --mouse-y-1: 50%;
-    --mouse-width: 1em;
-    --gap: 5rem;
-
     height: 200vh;
     background: #eee;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 
     p {
         text-align: center;
@@ -118,26 +78,6 @@ const PAINTS = [
         }
     }
 
-    &:after,
-    &:before {
-        content: "";
-        display: block;
-        position: absolute;
-        opacity: 0.15;
-        width: calc(1 / 6 * 100vw);
-        border-left: 1px solid var(--border-color);
-        border-right: 1px solid var(--border-color);
-        pointer-events: none;
-    }
-
-    &:before {
-        inset: 0 auto 0 5%;
-    }
-
-    &:after {
-        inset: 0 5% 0 auto;
-    }
-
     &__wrapper {
         position: relative;
         width: 100%;
@@ -153,52 +93,60 @@ const PAINTS = [
             position: absolute;
             z-index: 10;
 
+            &:nth-of-type(odd) {
+                left: 5%;
+            }
+
+            &:nth-of-type(even) {
+                right: 5%;
+            }
+
+            // Radioactiv
+            &:nth-of-type(1) {
+                top: calc(40vh + 10%);
+                width: 350px;
+            }
+
+            // Staar
+            &:nth-of-type(3) {
+                top: calc(40vh + 25%);
+                width: calc(1 / 4 * 100vw);
+            }
+
+            // Eclectic
+            &:nth-of-type(5) {
+                top: calc(40vh + 50%);
+                width: calc(1 / 6 * 100vw);
+            }
+
+            // Self
+            &:nth-of-type(7) {
+                top: calc(40vh + 70%);
+                width: 600px;
+            }
+
+            // Spiraal
+            &:nth-of-type(2) {
+                top: calc(40vh + 20%);
+                width: 450px;
+            }
+
+            // Knowledge
+            &:nth-of-type(4) {
+                top: calc(40vh + 35%);
+                width: 350px;
+            }
+
+            // Penrose chaos
+            &:nth-of-type(6) {
+                top: calc(40vh + 80%);
+                width: 400px;
+            }
+
             img {
                 width: 100%;
                 height: 100%;
                 object-fit: contain;
-            }
-
-            &:nth-of-type(1),
-            &:nth-of-type(2),
-            &:nth-of-type(3) {
-                left: 5%;
-            }
-
-            &:nth-of-type(4),
-            &:nth-of-type(5),
-            &:nth-of-type(6) {
-                right: 5%;
-            }
-
-            &:nth-of-type(1) {
-                top: 15%;
-                width: 350px;
-            }
-
-            &:nth-of-type(2) {
-                top: 30%;
-                width: 450px;
-            }
-
-            &:nth-of-type(3) {
-                bottom: 0%;
-                width: calc(1 / 6 * 100vw);
-            }
-
-            &:nth-of-type(4) {
-                top: 0px;
-                width: 600px;
-            }
-
-            &:nth-of-type(5) {
-                bottom: 45%;
-                width: calc(1 / 6 * 100vw);
-            }
-
-            &:nth-of-type(6) {
-                bottom: 20%;
-                width: 500px;
             }
         }
     }

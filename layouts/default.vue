@@ -1,13 +1,5 @@
-<script setup>
-
-
-
-// Listen for the event
-defineEmits(['cursorChange']);
-</script>
-
 <template>
-    <LightSwitcher />
+    <!-- <LightSwitcher /> -->
     <main>
         <slot />
     </main>

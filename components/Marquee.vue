@@ -3,19 +3,21 @@ import { ref } from 'vue'
 
 const ROOT_CLASS = "marquee"
 
-const { title, item, link } = defineProps({
+const { title, item, link, cursor } = defineProps({
     title: String,
     item: Boolean,
     link: String,
+    cursor: String
 })
 
-const cursorPath = ref(`url("/images/${title}/cursor.png")`)
+const cursorPath = ref(`url(${cursor})`)
 
 </script>
 
 <template>
     <component ref="marqueeItem" :is="item ? 'li' : 'div'" :class="ROOT_CLASS" :data-cursor="title">
-        <NuxtLink :class="ROOT_CLASS + '__link'" :to="link">{{ title }}</NuxtLink>
+        <NuxtLink :title="`Lien vers la page dédiée à l'oeuvre '${title}'`" :class="ROOT_CLASS + '__link'" :to="link">{{
+            title }}</NuxtLink>
         <div :class="ROOT_CLASS + '__wrapper'" aria-hidden="true">
             <ul :class="ROOT_CLASS + '__content'">
                 <li>{{ title }}</li>
@@ -80,7 +82,6 @@ const cursorPath = ref(`url("/images/${title}/cursor.png")`)
         display: block;
         width: 1em;
 
-        // background-image: url("/images/eclectic/cursor.png");
         background: v-bind('cursorPath') center;
         background-size: contain;
         background-repeat: no-repeat;

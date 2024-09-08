@@ -1,6 +1,7 @@
 <script setup>
-const emit = defineEmits(['cursorChange'])
+import paints from '~/assets/data/paints.json'
 
+const emit = defineEmits(['cursorChange'])
 const { $gsap } = useNuxtApp()
 
 useSeoMeta({
@@ -9,16 +10,6 @@ useSeoMeta({
 })
 
 const ROOT_CLASS = "index";
-const PAINT_ITEMS = [
-    { title: "staar", link: "/paints/staar" },
-    { title: "radioactiv", link: "/paints/radioactiv" },
-    { title: "fluid", link: "/paints/fluid" },
-    { title: "spiraal", link: "/paints/spiraal" },
-    { title: "knowledge", link: "/paints/knowledge" },
-    { title: "eclectic", link: "/paints/eclectic" },
-    { title: "self", link: "/paints/self" },
-];
-
 
 onMounted(() => {
     loader()
@@ -115,64 +106,35 @@ const loader = () => {
             },
             "<="
         )
-    // .set(mainHeadingLarge.parentNode, { overflow: "visible" })
-    // .to(mainHeadingLarge, {
-    //   scale: 2.5,
-    //   duration: 1,
-    //   ease: "power4.inOut",
-    // })
-
-    // .to(paints, {
-    //     opacity: 1,
-    //     stagger: 0.1,
-    // })
-    // .to(
-    //     lightSwitcher,
-    //     {
-    //         translateY: 0,
-    //         ease: "power4.out",
-    //         duration: 0.8,
-    //     },
-    //     "<="
-    // )
-    // .then(() => {
-    // gsap.set("main", { overflow: "initial" });
-    // });
-    // .to(loaderImage, {
-    //   scrollTrigger: {
-    //     trigger: loaderImage,
-    //     scrub: true, // Smooth scrubbing effect
-    //   },
-    //   scale: 3,
-    // });
 };
 
 </script>
 
 <template>
     <section :class="ROOT_CLASS">
-        <section :class="ROOT_CLASS + '__headings'">
-            <div :class="ROOT_CLASS + '__headings__mask'" aria-hidden="true">
+        <section :class="`${ROOT_CLASS}__headings`">
+            <div :class="`${ROOT_CLASS}__headings__mask`" aria-hidden="true">
                 <h1>selfear</h1>
             </div>
 
-            <div :class="ROOT_CLASS + '__headings__mask'">
+            <div :class="`${ROOT_CLASS}__headings__mask`">
                 <h1>selfear</h1>
             </div>
 
-            <span aria-hidden=true :class="ROOT_CLASS + '__loader__progress'">
+            <span aria-hidden=true :class="`${ROOT_CLASS}__loader__progress`">
                 <span></span>
             </span>
             <!-- <h2>UV/Night light painter</h2> -->
-            <NuxtImg :class="ROOT_CLASS + '__loader__image'" data-scale="1.2" src="/images/fluid/main-2.jpg"
+            <NuxtImg data-scale="1.5" :class="`${ROOT_CLASS}__loader__image`" src="/images/fluid/main-2.jpg"
                 alt="'fluid' - peinture acrylique Fluo - 20x14cm - toile en coton | selfear 2022" />
         </section>
 
         <PaintsParallax />
 
-        <ol :class="ROOT_CLASS + '__paints'">
-            <Marquee v-for="item in PAINT_ITEMS" :key="item.title" @mouseenter="emit('cursorChange', item.title)"
-                :title="item.title" :item="true" :link="item.link" />
+        <ol :class="`${ROOT_CLASS}__paints`" @mouseleave="emit('cursorChange', null)">
+            <Marquee v-for="(paint, index) in paints" :key="index" @mouseenter="emit('cursorChange', paint.cursor)"
+                @click="emit('cursorChange', null)" :title="paint.title" :item="true" :link="`/paints/${paint.title}`"
+                :cursor="paint.cursor" />
         </ol>
     </section>
 

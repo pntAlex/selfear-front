@@ -29,6 +29,20 @@ const parallax = () => {
     },
   });
 
+  $gsap.to("[data-alpha]", {
+    autoAlpha: (_, el) => el.getAttribute("data-alpha"),
+    ease: "none",
+    scrollTrigger: {
+      // trigger: el.parentElement,
+      start: "0%",
+      end: "20%",
+      // start: `${el.getAttribute("data-scroll-start")}%`,
+      // end: `${el.getAttribute("data-scroll-end")}%`,
+      invalidateOnRefresh: true,
+      scrub: true,
+    },
+  });
+
   // $gsap.to("[data-blur]", {
   //   filter: (_, el) => `blur(${el.getAttribute("data-blur")}px)`,
   //   ease: "none",
@@ -44,7 +58,7 @@ const parallax = () => {
 const cursorType = ref(null); // Default cursor type
 
 const modifyCursorImage = (newCursorType) => {
-  cursorType.value = newCursorType.toLowerCase(); // Update cursor type
+  cursorType.value = newCursorType?.toLowerCase();
 }
 
 </script>
@@ -55,3 +69,18 @@ const modifyCursorImage = (newCursorType) => {
   </NuxtLayout>
   <Cursor :image="cursorType" />
 </template>
+
+<style lang="scss">
+// @use "/assets/styles/main.scss";
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+</style>

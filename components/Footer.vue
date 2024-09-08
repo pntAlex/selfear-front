@@ -15,7 +15,8 @@ const ROOT_CLASS = "footer";
             <nav :class="ROOT_CLASS + '__contact__nav'">
                 <ul>
                     <li>
-                        <NuxtLink to="https://www.instagram.com/selfearuv" target="_blank">
+                        <NuxtLink title="Lien vers l'Instagram de l'artiste selfear"
+                            to="https://www.instagram.com/selfearuv" target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 viewBox="0 0 50 50">
                                 <path style="

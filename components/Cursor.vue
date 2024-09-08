@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, watch } from 'vue';
+import { watch } from 'vue';
 const { $gsap } = useNuxtApp()
 
 const ROOT_CLASS = 'cursor';
@@ -12,7 +12,7 @@ onMounted(() => {
 })
 
 watch(() => props.image, (newImage) => {
-    cursorImage.value = `/images/${newImage}/cursor.png`; // Update cursor image based on type
+    cursorImage.value = newImage ?? null
 });
 
 const cursor = () => {
@@ -37,7 +37,7 @@ const cursor = () => {
 
 <template>
     <div :class="ROOT_CLASS">
-        <NuxtImg :src="cursorImage" aria-hidden="true" />
+        <NuxtImg v-if="cursorImage" :src="cursorImage" aria-hidden="true" />
     </div>
 </template>
 
