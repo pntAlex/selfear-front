@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from 'vue';
+
+useNuxtApp().$lenis;
+
 const { $gsap } = useNuxtApp()
 
 onMounted(() => {
