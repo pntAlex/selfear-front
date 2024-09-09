@@ -13,6 +13,7 @@
   "dependencies": {
     "@nuxt/fonts": "^0.7.2",
     "@nuxt/image": "^1.8.0",
+    "@vercel/speed-insights": "^1.0.12",
     "lenis": "^1.1.13",
     "nuxt": "^3.13.0",
     "vue": "latest"
