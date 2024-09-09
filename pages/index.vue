@@ -1,5 +1,5 @@
 <script setup>
-import paints from '~/assets/data/paints.json'
+import paintings from '~/assets/data/paintings.json'
 
 const emit = defineEmits(['cursorChange'])
 const { $gsap } = useNuxtApp()
@@ -129,12 +129,12 @@ const loader = () => {
                 alt="'fluid' - peinture acrylique Fluo - 20x14cm - toile en coton | selfear 2022" />
         </section>
 
-        <PaintsParallax />
+        <PaintingsParallax />
 
-        <ol :class="`${ROOT_CLASS}__paints`" @mouseleave="emit('cursorChange', null)">
-            <Marquee v-for="(paint, index) in paints" :key="index" @mouseenter="emit('cursorChange', paint.cursor)"
-                @click="emit('cursorChange', null)" :title="paint.title" :item="true" :link="`/paints/${paint.title}`"
-                :cursor="paint.cursor" />
+        <ol :class="`${ROOT_CLASS}__paintings`" @mouseleave="emit('cursorChange', null)">
+            <Marquee v-for="(painting, index) in paintings" :key="index"
+                @mouseenter="emit('cursorChange', painting.cursor)" @click="emit('cursorChange', null)"
+                :title="painting.title" :item="true" :link="`/paintings/${painting.title}`" :cursor="painting.cursor" />
         </ol>
     </section>
 

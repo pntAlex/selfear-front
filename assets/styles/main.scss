@@ -25,8 +25,8 @@ body {
     --border-color: var(--lightgray-border);
   }
 
-  &:after,
-  &:before {
+  &:not(&-left):after,
+  &:not(&-right):before {
     content: "";
     display: block;
     position: absolute;
@@ -37,11 +37,11 @@ body {
     pointer-events: none;
   }
 
-  &:before {
+  &:not(&-right):before {
     inset: 0 auto 0 5%;
   }
 
-  &:after {
+  &:not(&-left):after {
     inset: 0 5% 0 auto;
   }
 }

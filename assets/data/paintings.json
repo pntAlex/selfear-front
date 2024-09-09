@@ -4,6 +4,10 @@
     "alt": "'radioactiv' - peinture acrylique Fluo - 56x56cm - naperon en coton | selfear 2022",
     "src": "/images/radioactiv/main.png",
     "cursor": "/images/radioactiv/cursor.png",
+    "date": "2022",
+    "paint_type": "peinture acrylique fluo",
+    "dimensions": "56x56",
+    "support": "naperon en coton",
     "pictures": []
   },
   {
@@ -11,6 +15,10 @@
     "alt": "'spiraal' - peinture acrylique Fluo - 40x40cm - toile en coton | selfear 2023",
     "src": "/images/spiraal/main.jpg",
     "cursor": "/images/spiraal/cursor.png",
+    "date": "2023",
+    "paint_type": "peinture acrylique fluo",
+    "dimensions": "40x40",
+    "support": "toile en coton",
     "pictures": []
   },
   {
@@ -18,6 +26,10 @@
     "alt": "'staar' - peinture acrylique Fluo - 40x40cm - toile en coton | selfear 2022",
     "src": "/images/staar/main-2.jpg",
     "cursor": "/images/staar/cursor.png",
+    "date": "2022",
+    "paint_type": "peinture acrylique fluo",
+    "dimensions": "40x40",
+    "support": "toile en coton",
     "pictures": []
   },
   {
@@ -25,6 +37,10 @@
     "alt": "'knowledge' - peinture acrylique Fluo & Phospho - 30x30cm - disque vinyle 33tpm | selfear 2023",
     "src": "/images/knowledge/main-uv.png",
     "cursor": "/images/knowledge/cursor.png",
+    "date": "2023",
+    "paint_type": "peinture acrylique fluo & phospho",
+    "dimensions": "30x30",
+    "support": "disque vinyle 33t",
     "pictures": []
   },
   {
@@ -32,13 +48,21 @@
     "alt": "'eclectic' - peinture acrylique Fluo & Phospho - 17.5x17.5cm - disque vinyle 45tpm | selfear 2024",
     "src": "/images/eclectic/main.png",
     "cursor": "/images/eclectic/cursor.png",
+    "date": "2024",
+    "paint_type": "peinture acrylique fluo & phospho",
+    "dimensions": "17.5x17.5",
+    "support": "disque vinyle 45t",
     "pictures": []
   },
   {
     "title": "penrose chaos",
     "alt": "'penrose chaos' - peinture acrylique Fluo & Phospho - 40x40cm - toile en coton | selfear 2024",
-    "src": "/images/penrose-chaos/main-uv.jpeg",
+    "src": "/images/penrose-chaos/main.jpg",
     "cursor": "/images/penrose-chaos/cursor.jpeg",
+    "date": "2024",
+    "paint_type": "peinture acrylique fluo & phospho",
+    "dimensions": "40x40",
+    "support": "toile en coton",
     "pictures": []
   },
   {
@@ -46,6 +70,10 @@
     "alt": "'self' - peinture acrylique Fluo & Phospho - 17.5x17.5cm - disque vinyle 45tpm | selfear 2024",
     "src": "/images/self/uv.png",
     "cursor": "/images/self/cursor.png",
+    "date": "2024",
+    "paint_type": "peinture acrylique fluo & phospho",
+    "dimensions": "17.5x17.5",
+    "support": "disque vinyle 45t",
     "pictures": []
   }
 ]

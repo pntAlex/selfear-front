@@ -3,7 +3,6 @@ const ROOT_CLASS = "light-switcher"
 </script>
 
 <template>
-    <!-- TODO - Switch to Toggle button input -->
     <div :class="ROOT_CLASS">
         <span>A</span>
         <span>B</span>
@@ -14,7 +13,7 @@ const ROOT_CLASS = "light-switcher"
 .light-switcher {
     position: fixed;
     top: 2vh;
-    transform: translateY(-200%);
+    // transform: translateY(-200%);s
     align-self: center;
     border: 1px solid var(--lightgray-border);
     background-color: var(--dark-bg);

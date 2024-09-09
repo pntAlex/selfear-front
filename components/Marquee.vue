@@ -16,10 +16,10 @@ const cursorPath = ref(`url(${cursor})`)
 
 <template>
     <component ref="marqueeItem" :is="item ? 'li' : 'div'" :class="ROOT_CLASS" :data-cursor="title">
-        <NuxtLink :title="`Lien vers la page dédiée à l'oeuvre '${title}'`" :class="ROOT_CLASS + '__link'" :to="link">{{
+        <NuxtLink :title="`Lien vers la page dédiée à l'oeuvre '${title}'`" :class="`${ROOT_CLASS}__link`" :to="link">{{
             title }}</NuxtLink>
-        <div :class="ROOT_CLASS + '__wrapper'" aria-hidden="true">
-            <ul :class="ROOT_CLASS + '__content'">
+        <div :class="`${ROOT_CLASS}__wrapper`" aria-hidden="true">
+            <ul :class="`${ROOT_CLASS}__content`">
                 <li>{{ title }}</li>
                 <li>{{ title }}</li>
                 <li>{{ title }}</li>
@@ -27,7 +27,7 @@ const cursorPath = ref(`url(${cursor})`)
                 <li>{{ title }}</li>
                 <li>{{ title }}</li>
             </ul>
-            <ul :class="ROOT_CLASS + '__content'">
+            <ul :class="`${ROOT_CLASS}__content`">
                 <li>{{ title }}</li>
                 <li>{{ title }}</li>
                 <li>{{ title }}</li>

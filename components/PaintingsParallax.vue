@@ -1,7 +1,7 @@
 <script setup>
-import paints from '~/assets/data/paints.json'
+import paintings from '~/assets/data/paintings.json'
 
-const ROOT_CLASS = "paints-parallax"
+const ROOT_CLASS = "paintings-parallax"
 </script>
 
 <template>
@@ -18,20 +18,20 @@ const ROOT_CLASS = "paints-parallax"
         </p>
 
         <p data-alpha="1" data-scroll-start="40" data-scroll-end="65">
-            All is <strong>relative</strong>.
+            Relativity is <strong>key</strong>.
         </p>
 
         <ul :class="`${ROOT_CLASS}__wrapper`">
-            <li v-for="(paint, index) in paints" :key="index">
-                <NuxtImg loading="lazy" :alt="paint.alt" :data-speed="Math.random() * (2 - 1.2) + 1.2"
-                    :src="paint.src" />
+            <li v-for="(painting, index) in paintings" :key="index">
+                <NuxtImg loading="lazy" :alt="painting.alt" :data-speed="Math.random() * (2 - 1.2) + 1.2"
+                    :src="painting.src" />
             </li>
         </ul>
     </section>
 </template>
 
 <style scoped lang="scss">
-.paints-parallax {
+.paintings-parallax {
     height: 200vh;
     background: #eee;
     position: relative;
@@ -53,28 +53,32 @@ const ROOT_CLASS = "paints-parallax"
         z-index: 20;
         color: var(--dark-bg);
         // color: white;
-        width: 100%;
+        width: fit-content;
+        /* background: white; */
+        backdrop-filter: blur(5px) brightness(0.4);
+        color: white;
 
         strong {
             color: gray;
+            text-decoration: underline;
         }
 
         &:nth-of-type(1) {
-            opacity: 1;
-            visibility: visible;
+            // opacity: 1;
+            // visibility: visible;
             inset: 30% auto auto;
         }
 
         &:nth-of-type(2) {
-            opacity: 0;
+            // opacity: 0;
+            // visibility: hidden;
             inset: 60% auto auto;
-            visibility: hidden;
         }
 
         &:nth-of-type(3) {
-            opacity: 0;
+            // opacity: 0;
+            // visibility: hidden;
             inset: 80% auto auto;
-            visibility: hidden;
         }
     }
 

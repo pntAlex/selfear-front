@@ -29,19 +29,19 @@ const parallax = () => {
     },
   });
 
-  $gsap.to("[data-alpha]", {
-    autoAlpha: (_, el) => el.getAttribute("data-alpha"),
-    ease: "none",
-    scrollTrigger: {
-      // trigger: el.parentElement,
-      start: "0%",
-      end: "20%",
-      // start: `${el.getAttribute("data-scroll-start")}%`,
-      // end: `${el.getAttribute("data-scroll-end")}%`,
-      invalidateOnRefresh: true,
-      scrub: true,
-    },
-  });
+  // $gsap.to("[data-alpha]", {
+  //   autoAlpha: (_, el) => el.getAttribute("data-alpha"),
+  //   ease: "none",
+  //   scrollTrigger: {
+  //     // trigger: el.parentElement,
+  //     start: "0%",
+  //     end: "20%",
+  //     // start: `${el.getAttribute("data-scroll-start")}%`,
+  //     // end: `${el.getAttribute("data-scroll-end")}%`,
+  //     invalidateOnRefresh: true,
+  //     scrub: true,
+  //   },
+  // });
 
   // $gsap.to("[data-blur]", {
   //   filter: (_, el) => `blur(${el.getAttribute("data-blur")}px)`,
