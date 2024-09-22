@@ -10,6 +10,7 @@ onMounted(() => {
 })
 
 const loader = () => {
+    const root = `.${ROOT_CLASS}`;
     const maskedTitle = `.${ROOT_CLASS}__mask__heading`;
     const titleContent = `.${ROOT_CLASS}__title__wrapper > *`
     const loaderWrapper = `.${ROOT_CLASS}__progress`;
@@ -69,15 +70,27 @@ const loader = () => {
             {
                 opacity: 0,
                 duration: 0.5,
+                ease: "power4.inOut",
             },
-            "<=")
+            "<"
+        )
+        .to(root,
+            {
+                "--column-scale-Y": 1,
+                scaleY: 1,
+                duration: 2.5,
+                ease: "power4.inOut",
+            },
+            "<"
+        )
         .to(titleContent,
             {
                 autoAlpha: 1,
                 duration: 1.5,
                 ease: "power3.inOut",
                 stagger: 0.5
-            })
+            },
+            "<=0.5")
         .to(
             loaderImage,
             {
@@ -118,25 +131,22 @@ const loader = () => {
         <NuxtImg data-scroll-alpha="0" data-scroll-end="20" :class="`${ROOT_CLASS}__image`" src="/images/fluid/fluo.jpg"
             alt="'fluid' - peinture acrylique Fluo - 20x14cm - toile en coton | selfear 2022" />
 
-        <!-- <div aria-hidden="true" :class="`${ROOT_CLASS}__paintings__wrapper`" data-scroll-alpha="1"
+        <div aria-hidden="true" :class="`${ROOT_CLASS}__paintings__wrapper`" data-scroll-alpha="1"
             data-scroll-start="20" data-scroll-end="50">
-            <ul data-scroll-x="-1000" :class="`${ROOT_CLASS}__paintings`">
-                <li v-for="({ src, alt }, index) in [...paintings, ...paintings]" :key="index">
-                    <NuxtImg :src :alt />
+            <ul v-for="i in 4" :key="i" :class="`${ROOT_CLASS}__paintings`">
+                <li v-for="({ src, alt }, index) in [...paintings, ...paintings, ...paintings, ...paintings]"
+                    :key="index">
+                    <NuxtImg :src="src" :alt="alt" />
                 </li>
             </ul>
-
-            <ul data-scroll-x="1000" data-scroll-translate :class="`${ROOT_CLASS}__paintings`">
-                <li v-for="({ src, alt }, index) in [...paintings, ...paintings]" :key="index">
-                    <NuxtImg :src :alt />
-                </li>
-            </ul>
-        </div> -->
+        </div>
     </section>
 </template>
 
 <style lang="scss" scoped>
 .loader {
+    --column-scale-Y: 0;
+
     height: 200vh;
     display: grid;
     place-items: center;
@@ -147,6 +157,12 @@ const loader = () => {
     position: relative;
     z-index: 0;
 
+    &:after,
+    &:before {
+        transform-origin: top center;
+        transform: scaleY(var(--column-scale-Y))
+    }
+
     & {
         >* {
             grid-area: content;
@@ -154,35 +170,7 @@ const loader = () => {
     }
 
     &__title {
-        opacity: 1;
-        margin: 0;
-        padding: 0;
-        line-height: 1;
-        font-size: 30vw;
-        color: transparent;
-        font-weight: unset;
-        line-height: normal;
-
-        -webkit-text-stroke-width: 2px;
-        -webkit-text-stroke-color: var(--light);
-
-        &__wrapper {
-            position: fixed;
-            display: flex;
-            flex-direction: column;
-            z-index: 10;
-        }
-
-        :deep(span) {
-            font-variation-settings: "wdth" 0;
-            transition: font-variation-settings 500ms, color 500ms;
-            color: inherit;
-
-            &:hover {
-                font-variation-settings: "wdth" 1000;
-                color: var(--light);
-            }
-        }
+        @include selfear(30vw);
     }
 
     &__subtitle {
@@ -251,14 +239,36 @@ const loader = () => {
     }
 
     &__paintings {
-        // position: fixed;
+        position: absolute;
         list-style: none;
         display: flex;
-        // flex-direction: column;
         gap: 1rem;
         margin: 0;
         padding: 0;
-        // transform: rotateZ(45deg);
+
+        &:nth-of-type(even) {
+            flex-direction: column;
+        }
+
+        &:nth-of-type(odd) {
+            flex-direction: row;
+        }
+
+        &:nth-of-type(1) {
+            inset: 0 auto auto auto;
+        }
+
+        &:nth-of-type(2) {
+            inset: auto 0 auto auto;
+        }
+
+        &:nth-of-type(3) {
+            inset: auto auto 0 auto;
+        }
+
+        &:nth-of-type(4) {
+            inset: auto auto auto 0;
+        }
 
         &__wrapper {
             position: fixed;
@@ -271,16 +281,8 @@ const loader = () => {
             gap: 10vh;
         }
 
-        &:nth-of-type(1) {
-            // translate: -40vw;
-        }
-
-        &:nth-of-type(2) {
-            // translate: 40vw;
-        }
-
         img {
-            width: 12rem;
+            width: 5rem;
         }
     }
 }

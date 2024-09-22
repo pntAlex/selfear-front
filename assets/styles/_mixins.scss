@@ -1,0 +1,31 @@
+@mixin selfear($font-size: 30vw) {
+  opacity: 1;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  font-size: $font-size;
+  color: transparent;
+  font-weight: unset;
+  line-height: normal;
+
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: var(--light);
+
+  &__wrapper {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+  }
+
+  :deep(span) {
+    font-variation-settings: "wdth" 0;
+    transition: font-variation-settings 500ms, color 500ms;
+    color: inherit;
+
+    &:hover {
+      font-variation-settings: "wdth" 1000;
+      color: var(--light);
+    }
+  }
+}
