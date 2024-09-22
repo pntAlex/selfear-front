@@ -12,11 +12,11 @@ const ROOT_CLASS = "light-switcher"
 <style lang="scss">
 .light-switcher {
     position: fixed;
-    top: 2vh;
-    // transform: translateY(-200%);s
+    bottom: 2vh;
+    // transform: translateY(-200%);
     align-self: center;
-    border: 1px solid var(--lightgray-border);
-    background-color: var(--dark-bg);
+    border: 1px solid grey;
+    background-color: var(--dark);
     border-radius: 2ch;
     width: 10ch;
     height: 3ch;

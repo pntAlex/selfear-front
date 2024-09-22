@@ -1,30 +1,29 @@
 <script setup>
-import paintings from '~/assets/data/paintings.json'
+defineProps(['paintings'])
 
 const ROOT_CLASS = "paintings-parallax"
 </script>
 
 <template>
     <section :class="`${ROOT_CLASS} column-border`">
-        <p data-alpha="0" data-scroll-start="0" data-scroll-end="35">
+        <p v-text-splitted data-scroll-alpha="0" data-scroll-start="0" data-scroll-end="25">
             I'm a <strong>fluo and phospho</strong> <br />acrylic painter, based
             in<br />
             <strong>Tours, France</strong>
         </p>
-        <p data-alpha="1" data-scroll-start="20" data-scroll-end="40">
+        <p v-text-splitted data-scroll-alpha="0" data-scroll-start="40" data-scroll-end="65">
             I exploit the potential of <strong>light exposure</strong><br />to
             approach <strong>different facets</strong><br />of the same
             painting.<br />
         </p>
 
-        <p data-alpha="1" data-scroll-start="40" data-scroll-end="65">
+        <p v-text-splitted data-scroll-alpha="1" data-scroll-start="0" data-scroll-end="65">
             Relativity is <strong>key</strong>.
         </p>
 
         <ul :class="`${ROOT_CLASS}__wrapper`">
-            <li v-for="(painting, index) in paintings" :key="index">
-                <NuxtImg loading="lazy" :alt="painting.alt" :data-speed="Math.random() * (2 - 1.2) + 1.2"
-                    :src="painting.src" />
+            <li v-for="({ src, alt }, index) in paintings" :key="index">
+                <NuxtImg loading="lazy" :alt :src :data-scroll-speed="Math.random() * (2 - 1.2) + 1.2" />
             </li>
         </ul>
     </section>
@@ -43,18 +42,13 @@ const ROOT_CLASS = "paintings-parallax"
     p {
         text-align: center;
         position: absolute;
-        // position: fixed;
         font-size: 2.5em;
         text-transform: uppercase;
-        // backdrop-filter: blur(10px);
-        // backdrop-filter: brightness(0.2);
         padding: 0.6em;
         inset: 30% auto auto;
         z-index: 20;
-        color: var(--dark-bg);
-        // color: white;
+        color: var(--dark);
         width: fit-content;
-        /* background: white; */
         backdrop-filter: blur(5px) brightness(0.4);
         color: white;
 
@@ -64,21 +58,15 @@ const ROOT_CLASS = "paintings-parallax"
         }
 
         &:nth-of-type(1) {
-            // opacity: 1;
-            // visibility: visible;
-            inset: 30% auto auto;
+            inset: 20% auto auto;
         }
 
         &:nth-of-type(2) {
-            // opacity: 0;
-            // visibility: hidden;
-            inset: 60% auto auto;
+            inset: 45% auto auto;
         }
 
         &:nth-of-type(3) {
-            // opacity: 0;
-            // visibility: hidden;
-            inset: 80% auto auto;
+            inset: 70% auto auto;
         }
     }
 
@@ -107,7 +95,7 @@ const ROOT_CLASS = "paintings-parallax"
 
             // Radioactiv
             &:nth-of-type(1) {
-                top: calc(40vh + 10%);
+                top: calc(40vh + 0%);
                 width: 350px;
             }
 
@@ -119,7 +107,7 @@ const ROOT_CLASS = "paintings-parallax"
 
             // Eclectic
             &:nth-of-type(5) {
-                top: calc(40vh + 50%);
+                top: calc(40vh + 35%);
                 width: calc(1 / 6 * 100vw);
             }
 
@@ -137,7 +125,7 @@ const ROOT_CLASS = "paintings-parallax"
 
             // Knowledge
             &:nth-of-type(4) {
-                top: calc(40vh + 35%);
+                top: calc(40vh + 40%);
                 width: 350px;
             }
 

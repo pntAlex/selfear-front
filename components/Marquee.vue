@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 const ROOT_CLASS = "marquee"
 
@@ -16,36 +16,15 @@ const cursorPath = ref(`url(${cursor})`)
 
 <template>
     <component ref="marqueeItem" :is="item ? 'li' : 'div'" :class="ROOT_CLASS" :data-cursor="title">
-        <NuxtLink :title="`Lien vers la page dédiée à l'oeuvre '${title}'`" :class="`${ROOT_CLASS}__link`" :to="link">{{
-            title }}</NuxtLink>
+        <NuxtLink :title="`Lien vers la page dédiée à l'oeuvre '${title}'`" :class="`${ROOT_CLASS}__link typed`"
+            :to="link">{{
+                title }}</NuxtLink>
         <div :class="`${ROOT_CLASS}__wrapper`" aria-hidden="true">
             <ul :class="`${ROOT_CLASS}__content`">
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
+                <li class="typed" v-for="n in 12" :key="n">{{ title }}</li>
             </ul>
             <ul :class="`${ROOT_CLASS}__content`">
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
-                <li>{{ title }}</li>
+                <li class="typed" v-for="n in 12" :key="n">{{ title }}</li>
             </ul>
         </div>
     </component>

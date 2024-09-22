@@ -10,8 +10,8 @@ onMounted(() => {
 })
 
 const parallax = () => {
-  $gsap.to("[data-speed]", {
-    translateY: (_, el) => (1 - parseFloat(el.getAttribute("data-speed"))) * 1000,
+  $gsap.to("[data-scroll-speed]", {
+    translateY: (_, el) => (1 - parseFloat(el.dataset.scrollSpeed)) * 1000,
     ease: "none",
     scrollTrigger: {
       start: 0,
@@ -21,30 +21,61 @@ const parallax = () => {
     },
   });
 
-  $gsap.to("[data-scale]", {
-    scale: (_, el) => parseFloat(el.getAttribute("data-scale")),
-    ease: "none",
-    scrollTrigger: {
-      start: 0,
-      end: "50%",
-      invalidateOnRefresh: true,
-      scrub: true,
-    },
+
+  // TODO compute y after scale
+  document.querySelectorAll("[data-scroll-scale]").forEach((el) => {
+    $gsap.to(el, {
+      scale: parseFloat(el.dataset.scrollScale),
+      translateY: `-${el.getBoundingClientRect().y * 2.2 - el.dataset.scrollY}px`,
+      scrollTrigger: {
+        start: 0,
+        end: `${el.dataset.scrollY}%`,
+        scrub: true,
+      }
+    });
   });
 
-  // $gsap.to("[data-alpha]", {
-  //   autoAlpha: (_, el) => el.getAttribute("data-alpha"),
+
+  document.querySelectorAll("[data-scroll-alpha]").forEach((el) => {
+    if (el.dataset.scrollAlpha == 1) {
+      $gsap.set(el, { autoAlpha: 0 })
+    }
+
+    $gsap.to(el, {
+      autoAlpha: el.dataset.scrollAlpha,
+      scrollTrigger: {
+        trigger: el.parentElement,
+        start: `${el.dataset.scrollStart || 0}%`,
+        end: `${el.dataset.scrollEnd || 20}%`,
+        scrub: true,
+      },
+    });
+  });
+
+  document.querySelectorAll("[data-scroll-x]").forEach((el) => {
+    $gsap.to(el, {
+      translateX: el.dataset.scrollX,
+      scrollTrigger: {
+        trigger: el.parentElement,
+        start: `${el.dataset.scrollStart || 0}%`,
+        end: `${el.dataset.scrollEnd || 20}%`,
+        scrub: true,
+      },
+    });
+  });
+
+  // $gsap.to("[data-scroll-y]", {
+  //   translateY: (_, el) => `${el.dataset.dataScrollY}%`,
   //   ease: "none",
   //   scrollTrigger: {
-  //     // trigger: el.parentElement,
-  //     start: "0%",
-  //     end: "20%",
-  //     // start: `${el.getAttribute("data-scroll-start")}%`,
-  //     // end: `${el.getAttribute("data-scroll-end")}%`,
+  //     start: 0,
+  //     end: "max",
   //     invalidateOnRefresh: true,
   //     scrub: true,
   //   },
   // });
+
+
 
   // $gsap.to("[data-blur]", {
   //   filter: (_, el) => `blur(${el.getAttribute("data-blur")}px)`,

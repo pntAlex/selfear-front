@@ -1,5 +1,5 @@
 .footer {
-  // background-color: var(--dark-bg);
+  // background-color: var(--dark);
   height: 60vh;
   overflow: hidden;
   display: grid;
@@ -41,9 +41,9 @@
       line-height: 1;
 
       span {
-        color: var(--lightgray-border);
+        color: var(--light);
         -webkit-text-stroke-width: 1px;
-        -webkit-text-stroke-color: var(--lightgray-border);
+        -webkit-text-stroke-color: var(--light);
         color: transparent;
       }
     }
@@ -75,7 +75,7 @@
       }
 
       a {
-        color: var(--lightgray-border);
+        color: var(--light);
         text-decoration: none;
 
         svg {
@@ -97,15 +97,23 @@
 
   &__heading {
     font-size: 20vw;
-    text-align: center;
     text-transform: uppercase;
     letter-spacing: -0.05ch;
     margin: 0;
     line-height: 1em;
 
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: var(--lightgray-border);
+    -webkit-text-stroke-color: var(--light);
     color: transparent;
+
+    :deep(span) {
+      transition: font-variation-settings 500ms;
+      font-variation-settings: "wdth" 0;
+
+      &:hover {
+        font-variation-settings: "wdth" 1000;
+      }
+    }
   }
 
   ul {

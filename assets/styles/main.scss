@@ -1,17 +1,25 @@
 :root {
-  --dark-bg: #111;
-  --lightgray-border: lightgray;
+  --dark: #111;
+  --light: lightgray;
   --text-color: white;
 
-  font-family: Neue Metana;
+  font-family: "Neue Metana";
   color: var(--text-color);
+  cursor: none;
+}
+
+h1,
+h2,
+h3,
+.typed {
+  font-family: RibbonVF;
 }
 
 body {
   margin: 0;
   position: relative;
   font-weight: normal;
-  background-color: var(--dark-bg);
+  background-color: var(--dark);
 
   &::-webkit-scrollbar {
     display: none;
@@ -19,10 +27,11 @@ body {
 }
 
 .column-border {
-  --border-color: var(--dark-bg);
+  --column-width: calc(1 / 6 * 100vw);
+  --border-color: var(--dark);
 
   &-gray {
-    --border-color: var(--lightgray-border);
+    --border-color: var(--light);
   }
 
   &:not(&-left):after,
@@ -31,17 +40,22 @@ body {
     display: block;
     position: absolute;
     opacity: 0.15;
-    width: calc(1 / 6 * 100vw);
+    width: var(--column-width);
     border-left: 1px solid var(--border-color);
     border-right: 1px solid var(--border-color);
     pointer-events: none;
   }
 
   &:not(&-right):before {
-    inset: 0 auto 0 5%;
+    inset: 0 auto 0 5vw;
   }
 
   &:not(&-left):after {
-    inset: 0 5% 0 auto;
+    inset: 0 5vw 0 auto;
+  }
+
+  &-padded {
+    padding: calc(5vw + var(--column-width) / 4)
+      calc(5vw + var(--column-width) / 2);
   }
 }

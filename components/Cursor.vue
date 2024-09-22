@@ -31,7 +31,7 @@ const cursor = () => {
     }
 
     document.addEventListener("pointermove", initPos);
-    document.addEventListener("scroll", initPos);
+    // document.addEventListener("scroll", initPos);
 }
 </script>
 

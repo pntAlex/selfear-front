@@ -30,4 +30,7 @@ export default defineNuxtConfig({
       scrollTrigger: true,
     },
   },
+  fonts: {
+    families: [{ name: "RibbonVF", provider: "local", weight: "0 1000" }],
+  },
 });
