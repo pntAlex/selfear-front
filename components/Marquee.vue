@@ -12,12 +12,14 @@ const { title, item, link, cursor } = defineProps({
 
 const cursorPath = ref(`url(${cursor})`)
 
+const { setCursorImage } = useCursorStore()
+
 </script>
 
 <template>
     <component ref="marqueeItem" :is="item ? 'li' : 'div'" :class="ROOT_CLASS" :data-cursor="title">
-        <NuxtLink :title="`Lien vers la page dédiée à l'oeuvre '${title}'`" :class="`${ROOT_CLASS}__link typed`"
-            :to="link">{{
+        <NuxtLink @mouseenter="setCursorImage(cursor)" @mouseleave="setCursorImage(null)"
+            :title="`Lien vers la page dédiée à l'oeuvre '${title}'`" :class="`${ROOT_CLASS}__link typed`" :to="link">{{
                 title }}</NuxtLink>
         <div :class="`${ROOT_CLASS}__wrapper`" aria-hidden="true">
             <ul :class="`${ROOT_CLASS}__content`">

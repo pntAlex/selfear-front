@@ -23,7 +23,8 @@ const ROOT_CLASS = "paintings-parallax"
 
         <ul :class="`${ROOT_CLASS}__wrapper`">
             <li v-for="({ src, alt }, index) in paintings" :key="index">
-                <NuxtImg loading="lazy" :alt :src :data-scroll-speed="Math.random() * (2 - 1.2) + 1.2" />
+                <NuxtImg data-scroll-start="0" data-scroll-end="max" loading="lazy" :alt :src
+                    :data-scroll-speed="Math.random() * (2 - 1.2) + 1.2" />
             </li>
         </ul>
     </section>

@@ -53,7 +53,6 @@ const ROOT_CLASS = "footer";
     display: grid;
     grid-template-rows: repeat(2, 1fr);
     position: relative;
-    backdrop-filter: blur(10px) brightness(0.15);
 
     &__headings {
         display: flex;

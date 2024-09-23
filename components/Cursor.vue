@@ -1,19 +1,18 @@
 <script setup>
-import { watch } from 'vue';
 const { $gsap } = useNuxtApp()
 
 const ROOT_CLASS = 'cursor';
 
-const cursorImage = ref(null); // Default cursor image
+// const cursorImage = ref(null); // Default cursor image
 const props = defineProps(['image']);
 
 onMounted(() => {
     cursor()
 })
 
-watch(() => props.image, (newImage) => {
-    cursorImage.value = newImage ?? null
-});
+// watch(() => props.image, (newImage) => {
+//     cursorImage.value = newImage ?? null
+// });
 
 const cursor = () => {
     let posX = null;
@@ -33,6 +32,9 @@ const cursor = () => {
     document.addEventListener("pointermove", initPos);
     // document.addEventListener("scroll", initPos);
 }
+
+const { cursorImage } = useCursorStore()
+
 </script>
 
 <template>

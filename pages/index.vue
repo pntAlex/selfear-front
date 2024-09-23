@@ -9,7 +9,9 @@ useSeoMeta({
 </script>
 
 <template>
-    <Loader :paintings />
-    <PaintingsParallax :paintings />
-    <PaintingsMarquee :paintings />
+    <section>
+        <Loader :paintings />
+        <PaintingsParallax :paintings />
+        <PaintingsMarquee :paintings />
+    </section>
 </template>

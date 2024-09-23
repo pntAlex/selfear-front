@@ -19,6 +19,7 @@ export default defineNuxtConfig({
           additionalData: `
           @use "~/assets/styles/main.scss" as *;
           @use "~/assets/styles/_mixins.scss" as *;
+          @use "~/assets/styles/_animations.scss" as *;
           `,
         },
       },

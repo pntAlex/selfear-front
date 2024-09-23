@@ -104,6 +104,22 @@ const loader = () => {
         )
 };
 
+const computeTranslateX = (key) => {
+    switch (key) {
+        case 1: return "100vw";
+        case 3: return "-100vw";
+        default: return null
+    }
+}
+
+const computeTranslateY = (key) => {
+    switch (key) {
+        case 2: return "100vh";
+        case 4: return "-100vh";
+        default: return null
+    }
+}
+
 </script>
 
 <template>
@@ -113,7 +129,8 @@ const loader = () => {
         </div>
 
         <div :class="`${ROOT_CLASS}__title__wrapper`">
-            <h1 data-scroll-y="20" data-scroll-scale="0.1" :class="`${ROOT_CLASS}__title`" v-text-splitted>
+            <h1 data-scroll-start="0%" data-scroll-y="20" data-scroll-scale="0.1" :class="`${ROOT_CLASS}__title`"
+                v-text-splitted>
                 selfear
             </h1>
             <span data-scroll-alpha="0" :class="`${ROOT_CLASS}__subtitle`">
@@ -131,15 +148,15 @@ const loader = () => {
         <NuxtImg data-scroll-alpha="0" data-scroll-end="20" :class="`${ROOT_CLASS}__image`" src="/images/fluid/fluo.jpg"
             alt="'fluid' - peinture acrylique Fluo - 20x14cm - toile en coton | selfear 2022" />
 
-        <div aria-hidden="true" :class="`${ROOT_CLASS}__paintings__wrapper`" data-scroll-alpha="1"
-            data-scroll-start="20" data-scroll-end="50">
-            <ul v-for="i in 4" :key="i" :class="`${ROOT_CLASS}__paintings`">
-                <li v-for="({ src, alt }, index) in [...paintings, ...paintings, ...paintings, ...paintings]"
-                    :key="index">
-                    <NuxtImg :src="src" :alt="alt" />
+        <!-- <div aria-hidden="true" :class="`${ROOT_CLASS}__paintings__wrapper`">
+            <ul v-for="key in 4" :key :class="`${ROOT_CLASS}__paintings`" :data-scroll-x="computeTranslateX(key)"
+                :data-scroll-y="computeTranslateY(key)" data-scroll-end="max" data-scroll-start="-20%">
+                <li v-for="({ src, alt }, key) in [...paintings, ...paintings, ...paintings, ...paintings]" :key>
+                    <NuxtImg data-scroll-end="max" data-scroll-start="-20%" data-scroll-scale="2.5"
+                        :data-scroll-trigger-parent="`.${ROOT_CLASS}__paintings__wrapper`" :src="src" :alt="alt" />
                 </li>
             </ul>
-        </div>
+        </div> -->
     </section>
 </template>
 
@@ -151,7 +168,7 @@ const loader = () => {
     display: grid;
     place-items: center;
     place-content: center;
-    grid-template-areas: "content" ".";
+    grid-template-areas: "content" "paintings";
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
     position: relative;
@@ -242,7 +259,7 @@ const loader = () => {
         position: absolute;
         list-style: none;
         display: flex;
-        gap: 1rem;
+        gap: 4rem;
         margin: 0;
         padding: 0;
 
@@ -252,6 +269,8 @@ const loader = () => {
 
         &:nth-of-type(odd) {
             flex-direction: row;
+            width: 100%;
+            overflow: hidden;
         }
 
         &:nth-of-type(1) {
@@ -270,19 +289,15 @@ const loader = () => {
             inset: auto auto auto 0;
         }
 
-        &__wrapper {
-            position: fixed;
-            inset: 0;
-            display: grid;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            place-content: center;
-            gap: 10vh;
-        }
-
         img {
             width: 5rem;
+            aspect-ratio: 1/1;
+        }
+
+        &__wrapper {
+            grid-area: paintings;
+            position: absolute;
+            inset: 0;
         }
     }
 }
