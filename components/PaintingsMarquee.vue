@@ -1,14 +1,14 @@
 <script setup>
-const props = defineProps(['paintings'])
-const emit = defineEmits(['cursorChange'])
+const { paintings } = usePaintingsStore()
 
 const ROOT_CLASS = "paintings-marquee"
 </script>
 
 <template>
-    <ol :class="`${ROOT_CLASS}`" @mouseleave="emit('cursorChange', null)">
-        <Marquee v-for="(painting, index) in paintings" :key="index" @mouseenter="emit('cursorChange', painting.cursor)"
-            :title="painting.title" :item="true" :link="`/paintings/${painting.title}`" :cursor="painting.cursor" />
+    <ol :class="`${ROOT_CLASS}`">
+
+        <Marquee v-for="({ title, cursor }, index) in paintings" :key="index" :item="true" :link="`/paintings/${title}`"
+            :cursor :title />
     </ol>
 </template>
 

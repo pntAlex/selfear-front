@@ -4,7 +4,7 @@
   --light: lightgray;
   --text-color: white;
 
-  font-family: "Neue Metana";
+  font-family: Raleway;
   color: var(--text-color);
   cursor: none;
 }
@@ -43,8 +43,8 @@ body {
     position: absolute;
     opacity: 0.15;
     width: var(--column-width);
-    border-left: 1px solid var(--border-color);
-    border-right: 1px solid var(--border-color);
+    border-left: 2px solid var(--border-color);
+    border-right: 2px solid var(--border-color);
     pointer-events: none;
   }
 

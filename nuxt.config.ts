@@ -1,7 +1,10 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
+  sourcemap: {
+    server: false,
+    client: false,
+  },
   app: {
     pageTransition: { name: "page", mode: "out-in" },
     head: {
@@ -16,6 +19,7 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
+          api: "modern-compiler",
           additionalData: `
           @use "~/assets/styles/main.scss" as *;
           @use "~/assets/styles/_mixins.scss" as *;
@@ -35,6 +39,9 @@ export default defineNuxtConfig({
     },
   },
   fonts: {
-    families: [{ name: "RibbonVF", provider: "local", weight: "0 1000" }],
+    families: [
+      { name: "RibbonVF", provider: "local", weight: "0 1000" },
+      { name: "RalewayVF", provider: "local", weight: "0 900" },
+    ],
   },
 });

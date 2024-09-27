@@ -1,18 +1,13 @@
 <script setup>
 const { $gsap } = useNuxtApp()
+const { cursorImage } = useCursorStore()
+const { paintings } = usePaintingsStore()
 
 const ROOT_CLASS = 'cursor';
-
-// const cursorImage = ref(null); // Default cursor image
-const props = defineProps(['image']);
 
 onMounted(() => {
     cursor()
 })
-
-// watch(() => props.image, (newImage) => {
-//     cursorImage.value = newImage ?? null
-// });
 
 const cursor = () => {
     let posX = null;
@@ -33,13 +28,13 @@ const cursor = () => {
     // document.addEventListener("scroll", initPos);
 }
 
-const { cursorImage } = useCursorStore()
-
 </script>
 
 <template>
     <div :class="ROOT_CLASS">
-        <NuxtImg v-if="cursorImage" :src="cursorImage" aria-hidden="true" />
+        <template v-for="({ cursor }, index) in paintings" :key="index">
+            <NuxtImg v-show="cursorImage === cursor" :src="cursor" aria-hidden="true" />
+        </template>
     </div>
 </template>
 

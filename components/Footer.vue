@@ -53,6 +53,8 @@ const ROOT_CLASS = "footer";
     display: grid;
     grid-template-rows: repeat(2, 1fr);
     position: relative;
+    // backdrop-filter: grayscale(1) blur(2px);
+    background: var(--dark);
 
     &__headings {
         display: flex;
@@ -143,7 +145,7 @@ const ROOT_CLASS = "footer";
     }
 
     &__heading {
-        @include selfear(20vw);
+        @include title(20vw);
     }
 
     ul {

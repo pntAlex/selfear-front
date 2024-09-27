@@ -4,19 +4,17 @@ const ROOT_CLASS = "light-switcher"
 
 <template>
     <div :class="ROOT_CLASS">
-        <span>A</span>
-        <span>B</span>
+        <!-- <span>A</span>
+        <span>B</span> -->
     </div>
 </template>
 
 <style lang="scss">
 .light-switcher {
     position: fixed;
-    bottom: 2vh;
-    // transform: translateY(-200%);
-    align-self: center;
-    border: 1px solid grey;
-    background-color: var(--dark);
+    inset: auto calc(50% - 5ch) 2vh;
+    margin: 0 auto;
+    background-color: var(--light);
     border-radius: 2ch;
     width: 10ch;
     height: 3ch;

@@ -1,5 +1,3 @@
-// import { useState } from '#app'
-
 export const useCursorStore = () => {
   const cursorImage = useState('cursorImage', () => null)
 

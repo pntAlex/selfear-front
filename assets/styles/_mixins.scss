@@ -1,4 +1,4 @@
-@mixin selfear($font-size: 30vw) {
+@mixin title($font-size: 30vw, $color: var(--light)) {
   opacity: 1;
   margin: 0;
   padding: 0;
@@ -9,14 +9,7 @@
   line-height: normal;
 
   -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: var(--light);
-
-  &__wrapper {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    z-index: 10;
-  }
+  -webkit-text-stroke-color: $color;
 
   :deep(span) {
     font-variation-settings: "wdth" 0;
@@ -25,7 +18,12 @@
 
     &:hover {
       font-variation-settings: "wdth" 1000;
-      color: var(--light);
+      color: $color;
     }
   }
+}
+
+@mixin hidden {
+  opacity: 0;
+  visibility: hidden;
 }

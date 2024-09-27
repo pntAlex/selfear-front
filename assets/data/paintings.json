@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "title": "radioactiv",
     "alt": "'radioactiv' - peinture acrylique Fluo - 56x56cm - naperon en coton | selfear 2022",
     "src": "/images/radioactiv/fluo.png",
@@ -20,6 +21,7 @@
     ]
   },
   {
+    "id": 2,
     "title": "spiraal",
     "alt": "'spiraal' - peinture acrylique Fluo - 40x40cm - toile en coton | selfear 2023",
     "src": "/images/spiraal/fluo.jpg",
@@ -32,6 +34,7 @@
     "pictures": []
   },
   {
+    "id": 3,
     "title": "staar",
     "alt": "'staar' - peinture acrylique Fluo - 40x40cm - toile en coton | selfear 2022",
     "src": "/images/staar/fluo.jpg",
@@ -53,6 +56,7 @@
     ]
   },
   {
+    "id": 4,
     "title": "knowledge",
     "alt": "'knowledge' - peinture acrylique Fluo & Phospho - 30x30cm - disque vinyle 33tpm | selfear 2023",
     "src": "/images/knowledge/fluo.png",
@@ -65,6 +69,7 @@
     "pictures": []
   },
   {
+    "id": 5,
     "title": "eclectic",
     "alt": "'eclectic' - peinture acrylique Fluo & Phospho - 17.5x17.5cm - disque vinyle 45tpm | selfear 2024",
     "src": "/images/eclectic/fluo.png",
@@ -77,6 +82,7 @@
     "pictures": []
   },
   {
+    "id": 6,
     "title": "penrose chaos",
     "alt": "'penrose chaos' - peinture acrylique Fluo & Phospho - 40x40cm - toile en coton | selfear 2024",
     "src": "/images/penrose-chaos/fluo.jpg",
@@ -89,6 +95,7 @@
     "pictures": []
   },
   {
+    "id": 7,
     "title": "self",
     "alt": "'self' - peinture acrylique Fluo & Phospho - 17.5x17.5cm - disque vinyle 45tpm | selfear 2024",
     "src": "/images/self/fluo.png",
