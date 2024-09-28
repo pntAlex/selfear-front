@@ -22,6 +22,7 @@ export default defineNuxtConfig({
           api: "modern-compiler",
           additionalData: `
           @use "~/assets/styles/main.scss" as *;
+          @use "~/assets/styles/_lenis.scss" as *;
           @use "~/assets/styles/_mixins.scss" as *;
           @use "~/assets/styles/_animations.scss" as *;
           `,

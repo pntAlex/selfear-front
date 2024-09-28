@@ -5,38 +5,44 @@ const ROOT_CLASS = "footer";
 <template>
     <footer :class="`${ROOT_CLASS} column-border column-border-gray`">
         <div :class="`${ROOT_CLASS}__contact`">
-            <p :class="`${ROOT_CLASS}__contact__copyright`">
-                &copy; 2024 all rights reserved.<br />Selfear
-            </p>
-            <span>For any inquiries&nbsp;:</span>
-            <NuxtLink :class="`${ROOT_CLASS}__contact__mail`" to="mailto:contact@selfear.uv">
-                <span>contact</span>@selfear.uv
-            </NuxtLink>
-            <nav :class="`${ROOT_CLASS}__contact__nav`">
-                <ul>
-                    <li>
-                        <NuxtLink title="Lien vers l'Instagram de l'artiste selfear"
-                            to="https://www.instagram.com/selfearuv" target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                viewBox="0 0 50 50">
-                                <path style="
-                      fill: none;
-                      stroke: var(--light);
-                      stroke-width: 2;
-                      stroke-miterlimit: 10;
-                    " d="M16,46h18c6.627,0,12-5.373,12-12V16c0-6.627-5.373-12-12-12H16C9.373,4,4,9.373,4,16v18C4,40.627,9.373,46,16,46z" />
-                                <circle style="
-                      fill: none;
-                      stroke: var(--light);
-                      stroke-width: 2;
-                      stroke-miterlimit: 10;
-                    " cx="25" cy="25" r="10" />
-                                <circle cx="37" cy="13" r="2" />
-                            </svg>
-                        </NuxtLink>
-                    </li>
-                </ul>
-            </nav>
+            <div :class="`${ROOT_CLASS}__contact__section`">
+                <span>for any inquiries&nbsp;:</span>
+                <NuxtLink :class="`${ROOT_CLASS}__contact__mail`" to="mailto:contact@selfear.uv">
+                    <span>contact</span>@selfear.uv
+                </NuxtLink>
+            </div>
+
+            <div :class="`${ROOT_CLASS}__contact__section`">
+                <p :class="`${ROOT_CLASS}__contact__copyright`">
+                    &copy; 2024 all rights reserved.<br />selfear
+                </p>
+
+                <nav :class="`${ROOT_CLASS}__contact__nav`">
+                    <ul>
+                        <li>
+                            <NuxtLink title="Lien vers l'Instagram de l'artiste selfear"
+                                to="https://www.instagram.com/selfearuv" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    viewBox="0 0 50 50">
+                                    <path style="
+                          fill: none;
+                          stroke: var(--light);
+                          stroke-width: 2;
+                          stroke-miterlimit: 10;
+                        " d="M16,46h18c6.627,0,12-5.373,12-12V16c0-6.627-5.373-12-12-12H16C9.373,4,4,9.373,4,16v18C4,40.627,9.373,46,16,46z" />
+                                    <circle style="
+                          fill: none;
+                          stroke: var(--light);
+                          stroke-width: 2;
+                          stroke-miterlimit: 10;
+                        " cx="25" cy="25" r="10" />
+                                    <circle cx="37" cy="13" r="2" />
+                                </svg>
+                            </NuxtLink>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
         <div :class="`${ROOT_CLASS}__headings`">
             <span><strong>fluorescent</strong> &
@@ -48,13 +54,11 @@ const ROOT_CLASS = "footer";
 
 <style scoped lang="scss">
 .footer {
-    height: 60vh;
     overflow: hidden;
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
     position: relative;
-    // backdrop-filter: grayscale(1) blur(2px);
     background: var(--dark);
+    padding: 4rem 5vw 0;
 
     &__headings {
         display: flex;
@@ -63,7 +67,6 @@ const ROOT_CLASS = "footer";
         position: relative;
         justify-content: flex-end;
         transform: translateY(7rem);
-        text-transform: uppercase;
 
         strong {
             color: blue;
@@ -78,15 +81,28 @@ const ROOT_CLASS = "footer";
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-end;
-        text-transform: uppercase;
         position: relative;
+
+        &__section {
+            display: flex;
+
+            &:nth-child(1) {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            &:nth-child(2) {
+                width: 100%;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
 
         &__mail {
             font-size: 3rem;
             text-decoration: none;
             color: white;
-            text-transform: uppercase;
             line-height: 1;
 
             span {
@@ -103,18 +119,12 @@ const ROOT_CLASS = "footer";
         }
 
         &__copyright {
-            position: absolute;
-            bottom: 0;
-            left: 5vw;
             margin: 0;
             letter-spacing: -0.05ch;
             font-size: 0.8rem;
         }
 
         &__nav {
-            position: absolute;
-            bottom: 0;
-            right: 5vw;
             display: flex;
             gap: 1rem;
 

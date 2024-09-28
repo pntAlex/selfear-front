@@ -32,8 +32,8 @@ const cursor = () => {
 
 <template>
     <div :class="ROOT_CLASS">
-        <template v-for="({ cursor }, index) in paintings" :key="index">
-            <NuxtImg v-show="cursorImage === cursor" :src="cursor" aria-hidden="true" />
+        <template v-for="({ cursor, id }) in paintings" :key="id">
+            <NuxtImg :class="cursorImage === cursor ? 'shown' : 'hidden'" :src="cursor" aria-hidden="true" />
         </template>
     </div>
 </template>
@@ -65,6 +65,44 @@ const cursor = () => {
         bottom: 100%;
         position: absolute;
         width: 100%;
+        animation: fadeOut 0.3s;
+
+        &.shown {
+            display: block;
+            animation: fadeIn 0.2s;
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    display: none;
+                }
+
+                to {
+                    opacity: 1;
+                    display: block;
+                }
+            }
+
+        }
+
+        &.hidden {
+            display: none;
+            animation: fadeOut 0.2s;
+
+            @keyframes fadeOut {
+                from {
+                    opacity: 1;
+                    display: block;
+                }
+
+                to {
+                    opacity: 0;
+                    display: none;
+                }
+            }
+        }
+
+
     }
 }
 </style>

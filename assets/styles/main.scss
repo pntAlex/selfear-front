@@ -6,7 +6,6 @@
 
   font-family: Raleway;
   color: var(--text-color);
-  cursor: none;
 }
 
 h1,
@@ -21,7 +20,6 @@ body {
   position: relative;
   font-weight: normal;
   background-color: var(--dark);
-  overflow: hidden;
 
   &::-webkit-scrollbar {
     display: none;
@@ -59,5 +57,29 @@ body {
   &-padded {
     padding: calc(5vw + var(--column-width) / 4)
       calc(5vw + var(--column-width) / 2);
+
+    &:after {
+      content: "";
+      display: block;
+      width: 2.5vw;
+      aspect-ratio: 1;
+      position: absolute;
+      background-color: var(--dark);
+      top: calc((5vw - 2.5vw) / 2);
+      left: calc((5vw - 2.5vw) / 2);
+    }
   }
+}
+
+html.lenis {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
 }

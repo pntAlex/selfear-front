@@ -70,7 +70,7 @@ const initGsap = () => {
             </p>
 
             <p v-text-splitted :class="`${ROOT_CLASS}__text`">
-                relativity is <strong>key</strong>.
+                relativity is <strong>key.</strong>
             </p>
         </div>
 

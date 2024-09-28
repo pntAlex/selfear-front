@@ -1,13 +1,18 @@
 <script setup>
-const { $gsap } = useNuxtApp()
+const { $gsap, $lenis } = useNuxtApp()
+const { loaderInit, setLoaderInit } = useLoaderStore()
 
 const ROOT_CLASS = "loader"
 
 onMounted(() => {
-    loader()
+    // if (loaderInit.value) {
+    // return;
+    // }
+
+    initAnimation()
 })
 
-const loader = () => {
+const initAnimation = () => {
     const root = `.${ROOT_CLASS}`;
 
     const maskedTitle = `.${ROOT_CLASS}__mask__heading`;
@@ -16,18 +21,24 @@ const loader = () => {
     const loaderWrapper = `.${ROOT_CLASS}__progress`;
     const loaderImage = `.${ROOT_CLASS}__image`;
 
+    const loaderTL = $gsap.timeline({
+        onStart: () => {
+            $lenis.stop();
+            // setLoaderInit(true)
+        }, onComplete: () => $lenis.start()
+    })
+
     $gsap.set([loaderImage, titleContent], {
         autoAlpha: 0
     })
 
-    $gsap.timeline()
-        .to(maskedTitle,
-            {
-                yPercent: -100,
-                duration: 1,
-                ease: "power3.inOut"
-            }
-        )
+    loaderTL.to(maskedTitle,
+        {
+            yPercent: -100,
+            duration: 1,
+            ease: "power3.inOut"
+        }
+    )
         .to(loaderWrapper,
             {
                 autoAlpha: 1,

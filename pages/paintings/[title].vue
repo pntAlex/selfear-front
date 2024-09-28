@@ -3,6 +3,7 @@ const ROOT_CLASS = "painting";
 
 const { getPaintingByTitle, getNextPainting } = usePaintingsStore();
 const { setCursorImage } = useCursorStore()
+
 const route = useRoute()
 
 const { index, painting } = getPaintingByTitle(route?.params?.title)
@@ -21,7 +22,8 @@ setCursorImage(cursor)
 
 <template>
     <section v-if="painting" :class="`${ROOT_CLASS}`">
-        <NuxtImg :class="`${ROOT_CLASS}__image`" :alt :src="src_full ?? src" />
+        <NuxtImg data-scroll-scale="1.05" data-scroll-end="max" :class="`${ROOT_CLASS}__image`" :alt
+            :src="src_full ?? src" />
 
         <section :class="`${ROOT_CLASS}__content column-border column-border-left column-border-padded`">
             <div :class="`${ROOT_CLASS}__content__headings`">
@@ -30,7 +32,7 @@ setCursorImage(cursor)
             </div>
 
             <div :class="`${ROOT_CLASS}__content__info`">
-                <p>{{ paint_type }}</p>
+                <span>{{ paint_type }}</span>
                 <span>{{ support }}</span>
                 <span>{{ dimensions }}</span>
             </div>
@@ -40,9 +42,10 @@ setCursorImage(cursor)
                     <NuxtImg :src :alt loading="lazy" />
                 </li>
             </ul>
+
         </section>
 
-        <aside @mouseenter="emit('cursorChange', cursor)" :class="`${ROOT_CLASS}__aside`">
+        <aside :class="`${ROOT_CLASS}__aside`">
             <nav>
                 <NuxtLink @mouseover="setCursorImage(nextPaintingCursor)" @mouseleave="setCursorImage(cursor)"
                     :class="`${ROOT_CLASS}__aside__nav__next`" :to="`/paintings/${nextPaintingTitle}`">
@@ -79,15 +82,8 @@ setCursorImage(cursor)
         grid-template-rows: auto 1fr;
         gap: 2rem;
 
-        &:after {
-            content: "";
-            display: block;
-            width: 2.5vw;
-            aspect-ratio: 1;
-            position: absolute;
-            background-color: var(--dark);
-            top: 2.5%;
-            left: 2.5%;
+        &.column-border-padded {
+            padding-right: 5vw
         }
 
         &__headings {
@@ -102,8 +98,8 @@ setCursorImage(cursor)
             }
 
             &__title {
-                @include title(4em, black);
-
+                letter-spacing: 0.1em;
+                font-size: 2.5rem;
                 margin: 0;
             }
         }
@@ -112,10 +108,9 @@ setCursorImage(cursor)
             grid-area: content;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
 
             &>* {
-                color: gray;
+                color: var(--light);
                 margin: 0;
             }
         }
