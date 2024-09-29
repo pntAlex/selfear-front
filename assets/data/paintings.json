@@ -2,112 +2,112 @@
   {
     "id": 1,
     "title": "radioactiv",
-    "alt": "'radioactiv' - peinture acrylique Fluo - 56x56cm - naperon en coton | selfear 2022",
+    "alt": "'radioactiv' - acrylic fluorescent painting - 56x56cm - cotton canvas | selfear 2022",
     "src": "/images/radioactiv/fluo.png",
     "cursor": "/images/radioactiv/cursor.png",
     "date": "2022",
-    "paint_type": "peinture acrylique fluo",
+    "paint_type": "acrylic fluorescent paint",
     "dimensions": "56x56",
-    "support": "naperon en coton",
+    "support": "cotton canvas",
     "pictures": [
       {
         "src": "/images/radioactiv/fluo-1.jpg",
-        "alt": "'radioactiv' - photo de l'oeuvre sous lumière UV, étalé sur un tabouret"
+        "alt": "'radioactiv' - photo of the work under UV light, laid out on a stool"
       },
       {
         "src": "/images/radioactiv/fluo-2.jpg",
-        "alt": "'radioactiv' - photo de l'oeuvre sous lumière UV, étalé contre une planche de bois à la verticale"
+        "alt": "'radioactiv' - photo of the work under UV light, laid out vertically against a wooden board"
       }
     ]
   },
   {
     "id": 2,
     "title": "spiraal",
-    "alt": "'spiraal' - peinture acrylique Fluo - 40x40cm - toile en coton | selfear 2023",
+    "alt": "'spiraal' - acrylic fluorescent painting - 40x40cm - cotton canvas | selfear 2023",
     "src": "/images/spiraal/fluo.jpg",
     "src_full": "/images/spiraal/fluo-full.jpg",
     "cursor": "/images/spiraal/cursor.png",
     "date": "2023",
-    "paint_type": "peinture acrylique fluo",
+    "paint_type": "acrylic fluorescent paint",
     "dimensions": "40x40",
-    "support": "toile en coton",
+    "support": "cotton canvas",
     "pictures": []
   },
   {
     "id": 3,
     "title": "staar",
-    "alt": "'staar' - peinture acrylique Fluo - 40x40cm - toile en coton | selfear 2022",
+    "alt": "'staar' - acrylic fluorescent painting - 40x40cm - cotton canvas | selfear 2022",
     "src": "/images/staar/fluo.jpg",
     "src_full": "/images/staar/fluo-full.jpg",
     "cursor": "/images/staar/cursor.png",
     "date": "2022",
-    "paint_type": "peinture acrylique fluo",
+    "paint_type": "acrylic fluorescent paint",
     "dimensions": "40x40",
-    "support": "toile en coton",
+    "support": "cotton canvas",
     "pictures": [
       {
         "src": "/images/staar/fluo-1.jpg",
-        "alt": "'staar' - photo de l'oeuvre sous lumière UV, étalé sur un support plat en plongée"
+        "alt": "'staar' - photo of the work under UV light, laid out on a flat support in a low-angle shot"
       },
       {
         "src": "/images/staar/fluo-2.jpg",
-        "alt": "'staar' - photo de l'oeuvre sous lumière UV, posé contre le mur sur un meuble, à la verticale"
+        "alt": "'staar' - photo of the work under UV light, placed against the wall on a piece of furniture, vertically"
       }
     ]
   },
   {
     "id": 4,
     "title": "knowledge",
-    "alt": "'knowledge' - peinture acrylique Fluo & Phospho - 30x30cm - disque vinyle 33tpm | selfear 2023",
+    "alt": "'knowledge' - acrylic fluorescent & phosphorescent painting - 30x30cm - vinyl record 33rpm | selfear 2023",
     "src": "/images/knowledge/fluo.png",
     "src_full": "/images/knowledge/fluo-full.png",
     "cursor": "/images/knowledge/cursor.png",
     "date": "2023",
-    "paint_type": "peinture acrylique fluo & phospho",
+    "paint_type": "acrylic fluorescent & phosphorescent paint",
     "dimensions": "30x30",
-    "support": "disque vinyle 33t",
+    "support": "vinyl record 33",
     "pictures": []
   },
   {
     "id": 5,
     "title": "eclectic",
-    "alt": "'eclectic' - peinture acrylique Fluo & Phospho - 17.5x17.5cm - disque vinyle 45tpm | selfear 2024",
+    "alt": "'eclectic' - acrylic fluorescent & phosphorescent painting - 17.5x17.5cm - vinyl record 45rpm | selfear 2024",
     "src": "/images/eclectic/fluo.png",
     "src_full": "/images/eclectic/fluo-full.png",
     "cursor": "/images/eclectic/cursor.png",
     "date": "2024",
-    "paint_type": "peinture acrylique fluo & phospho",
+    "paint_type": "acrylic fluorescent & phosphorescent paint",
     "dimensions": "17.5x17.5",
-    "support": "disque vinyle 45t",
+    "support": "vinyl record 45",
     "pictures": []
   },
   {
     "id": 6,
     "title": "penrose chaos",
-    "alt": "'penrose chaos' - peinture acrylique Fluo & Phospho - 40x40cm - toile en coton | selfear 2024",
+    "alt": "'penrose chaos' - acrylic fluorescent & phosphorescent painting - 40x40cm - cotton canvas | selfear 2024",
     "src": "/images/penrose-chaos/fluo.jpg",
     "src_full": "/images/penrose-chaos/fluo-full.jpg",
     "cursor": "/images/penrose-chaos/cursor.jpg",
     "date": "2024",
-    "paint_type": "peinture acrylique fluo & phospho",
+    "paint_type": "acrylic fluorescent & phosphorescent paint",
     "dimensions": "40x40",
-    "support": "toile en coton",
+    "support": "cotton canvas",
     "pictures": []
   },
   {
     "id": 7,
     "title": "self",
-    "alt": "'self' - peinture acrylique Fluo & Phospho - 17.5x17.5cm - disque vinyle 45tpm | selfear 2024",
+    "alt": "'self' - acrylic fluorescent & phosphorescent painting - 17.5x17.5cm - vinyl record 45rpm | selfear 2024",
     "src": "/images/self/fluo.png",
     "cursor": "/images/self/cursor.png",
     "date": "2024",
-    "paint_type": "peinture acrylique fluo & phospho",
+    "paint_type": "acrylic fluorescent & phosphorescent paint",
     "dimensions": "17.5x17.5",
-    "support": "disque vinyle 45t",
+    "support": "vinyl record 45",
     "pictures": [
       {
         "src": "/images/self/phospho.png",
-        "alt": "'self' - photo de l'oeuvre dans la nuit"
+        "alt": "'self' - photo of the work at night"
       }
     ]
   }

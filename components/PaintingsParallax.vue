@@ -24,7 +24,7 @@ const initGsap = () => {
     })
 
     document.querySelectorAll(texts).forEach((text, index) => {
-        const tl = $gsap.timeline({ defaults: { ease: "power3.inOut" } })
+        const tl = $gsap.timeline()
 
         tl
             .fromTo(text.querySelectorAll('span'), { autoAlpha: 0 }, {
@@ -39,16 +39,16 @@ const initGsap = () => {
                     once: true
                 },
             })
-            .fromTo(text, { autoAlpha: 1 }, {
-                autoAlpha: 0,
-                duration: 0.5,
-                scrollTrigger: {
-                    trigger: root,
-                    start: `${index * 25 + 20}% `,
-                    end: `${index * 25 + 30}% `,
-                    scrub: true,
-                },
-            })
+        // .fromTo(text, { autoAlpha: 1 }, {
+        //     autoAlpha: 0,
+        //     duration: 0.5,
+        //     scrollTrigger: {
+        //         trigger: root,
+        //         start: `${index * 25 + 20}% `,
+        //         end: `${index * 25 + 30}% `,
+        //         scrub: true,
+        //     },
+        // })
     });
 }
 </script>
