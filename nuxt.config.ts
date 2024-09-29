@@ -33,7 +33,12 @@ export default defineNuxtConfig({
   image: {
     // Options
   },
-  modules: ["@nuxt/image", "@nuxt/fonts", "@hypernym/nuxt-gsap"],
+  modules: [
+    "@nuxt/image",
+    "@nuxt/fonts",
+    "@hypernym/nuxt-gsap",
+    "@nuxtjs/device",
+  ],
   gsap: {
     extraPlugins: {
       scrollTrigger: true,

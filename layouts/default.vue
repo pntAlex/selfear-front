@@ -2,6 +2,7 @@
 import { SpeedInsights } from "@vercel/speed-insights/nuxt";
 
 const { setCursorImage } = useCursorStore()
+const { isMobile } = useDevice()
 
 const ROOT_CLASS = "default-layout"
 const TITLE = `.${ROOT_CLASS}__nav__title`
@@ -23,7 +24,12 @@ const initAnimation = () => {
 
 <template>
     <!-- <LightSwitcher /> -->
-    <section :class="ROOT_CLASS">
+    <section :class="`${ROOT_CLASS}--mobile`" v-if="isMobile">
+        <h1>Selfear</h1>
+        <p>Mobile version WIP.</p>
+    </section>
+
+    <section v-else :class="ROOT_CLASS">
         <nav :class="`${ROOT_CLASS}__nav`">
             <NuxtLink @click="setCursorImage(null)" :class="`${ROOT_CLASS}__nav__title`" to="/">Selfear</NuxtLink>
         </nav>
@@ -58,6 +64,20 @@ const initAnimation = () => {
             color: var(--dark);
             color: white;
             font-size: 1.6rem;
+        }
+    }
+
+    &--mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        height: 100vh;
+        width: 100vw;
+        place-content: center;
+        place-items: center;
+
+        &>* {
+            margin: 0;
         }
     }
 }
