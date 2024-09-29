@@ -1,14 +1,31 @@
 <script setup>
 import { SpeedInsights } from "@vercel/speed-insights/nuxt";
 
+const { setCursorImage } = useCursorStore()
+
 const ROOT_CLASS = "default-layout"
+const TITLE = `.${ROOT_CLASS}__nav__title`
+
+const { $gsap } = useNuxtApp()
+
+onMounted(() => {
+    initAnimation()
+})
+
+const initAnimation = () => {
+    $gsap.to(TITLE, {
+        autoAlpha: 1,
+        delay: 5
+    })
+}
+
 </script>
 
 <template>
     <!-- <LightSwitcher /> -->
     <section :class="ROOT_CLASS">
         <nav :class="`${ROOT_CLASS}__nav`">
-            <NuxtLink :class="`${ROOT_CLASS}__nav__title`" to="/">Selfear</NuxtLink>
+            <NuxtLink @click="setCursorImage(null)" :class="`${ROOT_CLASS}__nav__title`" to="/">Selfear</NuxtLink>
         </nav>
 
         <main>
@@ -32,6 +49,8 @@ const ROOT_CLASS = "default-layout"
         mix-blend-mode: difference;
 
         &__title {
+            @include hidden;
+
             font-family: RibbonVF;
             text-decoration: none;
             text-align: center;

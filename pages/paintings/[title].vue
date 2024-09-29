@@ -16,6 +16,7 @@ useSeoMeta({
     title: `${title} - Selfear | Peintre Fluo-Phosphorescent`,
     description: `Peinture ${title}`
 })
+
 setCursorImage(cursor)
 
 </script>
@@ -43,15 +44,26 @@ setCursorImage(cursor)
                 </li>
             </ul>
 
-        </section>
-
-        <aside :class="`${ROOT_CLASS}__aside`">
-            <nav>
+            <!-- <nav> -->
+            <nav :class="`${ROOT_CLASS}__nav`">
+                <span :class="`${ROOT_CLASS}__nav__disclaimer`">Voir aussi</span>
                 <NuxtLink @mouseover="setCursorImage(nextPaintingCursor)" @mouseleave="setCursorImage(cursor)"
-                    :class="`${ROOT_CLASS}__aside__nav__next`" :to="`/paintings/${nextPaintingTitle}`">
+                    :class="`${ROOT_CLASS}__nav__next typed`" replace :to="`/paintings/${nextPaintingTitle}`">{{
+                        nextPainting.title }}
                 </NuxtLink>
             </nav>
-        </aside>
+
+
+            <!-- </nav> -->
+        </section>
+
+        <!-- <aside :class="`${ROOT_CLASS}__aside`">
+            <nav>
+                <NuxtLink @mouseover="setCursorImage(nextPaintingCursor)" @mouseleave="setCursorImage(cursor)"
+                    :class="`${ROOT_CLASS}__aside__nav__next`" replace :to="`/paintings/${nextPaintingTitle}`">
+                </NuxtLink>
+            </nav>
+        </aside> -->
     </section>
 </template>
 
@@ -77,9 +89,9 @@ setCursorImage(cursor)
         z-index: 10;
         grid-area: content;
         display: grid;
-        grid-template-areas: "heading heading" "content content";
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr;
+        // grid-template-areas: "heading heading" "content content";
+        // grid-template-columns: 1fr;
+        // grid-template-rows: auto 1fr;
         gap: 2rem;
 
         &.column-border-padded {
@@ -87,7 +99,6 @@ setCursorImage(cursor)
         }
 
         &__headings {
-            grid-area: heading;
             display: flex;
             flex-direction: column;
             gap: 0.25rem;
@@ -105,7 +116,6 @@ setCursorImage(cursor)
         }
 
         &__info {
-            grid-area: content;
             display: flex;
             flex-direction: column;
 
@@ -133,22 +143,47 @@ setCursorImage(cursor)
         }
     }
 
-    &__aside {
-        grid-area: aside;
+    &__nav {
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+        border-top: 2px solid var(--light);
+        margin-top: 3rem;
+        padding-top: 1rem;
+        gap: 0.4rem;
 
-        &__nav {
-            &__next {
-                width: 3ch;
+        &__next {
+            display: inline-flex;
+            font-size: 1.5rem;
+            text-decoration: none;
+            gap: 1ch;
+            align-items: center;
+            justify-content: flex-end;
+            text-align: end;
+            color: var(--dark);
+            letter-spacing: 0.1em;
+
+            &:before {
+                content: "";
+                display: block;
+                width: 1ch;
                 aspect-ratio: 1;
-                border-radius: 4ch;
-                border: 1px solid black;
-                backdrop-filter: blur(5px);
-                border: 1px solid lightgrey;
-                position: fixed;
-                right: 2vw;
-                top: 50%;
+                background-color: black;
+                transition: transform 0.2s, opacity 0.2s;
+                opacity: 0;
+                transform: translateX(-1ch)
+            }
+
+            &:hover:before {
+                opacity: 1;
+                transform: translateX(0)
             }
         }
+
+        &__disclaimer {
+            color: var(--light)
+        }
     }
+
 }
 </style>

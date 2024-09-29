@@ -1,7 +1,10 @@
 <script setup>
 const { $gsap } = useNuxtApp()
+
 const { cursorImage } = useCursorStore()
 const { paintings } = usePaintingsStore()
+
+const image = ref([])
 
 const ROOT_CLASS = 'cursor';
 
@@ -22,18 +25,25 @@ const cursor = () => {
             translateY: posY,
             duration: 0.05,
         });
+
+        // if (image.value) {
+        //     if (image.value.getBoundingClientRect().right > window.innerWidth) {
+        //         image.value.classList.toggle("outside");
+        //     }
+        // }
     }
 
+    // TODO Init cursor on load
     document.addEventListener("pointermove", initPos);
-    // document.addEventListener("scroll", initPos);
 }
 
 </script>
 
 <template>
-    <div :class="ROOT_CLASS">
+    <div ref="image" :class="ROOT_CLASS">
         <template v-for="({ cursor, id }) in paintings" :key="id">
-            <NuxtImg :class="cursorImage === cursor ? 'shown' : 'hidden'" :src="cursor" aria-hidden="true" />
+            <NuxtImg ref="images" :class="cursorImage === cursor ? 'shown' : 'hidden'" :src="cursor"
+                aria-hidden="true" />
         </template>
     </div>
 </template>
@@ -48,6 +58,12 @@ const cursor = () => {
     pointer-events: none;
     display: grid;
     z-index: 1000;
+
+    &.outside {
+        img {
+            transform: translateX(-100%)
+        }
+    }
 
     &:before {
         content: "";
@@ -66,6 +82,7 @@ const cursor = () => {
         position: absolute;
         width: 100%;
         animation: fadeOut 0.3s;
+        transition: transform 0.5s ease-in-out;
 
         &.shown {
             display: block;

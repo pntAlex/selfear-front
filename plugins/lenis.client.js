@@ -1,4 +1,4 @@
-import Lenis from 'lenis';
+import Lenis from "lenis";
 
 export default defineNuxtPlugin((nuxtApp) => {
   const lenis = new Lenis(); // Initialize Lenis
@@ -10,5 +10,5 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   requestAnimationFrame(animate); // Start the animation loop
 
-  nuxtApp.provide('lenis', lenis); // Provide lenis instance
+  nuxtApp.provide("lenis", lenis); // Provide lenis instance
 });

@@ -5,14 +5,10 @@ const { loaderInit, setLoaderInit } = useLoaderStore()
 const ROOT_CLASS = "loader"
 
 onMounted(() => {
-    // if (loaderInit.value) {
-    // return;
-    // }
-
-    initAnimation()
+    initAnimation(loaderInit.value)
 })
 
-const initAnimation = () => {
+const initAnimation = (init) => {
     const root = `.${ROOT_CLASS}`;
 
     const maskedTitle = `.${ROOT_CLASS}__mask__heading`;
@@ -22,91 +18,48 @@ const initAnimation = () => {
     const loaderImage = `.${ROOT_CLASS}__image`;
 
     const loaderTL = $gsap.timeline({
+        defaults: { ease: 'power3.inOut' },
         onStart: () => {
+            window.scrollTo(0, 0);
             $lenis.stop();
-            // setLoaderInit(true)
-        }, onComplete: () => $lenis.start()
-    })
-
-    $gsap.set([loaderImage, titleContent], {
-        autoAlpha: 0
-    })
-
-    loaderTL.to(maskedTitle,
-        {
-            yPercent: -100,
-            duration: 1,
-            ease: "power3.inOut"
+            setLoaderInit(true)
+        },
+        onComplete: () => {
+            $lenis.start()
+            initScrollAnimation()
         }
-    )
-        .to(loaderWrapper,
-            {
-                autoAlpha: 1,
-                duration: 1.3,
-                ease: "power3.inOut",
+    })
 
-            }, '<')
-        .to(loaderWrapper,
-            {
-                opacity: 1,
-                duration: 1,
-                ease: "power3.inOut",
+    loaderTL
+        .to(maskedTitle, { yPercent: -100, duration: 1 })
+        .to(loaderWrapper, { autoAlpha: 1, duration: 1.3 }, '<')
+        .to(loaderWrapper, { opacity: 1, duration: 1 }, "<")
+        .to(root, { "--progress-scale": 1, duration: 1.5 }, "<0.5")
+        .to(maskedTitle, { backgroundPosition: "-100% 0%", duration: 1.5 }, "<")
+        .to(maskedTitle, { yPercent: -200, duration: 1 })
+        .to(loaderWrapper, { opacity: 0, duration: 0.5 }, "<")
+        .to(root, { "--column-scale-Y": 1, duration: 2 }, "<")
+        .to(titleContent, { scale: 1, autoAlpha: 1, duration: 2, stagger: 0.5 }, '<1')
+        .to(loaderImage, { autoAlpha: 1, filter: "blur(0px)", scale: 1, duration: 2.5 }, "<")
+
+
+    const initScrollAnimation = () => {
+        $gsap.fromTo(titleContent, { autoAlpha: 1 }, {
+            autoAlpha: 0,
+            duration: 0.5,
+            stagger: 0.5,
+            scrollTrigger: {
+                trigger: root,
+                start: "0%",
+                end: "50%",
+                scrub: true,
             },
-            "<")
-        .to(root,
-            {
-                "--progress-scale": 1,
-                duration: 1.5,
-                ease: "power2.inOut",
-            },
-            "<0.5")
-        .to(maskedTitle,
-            {
-                backgroundPosition: "-100% 0%",
-                duration: 1.5,
-                ease: "power2.inOut",
-            },
-            "<=")
-        .to(maskedTitle,
-            {
-                yPercent: -200,
-                duration: 1,
-                ease: "power3.inOut",
-            })
-        .to(loaderWrapper,
-            {
-                opacity: 0,
-                duration: 0.5,
-                ease: "power3.inOut",
-            },
-            "<"
-        )
-        .to(root,
-            {
-                "--column-scale-Y": 1,
-                duration: 2,
-                ease: "power3.inOut",
-            },
-            "<"
-        )
-        .to(titleContent,
-            {
-                autoAlpha: 1,
-                duration: 1.5,
-                ease: "power3.inOut",
-                stagger: 0.5
-            },
-            '<1')
-        .to(loaderImage,
-            {
-                autoAlpha: 1,
-                filter: "blur(0px)",
-                scale: 1,
-                duration: 2.5,
-                ease: "power3.inOut",
-            },
-            "<"
-        )
+        })
+    }
+
+    if (init) {
+        loaderTL.totalProgress(1).kill();
+    }
 };
 
 </script>
@@ -118,16 +71,13 @@ const initAnimation = () => {
         </div>
 
         <div :class="`${ROOT_CLASS}__title__wrapper`">
-            <h1 data-scroll-start="0" data-scroll-end="50%" data-scroll-alpha="0" :class="`${ROOT_CLASS}__title`"
-                :data-scroll-trigger-parent="`.${ROOT_CLASS}`" v-text-splitted>
+            <h1 :class="`${ROOT_CLASS}__title`" v-text-splitted>
                 selfear
             </h1>
-            <span data-scroll-alpha="0" data-scroll-start="15%" data-scroll-end="30%"
-                :data-scroll-trigger-parent="`.${ROOT_CLASS}`" :class="`${ROOT_CLASS}__subtitle`"><strong>fluo</strong>
+            <span :class="`${ROOT_CLASS}__subtitle`"><strong>fluo</strong>
                 &
                 <strong>phospho</strong> painter</span>
-            <span data-scroll-alpha="0" data-scroll-start="10%" data-scroll-end="20%"
-                :data-scroll-trigger-parent="`.${ROOT_CLASS}`" :class="`${ROOT_CLASS}__subtitle`">
+            <span :class="`${ROOT_CLASS}__subtitle`">
                 based in France</span>
         </div>
 
@@ -144,13 +94,13 @@ const initAnimation = () => {
     --progress-scale: 0;
     --column-scale-Y: 0;
 
-    height: 150vh;
+    height: 100vh;
     display: grid;
     place-items: center;
     place-content: center;
     grid-template-areas: "content" "paintings";
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 0.5fr;
+    grid-template-rows: 1fr;
     position: relative;
     z-index: 0;
 
@@ -168,8 +118,10 @@ const initAnimation = () => {
 
     &__title {
         @include title(30vw);
+        @include hidden;
 
         text-align: center;
+        transform: scale(1.1);
 
         &__wrapper {
             position: fixed;
@@ -181,6 +133,8 @@ const initAnimation = () => {
     }
 
     &__subtitle {
+        @include hidden;
+
         align-self: flex-end;
         font-size: 0.8em;
 
@@ -213,11 +167,12 @@ const initAnimation = () => {
     }
 
     &__image {
+        @include hidden;
+
         height: 25vh;
         width: 45vw;
         object-fit: cover;
         filter: blur(50px);
-        // transform: scale(1.3);
         position: fixed;
         pointer-events: none;
     }

@@ -24,32 +24,31 @@ const initGsap = () => {
     })
 
     document.querySelectorAll(texts).forEach((text, index) => {
-        const tl = $gsap.timeline()
+        const tl = $gsap.timeline({ defaults: { ease: "power3.inOut" } })
 
-        tl.to(text.querySelectorAll('span'), {
-            autoAlpha: 1,
-            stagger: 0.02,
-            duration: 0.2,
-            scrollTrigger: {
-                trigger: root,
-                start: `${index * 25}%`,
-                end: `${index * 25 + 15}%`,
-                scrub: true,
-            },
-        })
-            .to(text, {
+        tl
+            .fromTo(text.querySelectorAll('span'), { autoAlpha: 0 }, {
+                autoAlpha: 1,
+                stagger: 0.02,
+                duration: 0.2,
+                scrollTrigger: {
+                    trigger: root,
+                    start: `${index * 25 - 20}%`,
+                    end: `${index * 25 + 15 - 20}%`,
+                    scrub: true,
+                    once: true
+                },
+            })
+            .fromTo(text, { autoAlpha: 1 }, {
                 autoAlpha: 0,
                 duration: 0.5,
                 scrollTrigger: {
                     trigger: root,
-                    start: `${index * 25 + 20}%`,
-                    end: `${index * 25 + 30}%`,
+                    start: `${index * 25 + 20}% `,
+                    end: `${index * 25 + 30}% `,
                     scrub: true,
                 },
             })
-
-
-        // $gsap
     });
 }
 </script>
@@ -104,7 +103,6 @@ const initGsap = () => {
     }
 
     &__text {
-        grid-area: content;
         text-align: center;
         color: var(--light);
         max-width: 20ch;
@@ -145,12 +143,10 @@ const initGsap = () => {
             width: 30ch;
             z-index: 20;
             display: grid;
-            position: fixed;
+            position: absolute;
             inset: 0;
             width: 100%;
-            grid-template-areas: 'content';
-            grid-template-columns: 1fr;
-            grid-template-rows: 1fr;
+            grid-template-rows: repeat(3, 1fr);
             place-items: center;
             place-content: center;
         }
