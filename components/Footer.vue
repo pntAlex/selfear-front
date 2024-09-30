@@ -8,8 +8,8 @@ const ROOT_CLASS = "footer";
 
             <div :class="`${ROOT_CLASS}__contact__mail__wrapper`">
                 <!-- <span>for any inquiries&nbsp;:</span> -->
-                <NuxtLink :class="`${ROOT_CLASS}__contact__mail`" to="mailto:contact@selfear.uv">
-                    <span>contact</span>@selfear.uv
+                <NuxtLink :class="`${ROOT_CLASS}__contact__mail`" to="mailto:a_pinot@icloud.com">
+                    <span>a_pinot</span>@icloud.com
                 </NuxtLink>
             </div>
 
