@@ -60,12 +60,11 @@ const { setCursorImage } = useCursorStore()
     &__link {
         letter-spacing: 0.15em;
         line-height: 1;
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         font-weight: bold;
         text-decoration: none;
         color: inherit;
-        padding-left: 2em;
-        padding: 1.5rem 0 1.5rem 3rem;
+        padding: 1.8rem 0 1.8rem 3rem;
         position: relative;
         text-transform: uppercase;
     }
@@ -96,7 +95,7 @@ const { setCursorImage } = useCursorStore()
 
         li {
             display: flex;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             gap: 3rem;
             color: black;
             opacity: 0;
@@ -138,7 +137,7 @@ const { setCursorImage } = useCursorStore()
         gap: var(--gap);
         padding: 0;
         margin: 0;
-        animation: scroll 10s linear infinite;
+        animation: scroll 15s linear infinite;
     }
 
     @keyframes scroll {

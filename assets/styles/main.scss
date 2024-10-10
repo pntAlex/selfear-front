@@ -1,7 +1,6 @@
 :root {
-  // --dark: #111;
   --dark: #050505;
-  --light: lightgray;
+  --light: #fee7dd;
   --text-color: white;
 
   font-family: Raleway;
@@ -58,17 +57,6 @@ body {
   &-padded {
     padding: calc(5vw + var(--column-width) / 4)
       calc(5vw + var(--column-width) / 2);
-
-    &:after {
-      content: "";
-      display: block;
-      width: 2.5vw;
-      aspect-ratio: 1;
-      position: absolute;
-      background-color: var(--dark);
-      top: calc((5vw - 2.5vw) / 2);
-      left: calc((5vw - 2.5vw) / 2);
-    }
   }
 }
 

@@ -2,59 +2,47 @@
 const { $gsap } = useNuxtApp()
 const { paintings } = usePaintingsStore()
 
+const root = ref(null)
+
 const ROOT_CLASS = "paintings-parallax"
 
 onMounted(() => {
-    initGsap()
+    if (root.value) {
+        initGsap()
+    }
 })
 
 const initGsap = () => {
-    const root = `.${ROOT_CLASS}`
-    const texts = `.${ROOT_CLASS}__text`
+    const textLetters = `.${ROOT_CLASS}__text span`
 
-    $gsap.to(root, {
+    $gsap.to(root.value, {
         '--column-scale-Y': 1,
         ease: 'power3.inOut',
         scrollTrigger: {
-            trigger: root,
+            trigger: root.value,
             start: "-20%",
             end: "20%",
             scrub: true,
         },
     })
 
-    document.querySelectorAll(texts).forEach((text, index) => {
-        const tl = $gsap.timeline()
-
-        tl
-            .fromTo(text.querySelectorAll('span'), { autoAlpha: 0 }, {
-                autoAlpha: 1,
-                stagger: 0.02,
-                duration: 0.2,
-                scrollTrigger: {
-                    trigger: root,
-                    start: `${index * 25 - 20}%`,
-                    end: `${index * 25 + 15 - 20}%`,
-                    scrub: true,
-                    once: true
-                },
-            })
-        // .fromTo(text, { autoAlpha: 1 }, {
-        //     autoAlpha: 0,
-        //     duration: 0.5,
-        //     scrollTrigger: {
-        //         trigger: root,
-        //         start: `${index * 25 + 20}% `,
-        //         end: `${index * 25 + 30}% `,
-        //         scrub: true,
-        //     },
-        // })
-    });
+    $gsap.to(textLetters, {
+        color: '#000000',
+        // color: (_, el) => el.parentElement?.nodeName === 'STRONG' ? 'black' : '#000000',
+        // "--wght": (_, el) => el.parentElement?.nodeName === 'STRONG' ? '400' : '200',
+        stagger: 0.1, // Délai entre chaque lettre
+        scrollTrigger: {
+            trigger: root.value,
+            start: '-20%', // Commence quand le haut de l'élément atteint 80% de la hauteur de la fenêtre
+            end: '50%', // Termine quand le bas de l'élément atteint 20% de la hauteur de la fenêtre
+            scrub: true, // Animation liée au scroll,
+        }
+    })
 }
 </script>
 
 <template>
-    <section :class="`${ROOT_CLASS} column-border`">
+    <section ref="root" :class="`${ROOT_CLASS} column-border`">
 
         <div :class="`${ROOT_CLASS}__text__wrapper`">
             <p v-text-splitted :class="`${ROOT_CLASS}__text`">i'm a <strong>fluo and phospho</strong> acrylic painter,
@@ -88,7 +76,7 @@ const initGsap = () => {
     --text-wrapper-scale: 0;
 
     height: 200vh;
-    background: #eee;
+    background: var(--light);
     position: relative;
     display: grid;
     place-items: center;
@@ -104,7 +92,6 @@ const initGsap = () => {
 
     &__text {
         text-align: center;
-        color: var(--light);
         max-width: 20ch;
         margin: 0;
         z-index: 1;
@@ -122,19 +109,19 @@ const initGsap = () => {
         }
 
         strong {
-            color: var(--dark);
+            // color: var(--dark);
             font-weight: normal;
         }
 
         :deep(span) {
-            @include hidden;
+            --wght: 300; // @include hidden;
 
-            font-variation-settings: "wght" 400;
+            font-variation-settings: "wght" var(--wght);
             transition: font-variation-settings 500ms;
 
-            &:hover {
-                font-variation-settings: "wght" 800;
-            }
+            // &:hover {
+            //     font-variation-settings: "wght" 800;
+            // }
         }
 
         &__wrapper {

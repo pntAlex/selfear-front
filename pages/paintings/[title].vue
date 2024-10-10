@@ -1,4 +1,6 @@
 <script setup>
+const { $gsap } = useNuxtApp()
+
 const ROOT_CLASS = "painting";
 
 const { getPaintingByTitle, getNextPainting } = usePaintingsStore();
@@ -18,6 +20,72 @@ useSeoMeta({
 })
 
 setCursorImage(cursor)
+
+onMounted(() => {
+    _initAnimations()
+})
+
+const _initAnimations = () => {
+    const paintingsPicture = `.${ROOT_CLASS}__content__paintings li div`
+    const nav = `.${ROOT_CLASS}__nav`
+    const navDisclaimer = `.${ROOT_CLASS}__nav__disclaimer`;
+    const navNext = `.${ROOT_CLASS}__nav__next`;
+
+    const content = `.${ROOT_CLASS}__content`
+    const titleLetters = `.${ROOT_CLASS}__content__headings__title > span`
+
+    const initObservers = () => {
+        const animatePicture = (el) => {
+            $gsap.to(el, { scaleX: 0, duration: 1, ease: "power3.inOut" });
+        }
+
+        const animateNav = () => {
+            const navTl = $gsap.timeline()
+
+            navTl
+                .to(nav, { "--nav-separator-scale": 1, duration: 1.2, ease: "power3.inOut" })
+                .fromTo([navDisclaimer, navNext], { autoAlpha: 0, translateX: '-2rem' }, { autoAlpha: 1, translateX: "0", duration: 0.5, stagger: 0.2 })
+        }
+
+        const pictureObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animatePicture(entry.target)
+                    pictureObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateNav()
+                    navObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        document.querySelectorAll(paintingsPicture).forEach(item => {
+            pictureObserver.observe(item);
+        });
+
+        navObserver.observe(document.querySelector(nav));
+    }
+
+    const initAbsolute = () => {
+        const contentTl = $gsap.timeline({ defaults: { ease: "power3.inOut" } });
+
+        contentTl
+            .to(content, { "--square-size": "2.5vw", duration: 1 })
+            .to(content, { "--border-size": 1, duration: 1 })
+            .fromTo(titleLetters, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.15, stagger: 0.03 }, '<')
+    }
+
+    initAbsolute()
+    initObservers()
+}
+
+const cursorPath = ref(`url(${nextPaintingCursor})`)
 
 </script>
 
@@ -40,6 +108,7 @@ setCursorImage(cursor)
 
             <ul :class="`${ROOT_CLASS}__content__paintings`" v-if="pictures?.length">
                 <li v-for="({ src, alt }) in pictures">
+                    <div aria-hidden="true" />
                     <NuxtImg :src :alt loading="lazy" />
                 </li>
             </ul>
@@ -84,18 +153,31 @@ setCursorImage(cursor)
     }
 
     &__content {
+        --border-size: 0;
+        --square-size: 1vw;
+
         position: relative;
-        background-color: white;
+        background-color: var(--light);
         z-index: 10;
         grid-area: content;
         display: grid;
-        // grid-template-areas: "heading heading" "content content";
-        // grid-template-columns: 1fr;
-        // grid-template-rows: auto 1fr;
         gap: 2rem;
+        padding-right: 5vw;
 
-        &.column-border-padded {
-            padding-right: 5vw
+        &:before {
+            transform-origin: top center;
+            transform: scaleY(var(--border-size));
+        }
+
+        &:after {
+            content: "";
+            display: block;
+            width: var(--square-size);
+            aspect-ratio: 1;
+            position: absolute;
+            background-color: var(--dark);
+            top: calc((5vw - 2.5vw) / 2);
+            left: calc((5vw - 2.5vw) / 2);
         }
 
         &__headings {
@@ -132,29 +214,64 @@ setCursorImage(cursor)
             flex-direction: column;
             gap: 1rem;
             width: 100%;
+            list-style: none;
 
-            li:nth-child(even) {
-                align-self: flex-end;
-            }
+            li {
+                position: relative;
 
-            img {
-                width: 50ch
+                div {
+                    background-color: var(--light);
+                    position: absolute;
+                    inset: 0;
+                }
+
+                img {
+                    width: 50ch
+                }
+
+                &:nth-child(odd) {
+                    align-self: flex-start;
+
+                    div {
+                        transform-origin: left;
+                    }
+                }
+
+                &:nth-child(even) {
+                    align-self: flex-end;
+
+                    div {
+                        transform-origin: right;
+                    }
+                }
             }
         }
     }
 
     &__nav {
+        --nav-separator-scale: 0;
+
         display: flex;
         align-items: flex-end;
         flex-direction: column;
-        border-top: 2px solid var(--light);
         margin-top: 3rem;
         padding-top: 1rem;
         gap: 0.4rem;
 
+        &:before {
+            content: "";
+            display: block;
+            height: 2px;
+            width: 100%;
+            opacity: 0.15;
+            background-color: var(--dark);
+            transform-origin: left;
+            transform: scaleX(var(--nav-separator-scale))
+        }
+
         &__next {
             display: inline-flex;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             text-decoration: none;
             gap: 1ch;
             align-items: center;
@@ -166,12 +283,16 @@ setCursorImage(cursor)
             &:before {
                 content: "";
                 display: block;
-                width: 1ch;
+                width: 0.6em;
                 aspect-ratio: 1;
-                background-color: black;
-                transition: transform 0.2s, opacity 0.2s;
+
+                background: v-bind(cursorPath) center;
+                background-size: contain;
+                background-repeat: no-repeat;
                 opacity: 0;
-                transform: translateX(-1ch)
+                transform: translateX(-1ch);
+                transition: transform 0.2s, opacity 0.2s;
+
             }
 
             &:hover:before {
@@ -181,7 +302,7 @@ setCursorImage(cursor)
         }
 
         &__disclaimer {
-            color: var(--light)
+            color: var(--border-color)
         }
     }
 

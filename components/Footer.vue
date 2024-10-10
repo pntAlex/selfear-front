@@ -1,5 +1,42 @@
 <script setup>
+
+const { $gsap } = useNuxtApp();
+
 const ROOT_CLASS = "footer";
+const footer = `.${ROOT_CLASS}`
+const copyrightLetters = `.${ROOT_CLASS}__contact__copyright span`
+const selfearLetters = `.${ROOT_CLASS}__heading span`
+const mailLetters = `.${ROOT_CLASS}__contact__mail span`
+const selfearSocial = `.${ROOT_CLASS}__contact__socials li`
+
+onMounted(() => {
+    _initAnimations()
+})
+
+const _initAnimations = () => {
+
+    const animateFooter = () => {
+        const footerTL = $gsap.timeline({ defaults: { ease: "power2.inOut" } })
+
+        footerTL
+            .to(footer, { "--column-scale-Y": 1, duration: 1 })
+            .to(copyrightLetters, { autoAlpha: 1, duration: 0.05, stagger: 0.025 }, "<")
+            .fromTo(mailLetters, { translateY: "100%", }, { translateY: "0", duration: 1, stagger: 0.05 }, '<')
+            .to(selfearLetters, { autoAlpha: 1, duration: 1, stagger: 0.05 }, '<')
+            .fromTo(selfearSocial, { autoAlpha: 0 }, { autoAlpha: 1, duration: 1, stagger: 0.05, reversed: true }, '<')
+    }
+
+    const footerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateFooter()
+                footerObserver.unobserve(entry.target);
+            }
+        });
+    })
+
+    footerObserver.observe(document.querySelector(footer));
+} 
 </script>
 
 <template>
@@ -8,12 +45,12 @@ const ROOT_CLASS = "footer";
 
             <div :class="`${ROOT_CLASS}__contact__mail__wrapper`">
                 <!-- <span>for any inquiries&nbsp;:</span> -->
-                <NuxtLink :class="`${ROOT_CLASS}__contact__mail`" to="mailto:a_pinot@icloud.com">
-                    <span>a_pinot</span>@icloud.com
+                <NuxtLink v-text-splitted :class="`${ROOT_CLASS}__contact__mail`" to="mailto:a_pinot@icloud.com">
+                    <span>a_pinot</span><span>@icloud.com</span>
                 </NuxtLink>
             </div>
 
-            <p :class="`${ROOT_CLASS}__contact__copyright`">
+            <p :class="`${ROOT_CLASS}__contact__copyright`" v-text-splitted>
                 &copy; 2024 all rights reserved.<br />selfear
             </p>
 
@@ -44,8 +81,8 @@ const ROOT_CLASS = "footer";
             </nav>
         </div>
         <div :class="`${ROOT_CLASS}__headings`">
-            <span><strong>fluorescent</strong> &
-                <strong>phosphorescent</strong> acrylic painter</span>
+            <!-- <span><strong>fluorescent</strong> &
+                <strong>phosphorescent</strong> acrylic painter</span> -->
             <span :class="`${ROOT_CLASS}__heading typed`" v-text-splitted>selfear</span>
         </div>
     </footer>
@@ -53,11 +90,19 @@ const ROOT_CLASS = "footer";
 
 <style scoped lang="scss">
 .footer {
+    --column-scale-Y: 0;
+
     overflow: hidden;
     display: grid;
     position: relative;
     background: var(--dark);
     padding: 4rem 5vw 0;
+
+    &::before,
+    &::after {
+        transform: scaleY(var(--column-scale-Y));
+        transform-origin: top center;
+    }
 
     &__headings {
         display: flex;
@@ -87,8 +132,6 @@ const ROOT_CLASS = "footer";
         &__section {
             display: flex;
 
-            &:nth-child(1) {}
-
             &:nth-child(2) {
                 width: 100%;
                 align-items: center;
@@ -97,16 +140,30 @@ const ROOT_CLASS = "footer";
         }
 
         &__mail {
+            overflow: hidden;
             font-size: 3rem;
             text-decoration: none;
             color: white;
             line-height: 1;
 
-            span {
+            :deep(span) {
+                display: inline-block;
+            }
+
+            span:nth-child(1) {
                 color: var(--light);
                 -webkit-text-stroke-width: 1px;
                 -webkit-text-stroke-color: var(--light);
                 color: transparent;
+            }
+
+            span {
+                font-variation-settings: "wght" 400;
+                transition: font-variation-settings 500ms;
+
+                &:hover {
+                    font-variation-settings: "wght" 800;
+                }
             }
 
             &__wrapper {
@@ -129,7 +186,11 @@ const ROOT_CLASS = "footer";
             justify-self: flex-start;
             margin: 0;
             letter-spacing: -0.05ch;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+
+            :deep(span) {
+                @include hidden;
+            }
         }
 
         &__socials {
@@ -166,6 +227,10 @@ const ROOT_CLASS = "footer";
 
     &__heading {
         @include title(20vw);
+
+        :deep(span) {
+            @include hidden;
+        }
     }
 
     ul {
