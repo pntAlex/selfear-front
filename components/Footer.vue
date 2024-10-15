@@ -80,11 +80,7 @@ const _initAnimations = () => {
                 </ul>
             </nav>
         </div>
-        <div :class="`${ROOT_CLASS}__headings`">
-            <!-- <span><strong>fluorescent</strong> &
-                <strong>phosphorescent</strong> acrylic painter</span> -->
-            <span :class="`${ROOT_CLASS}__heading typed`" v-text-splitted>selfear</span>
-        </div>
+        <span :class="`${ROOT_CLASS}__heading typed`" v-text-splitted>selfear</span>
     </footer>
 </template>
 
@@ -93,7 +89,6 @@ const _initAnimations = () => {
     --column-scale-Y: 0;
 
     overflow: hidden;
-    display: grid;
     position: relative;
     background: var(--dark);
     padding: 4rem 5vw 0;
@@ -104,23 +99,6 @@ const _initAnimations = () => {
         transform-origin: top center;
     }
 
-    &__headings {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-        justify-content: flex-end;
-        transform: translateY(7rem);
-
-        strong {
-            color: blue;
-
-            &:last-of-type {
-                color: yellow;
-            }
-        }
-    }
-
     &__contact {
         display: grid;
         grid-template-areas: "copyright mail socials";
@@ -128,6 +106,12 @@ const _initAnimations = () => {
         flex-direction: column;
         align-items: center;
         position: relative;
+        // padding-bottom: 10vh;
+
+        @media screen and (max-width: 768px) {
+            grid-template-areas: "mail mail mail" "copyright copyright socials";
+            row-gap: 2rem;
+        }
 
         &__section {
             display: flex;
@@ -140,8 +124,9 @@ const _initAnimations = () => {
         }
 
         &__mail {
+            @include middle-text;
+
             overflow: hidden;
-            font-size: 3rem;
             text-decoration: none;
             color: white;
             line-height: 1;
@@ -228,9 +213,9 @@ const _initAnimations = () => {
     &__heading {
         @include title(20vw);
 
-        :deep(span) {
-            @include hidden;
-        }
+        display: block;
+        text-align: center;
+        transform: translateY(0.35em);
     }
 
     ul {

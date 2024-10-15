@@ -28,8 +28,7 @@ onMounted(() => {
 const _initAnimations = () => {
     const paintingsPicture = `.${ROOT_CLASS}__content__paintings li div`
     const nav = `.${ROOT_CLASS}__nav`
-    const navDisclaimer = `.${ROOT_CLASS}__nav__disclaimer`;
-    const navNext = `.${ROOT_CLASS}__nav__next`;
+    const navChildren = `.${ROOT_CLASS}__nav__wrapper *`;
 
     const content = `.${ROOT_CLASS}__content`
     const titleLetters = `.${ROOT_CLASS}__content__headings__title > span`
@@ -44,7 +43,7 @@ const _initAnimations = () => {
 
             navTl
                 .to(nav, { "--nav-separator-scale": 1, duration: 1.2, ease: "power3.inOut" })
-                .fromTo([navDisclaimer, navNext], { autoAlpha: 0, translateX: '-2rem' }, { autoAlpha: 1, translateX: "0", duration: 0.5, stagger: 0.2 })
+                .fromTo(navChildren, { autoAlpha: 0, translateX: '-2rem' }, { autoAlpha: 1, translateX: "0", duration: 0.5, stagger: 0.2 })
         }
 
         const pictureObserver = new IntersectionObserver((entries) => {
@@ -76,7 +75,7 @@ const _initAnimations = () => {
         const contentTl = $gsap.timeline({ defaults: { ease: "power3.inOut" } });
 
         contentTl
-            .to(content, { "--square-size": "2.5vw", duration: 1 })
+            .to(content, { "--square-size": "1.5rem", duration: 1 })
             .to(content, { "--border-size": 1, duration: 1 })
             .fromTo(titleLetters, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.15, stagger: 0.03 }, '<')
     }
@@ -96,7 +95,7 @@ const cursorPath = ref(`url(${nextPaintingCursor})`)
 
         <section :class="`${ROOT_CLASS}__content column-border column-border-left column-border-padded`">
             <div :class="`${ROOT_CLASS}__content__headings`">
-                <span :class="`${ROOT_CLASS}__content__headings__date`">{{ date }}</span>
+                <span :class="`${ROOT_CLASS}__content__ headings__date`">{{ date }}</span>
                 <h1 v-text-splitted :class="`${ROOT_CLASS}__content__headings__title`">{{ title }}</h1>
             </div>
 
@@ -115,10 +114,14 @@ const cursorPath = ref(`url(${nextPaintingCursor})`)
 
             <!-- <nav> -->
             <nav :class="`${ROOT_CLASS}__nav`">
-                <span :class="`${ROOT_CLASS}__nav__disclaimer`">Voir aussi</span>
-                <NuxtLink @mouseover="setCursorImage(nextPaintingCursor)" @mouseleave="setCursorImage(cursor)"
-                    :class="`${ROOT_CLASS}__nav__next typed`" replace :to="`/paintings/${nextPaintingTitle}`">{{
-                        nextPainting.title }}
+                <NuxtLink :class="`${ROOT_CLASS}__nav__wrapper`" @mouseover="setCursorImage(nextPaintingCursor)"
+                    @mouseleave="setCursorImage(cursor)" replace :to="`/paintings/${nextPaintingTitle}`">
+                    <span :class="`${ROOT_CLASS}__nav__disclaimer`">Voir aussi</span>
+                    <span :class="`${ROOT_CLASS}__nav__next-painting typed`">
+                        {{ nextPainting.title }}
+                    </span>
+                    <Icon :class="`${ROOT_CLASS}__nav__next`" name="ic:sharp-keyboard-arrow-right"
+                        style="color: black" />
                 </NuxtLink>
             </nav>
 
@@ -144,6 +147,11 @@ const cursorPath = ref(`url(${nextPaintingCursor})`)
     grid-template-rows: 75vh auto;
     grid-template-areas: '. .' 'content aside';
 
+    @media screen and (max-width: 768px) {
+        grid-template-rows: 50vh auto;
+        grid-template-columns: 3fr 1fr;
+    }
+
     &__image {
         position: fixed;
         height: 100vh;
@@ -154,7 +162,7 @@ const cursorPath = ref(`url(${nextPaintingCursor})`)
 
     &__content {
         --border-size: 0;
-        --square-size: 1vw;
+        --square-size: 1rem;
 
         position: relative;
         background-color: var(--light);
@@ -187,12 +195,13 @@ const cursorPath = ref(`url(${nextPaintingCursor})`)
             color: var(--dark);
 
             &__date {
-                color: var(--light)
+                color: var(--dark)
             }
 
             &__title {
+                @include middle-text;
+
                 letter-spacing: 0.1em;
-                font-size: 2.5rem;
                 margin: 0;
             }
         }
@@ -201,8 +210,20 @@ const cursorPath = ref(`url(${nextPaintingCursor})`)
             display: flex;
             flex-direction: column;
 
+            &:after {
+                content: "";
+                display: block;
+                height: 2px;
+                width: 100%;
+                opacity: 0.15;
+                background-color: var(--dark);
+                transform-origin: left;
+                margin-top: 2rem;
+                // transform: scaleX(var(--nav-separator-scale))
+            }
+
             &>* {
-                color: var(--light);
+                color: var(--dark);
                 margin: 0;
             }
         }
@@ -218,6 +239,7 @@ const cursorPath = ref(`url(${nextPaintingCursor})`)
 
             li {
                 position: relative;
+                width: 80%;
 
                 div {
                     background-color: var(--light);
@@ -226,7 +248,7 @@ const cursorPath = ref(`url(${nextPaintingCursor})`)
                 }
 
                 img {
-                    width: 50ch
+                    width: 100%
                 }
 
                 &:nth-child(odd) {
@@ -251,12 +273,11 @@ const cursorPath = ref(`url(${nextPaintingCursor})`)
     &__nav {
         --nav-separator-scale: 0;
 
-        display: flex;
-        align-items: flex-end;
-        flex-direction: column;
         margin-top: 3rem;
         padding-top: 1rem;
-        gap: 0.4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
 
         &:before {
             content: "";
@@ -269,9 +290,51 @@ const cursorPath = ref(`url(${nextPaintingCursor})`)
             transform: scaleX(var(--nav-separator-scale))
         }
 
-        &__next {
+        &__wrapper {
+            display: grid;
+            grid-template-areas: "preview see next" "preview painting next";
+            place-content: flex-end;
+            row-gap: 0.5rem;
+            align-self: flex-end;
+            text-decoration: none;
+
+            &:before {
+                content: "";
+                display: block;
+                grid-area: preview;
+                width: 1.5rem;
+                aspect-ratio: 1;
+                align-self: center;
+                margin-right: 1rem;
+
+                background: v-bind(cursorPath) center;
+                background-size: contain;
+                background-repeat: no-repeat;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateX(-1ch);
+                transition: transform 0.2s, opacity 0.2s;
+
+                @media screen and (max-width: 768px) {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateX(0);
+                }
+            }
+
+            &:hover:before {
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(0)
+            }
+        }
+
+
+        &__next-painting {
+            @include small-text;
+
+            grid-area: painting;
             display: inline-flex;
-            font-size: 1.8rem;
             text-decoration: none;
             gap: 1ch;
             align-items: center;
@@ -279,32 +342,19 @@ const cursorPath = ref(`url(${nextPaintingCursor})`)
             text-align: end;
             color: var(--dark);
             letter-spacing: 0.1em;
-
-            &:before {
-                content: "";
-                display: block;
-                width: 0.6em;
-                aspect-ratio: 1;
-
-                background: v-bind(cursorPath) center;
-                background-size: contain;
-                background-repeat: no-repeat;
-                opacity: 0;
-                transform: translateX(-1ch);
-                transition: transform 0.2s, opacity 0.2s;
-
-            }
-
-            &:hover:before {
-                opacity: 1;
-                transform: translateX(0)
-            }
         }
 
         &__disclaimer {
-            color: var(--border-color)
+            grid-area: see;
+            place-self: flex-end;
+            color: var(--border-color);
+        }
+
+        &__next {
+            grid-area: next;
+            font-size: 3rem;
+            place-self: center;
         }
     }
-
 }
 </style>

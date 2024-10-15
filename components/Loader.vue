@@ -94,13 +94,13 @@ const initAnimation = (init) => {
     --progress-scale: 0;
     --column-scale-Y: 0;
 
-    height: 100vh;
+    height: 150svh;
     display: grid;
     place-items: center;
     place-content: center;
     grid-template-areas: "content" "paintings";
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: 1fr 0.5fr;
     position: relative;
     z-index: 0;
 
@@ -118,6 +118,7 @@ const initAnimation = (init) => {
 
     &__title {
         @include title(30vw);
+        @include huge-text;
         @include hidden;
 
         text-align: center;
@@ -125,7 +126,10 @@ const initAnimation = (init) => {
 
         &__wrapper {
             position: fixed;
-            inset: auto 5vw;
+            top: 50%;
+            left: 5vw;
+            right: 5vw;
+            transform: translateY(-50%);
             display: flex;
             flex-direction: column;
             z-index: 10;
@@ -149,7 +153,6 @@ const initAnimation = (init) => {
 
     &__mask {
         font-size: 1.5rem;
-        position: fixed;
         overflow: hidden;
         z-index: 100;
 
@@ -174,14 +177,22 @@ const initAnimation = (init) => {
         object-fit: cover;
         filter: blur(50px);
         position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         pointer-events: none;
+
+        @media screen and (max-width: 768px) {
+            height: 50vh;
+            width: 30vw;
+        }
     }
 
     &__progress {
         @include hidden;
 
         display: block;
-        width: 25vw;
+        width: max(25vw, 10rem);
         height: 0.5ch;
         background-color: grey;
         border-radius: 20px;

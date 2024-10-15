@@ -4,15 +4,20 @@ const { $gsap } = useNuxtApp()
 const { cursorImage } = useCursorStore()
 const { paintings } = usePaintingsStore()
 
+const { isMobile } = useDevice()
+
 const image = ref([])
 
 const ROOT_CLASS = 'cursor';
 
 onMounted(() => {
-    cursor()
+    if (isMobile) {
+        return
+    }
+    init()
 })
 
-const cursor = () => {
+const init = () => {
     let posX = null;
     let posY = null;
 
@@ -25,12 +30,6 @@ const cursor = () => {
             translateY: posY,
             duration: 0.05,
         });
-
-        // if (image.value) {
-        //     if (image.value.getBoundingClientRect().right > window.innerWidth) {
-        //         image.value.classList.toggle("outside");
-        //     }
-        // }
     }
 
     // TODO Init cursor on load
@@ -40,7 +39,7 @@ const cursor = () => {
 </script>
 
 <template>
-    <div ref="image" :class="ROOT_CLASS">
+    <div v-if="!isMobile" ref="image" :class="ROOT_CLASS">
         <template v-for="({ cursor, id }) in paintings" :key="id">
             <NuxtImg ref="images" :class="cursorImage === cursor ? 'shown' : 'hidden'" :src="cursor"
                 aria-hidden="true" />
@@ -118,8 +117,6 @@ const cursor = () => {
                 }
             }
         }
-
-
     }
 }
 </style>

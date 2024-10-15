@@ -28,8 +28,6 @@ const initGsap = () => {
 
     $gsap.to(textLetters, {
         color: '#000000',
-        // color: (_, el) => el.parentElement?.nodeName === 'STRONG' ? 'black' : '#000000',
-        // "--wght": (_, el) => el.parentElement?.nodeName === 'STRONG' ? '400' : '200',
         stagger: 0.1, // Délai entre chaque lettre
         scrollTrigger: {
             trigger: root.value,
@@ -91,10 +89,18 @@ const initGsap = () => {
     }
 
     &__text {
+        @include middle-text;
+
         text-align: center;
+        padding: 1rem;
         max-width: 20ch;
         margin: 0;
         z-index: 1;
+
+
+        @media screen and (max-width: 768px) {
+            backdrop-filter: blur(10px);
+        }
 
         &:nth-child(1) {
             z-index: 100;
@@ -109,24 +115,22 @@ const initGsap = () => {
         }
 
         strong {
-            // color: var(--dark);
             font-weight: normal;
+
+            :deep(span) {
+                font-variation-settings: "wght" 500;
+            }
         }
 
         :deep(span) {
-            --wght: 300; // @include hidden;
+            --wght: 300;
 
             font-variation-settings: "wght" var(--wght);
             transition: font-variation-settings 500ms;
-
-            // &:hover {
-            //     font-variation-settings: "wght" 800;
-            // }
         }
 
         &__wrapper {
-            font-size: 2.5em;
-            padding: 0.5em;
+            font-size: 8vw;
             width: 30ch;
             z-index: 20;
             display: grid;
@@ -161,43 +165,43 @@ const initGsap = () => {
             // Radioactiv
             &:nth-of-type(1) {
                 top: calc(20%);
-                width: 350px;
+                width: 20vw;
             }
 
             // Staar
             &:nth-of-type(3) {
                 top: calc(50%);
-                width: calc(1 / 4 * 100vw);
+                width: min(50vw, 30rem);
             }
 
             // Eclectic
             &:nth-of-type(5) {
                 top: calc(70%);
-                width: calc(1 / 6 * 100vw);
+                width: max(20vw, 10rem);
             }
 
             // Self
             &:nth-of-type(7) {
                 top: calc(100%);
-                width: 600px;
+                width: min(50vw, 30rem);
             }
 
             // Spiraal
             &:nth-of-type(2) {
                 top: calc(30%);
-                width: 450px;
+                width: min(40vw, 30rem);
             }
 
             // Knowledge
             &:nth-of-type(4) {
                 top: calc(60%);
-                width: 350px;
+                width: max(20vw, 10rem);
             }
 
             // Penrose chaos
             &:nth-of-type(6) {
                 top: calc(90%);
-                width: 400px;
+                width: min(45vw, 35rem);
             }
 
             img {

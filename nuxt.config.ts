@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
-  devtools: { enabled: true },
+  // devtools: { enabled: true },
   sourcemap: {
     server: false,
     client: false,
@@ -38,6 +38,7 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "@hypernym/nuxt-gsap",
     "@nuxtjs/device",
+    "@nuxt/icon",
   ],
   gsap: {
     extraPlugins: {

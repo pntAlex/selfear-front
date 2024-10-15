@@ -58,15 +58,31 @@ const { setCursorImage } = useCursorStore()
     }
 
     &__link {
+        @include small-text;
+
         letter-spacing: 0.15em;
         line-height: 1;
-        font-size: 1.4rem;
         font-weight: bold;
         text-decoration: none;
         color: inherit;
-        padding: 1.8rem 0 1.8rem 3rem;
+        padding: 1em 5vw;
         position: relative;
         text-transform: uppercase;
+
+        display: flex;
+        gap: 1em;
+
+        &:before {
+            content: "";
+            display: block;
+            width: 1em;
+            position: relative;
+
+            background: v-bind('cursorPath') center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
     }
 
     ul li:after {
@@ -92,10 +108,12 @@ const { setCursorImage } = useCursorStore()
         overflow: hidden;
         user-select: none;
         gap: var(--gap);
+        z-index: 10;
 
         li {
+            @include small-text;
+
             display: flex;
-            font-size: 1.4rem;
             gap: 3rem;
             color: black;
             opacity: 0;

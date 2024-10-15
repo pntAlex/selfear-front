@@ -19,11 +19,7 @@ body {
   position: relative;
   font-weight: normal;
   background-color: var(--dark);
-  overflow: hidden;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  width: 100vw;
 }
 
 .column-border {
