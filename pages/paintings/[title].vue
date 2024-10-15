@@ -31,7 +31,8 @@ const _initAnimations = () => {
     const navChildren = `.${ROOT_CLASS}__nav__wrapper *`;
 
     const content = `.${ROOT_CLASS}__content`
-    const titleLetters = `.${ROOT_CLASS}__content__headings__title > span`
+    // const titleLetters = `.${ROOT_CLASS}__content__headings__title > span`
+    const titleLetters = `.${ROOT_CLASS}__content__headings span, .${ROOT_CLASS}__content__info span`
 
     const initObservers = () => {
         const animatePicture = (el) => {
@@ -100,9 +101,9 @@ const cursorPath = ref(`url(${nextPaintingCursor})`)
             </div>
 
             <div :class="`${ROOT_CLASS}__content__info`">
-                <span>{{ paint_type }}</span>
-                <span>{{ support }}</span>
-                <span>{{ dimensions }}</span>
+                <span v-text-splitted>{{ paint_type }}</span>
+                <span v-text-splitted>{{ support }}</span>
+                <span v-text-splitted>{{ dimensions }}</span>
             </div>
 
             <ul :class="`${ROOT_CLASS}__content__paintings`" v-if="pictures?.length">
@@ -210,17 +211,7 @@ const cursorPath = ref(`url(${nextPaintingCursor})`)
             display: flex;
             flex-direction: column;
 
-            &:after {
-                content: "";
-                display: block;
-                height: 2px;
-                width: 100%;
-                opacity: 0.15;
-                background-color: var(--dark);
-                transform-origin: left;
-                margin-top: 2rem;
-                // transform: scaleX(var(--nav-separator-scale))
-            }
+
 
             &>* {
                 color: var(--dark);
@@ -273,8 +264,6 @@ const cursorPath = ref(`url(${nextPaintingCursor})`)
     &__nav {
         --nav-separator-scale: 0;
 
-        margin-top: 3rem;
-        padding-top: 1rem;
         display: flex;
         flex-direction: column;
         gap: 0.8rem;
