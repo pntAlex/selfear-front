@@ -1,14 +1,15 @@
 <script setup>
 useSeoMeta({
-    title: "Selfear | Peintre Fluo-Phosphorescent",
-    description: "Explorez l'univers captivant de Selfear, artiste amateur en peinture fluo-phosphorescente. Plongez dans un spectacle de couleurs éblouissant et admirez la splendeur de l'exposition lumineuse !"
-})
+  title: "Selfear | Peintre Fluo-Phosphorescent",
+  description:
+    "Explorez l'univers captivant de Selfear, artiste amateur en peinture fluo-phosphorescente. Plongez dans un spectacle de couleurs éblouissant et admirez la splendeur de l'exposition lumineuse !",
+});
 </script>
 
 <template>
-    <section>
-        <Loader />
-        <PaintingsParallax />
-        <PaintingsMarquee />
-    </section>
+  <section>
+    <LoaderScreen />
+    <PaintingsParallax />
+    <PaintingsMarquee />
+  </section>
 </template>

@@ -1,7 +1,7 @@
 import paintingsData from '@/assets/data/paintings.json'
 
 export const usePaintingsStore = () => {
-  const paintings = useState('paintings', () => paintingsData)
+  const paintings = useState('paintings', () => paintingsData || [])
 
   const getPaintingByTitle = (title) => {
      const index = paintings.value.findIndex(painting => painting.title === title)

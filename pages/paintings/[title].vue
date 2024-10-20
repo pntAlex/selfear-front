@@ -31,7 +31,6 @@ const _initAnimations = () => {
     const navChildren = `.${ROOT_CLASS}__nav__wrapper *`;
 
     const content = `.${ROOT_CLASS}__content`
-    // const titleLetters = `.${ROOT_CLASS}__content__headings__title > span`
     const titleLetters = `.${ROOT_CLASS}__content__headings span, .${ROOT_CLASS}__content__info span`
 
     const initObservers = () => {

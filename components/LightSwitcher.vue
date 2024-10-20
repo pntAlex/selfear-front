@@ -1,32 +1,32 @@
 <script setup>
-const ROOT_CLASS = "light-switcher"
+const ROOT_CLASS = "light-switcher";
 </script>
 
 <template>
-    <div :class="ROOT_CLASS">
-        <!-- <span>A</span>
+  <div :class="ROOT_CLASS">
+    <!-- <span>A</span>
         <span>B</span> -->
-    </div>
+  </div>
 </template>
 
 <style lang="scss">
 .light-switcher {
-    position: fixed;
-    inset: auto calc(50% - 5ch) 2vh;
-    margin: 0 auto;
-    background-color: var(--light);
-    border-radius: 2ch;
-    width: 10ch;
-    height: 3ch;
-    display: flex;
-    z-index: 1000;
+  position: fixed;
+  inset: auto calc(50% - 5ch) 2vh;
+  margin: 0 auto;
+  background-color: var(--light);
+  border-radius: 2ch;
+  width: 10ch;
+  height: 3ch;
+  display: flex;
+  z-index: 1000;
 
-    &>span {
-        flex: 1;
-        display: flex;
-        place-items: center;
-        place-content: center;
-        border-radius: 2ch;
-    }
+  & > span {
+    flex: 1;
+    display: flex;
+    place-items: center;
+    place-content: center;
+    border-radius: 2ch;
+  }
 }
 </style>
