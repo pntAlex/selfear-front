@@ -198,7 +198,7 @@ const initGsap = () => {
 
       &:nth-of-type(8) {
         top: calc(110%);
-        width: min(45vw, 35rem);
+        width: min(20vw, 20rem);
       }
 
       img {
