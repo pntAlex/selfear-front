@@ -13,6 +13,23 @@ export default defineNuxtConfig({
         lang: "fr",
       },
       viewport: "width=device-width, initial-scale=1",
+      link: [
+        {
+          rel: "icon",
+          type: "image/png",
+          href: "/favicon-48x48.png",
+          sizes: "48x48",
+        },
+        { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+        { rel: "shortcut icon", href: "/favicon.ico" },
+        {
+          rel: "apple-touch-icon",
+          sizes: "180x180",
+          href: "/apple-touch-icon.png",
+        },
+        // { name: 'apple-mobile-web-app-title', content: 'Selfear' },
+        { rel: "manifest", href: "/site.webmanifest" },
+      ],
     },
   },
   vite: {
