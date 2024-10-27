@@ -1,4 +1,9 @@
-<script setup>
+<script setup lang="ts">
+
+interface TimelineInstance {
+  to: (target: string, props: any) => TimelineInstance
+  fromTo: (target: string, from: any, to: any) => TimelineInstance
+}
 const { $gsap } = useNuxtApp()
 
 const ROOT_CLASS = "painting";

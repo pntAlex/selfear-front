@@ -1,4 +1,9 @@
-<script setup>
+<script setup lang="ts">
+
+interface TimelineInstance {
+  totalProgress: (progress: number) => TimelineInstance
+  kill: () => void
+}
 const { $gsap, $lenis, $strapi } = useNuxtApp();
 const { loaderInit, setLoaderInit } = useLoaderStore();
 
@@ -8,7 +13,7 @@ onMounted(async () => {
   initAnimation(loaderInit.value);
 });
 
-const initAnimation = (init) => {
+const initAnimation = (init: boolean) => {
   const root = `.${ROOT_CLASS}`;
 
   const maskedTitle = `.${ROOT_CLASS}__mask__heading`;

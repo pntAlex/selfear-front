@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 useSeoMeta({
   title: "Selfear | Peintre Fluo-Phosphorescent",
   description:

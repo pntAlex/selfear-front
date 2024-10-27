@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const { paintings } = usePaintingsStore();
 
 const ROOT_CLASS = "paintings-marquee";
