@@ -1,40 +1,46 @@
+import { GSAPInstance } from "gsap/gsap-core";
+
 declare namespace gsap {
   interface Timeline {
-    to(target: string | Element, vars: object): Timeline
-    fromTo(target: string | Element, fromVars: object, toVars: object): Timeline
-    totalProgress(progress: number): Timeline
-    kill(): void
+    to(target: string | Element, vars: object): Timeline;
+    fromTo(
+      target: string | Element,
+      fromVars: object,
+      toVars: object
+    ): Timeline;
+    totalProgress(progress: number): Timeline;
+    kill(): void;
   }
 
   interface ScrollTrigger {
-    trigger: string | Element
-    start?: string
-    end?: string
-    scrub?: boolean | number
-    pin?: boolean | string | Element
-    markers?: boolean
-    onEnter?: () => void
-    onLeave?: () => void
-    onEnterBack?: () => void
-    onLeaveBack?: () => void
+    trigger: string | Element;
+    start?: string;
+    end?: string;
+    scrub?: boolean | number;
+    pin?: boolean | string | Element;
+    markers?: boolean;
+    onEnter?: () => void;
+    onLeave?: () => void;
+    onEnterBack?: () => void;
+    onLeaveBack?: () => void;
   }
 }
 
 interface GSAPInstance {
-  to(target: string | Element, vars: object): void
-  fromTo(target: string | Element, fromVars: object, toVars: object): void
-  timeline(vars?: object): gsap.Timeline
+  to(target: string | Element, vars: object): void;
+  fromTo(target: string | Element, fromVars: object, toVars: object): void;
+  timeline(vars?: object): gsap.Timeline;
 }
 
-declare module '#app' {
+declare module "#app" {
   interface NuxtApp {
-    $gsap: GSAPInstance
+    $gsap: GSAPInstance;
     $lenis: {
-      start(): void
-      stop(): void
-      raf(time: number): void
-    }
+      start(): void;
+      stop(): void;
+      raf(time: number): void;
+    };
   }
 }
 
-export {}
+export {};

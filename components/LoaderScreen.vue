@@ -4,7 +4,7 @@ interface TimelineInstance {
   totalProgress: (progress: number) => TimelineInstance
   kill: () => void
 }
-const { $gsap, $lenis, $strapi } = useNuxtApp();
+const { $gsap, $lenis } = useNuxtApp();
 const { loaderInit, setLoaderInit } = useLoaderStore();
 
 const ROOT_CLASS = "loader";

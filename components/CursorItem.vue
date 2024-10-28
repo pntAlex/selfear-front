@@ -39,12 +39,7 @@ const init = () => {
 <template>
   <div v-if="!isMobile" ref="image" :class="ROOT_CLASS">
     <template v-for="{ cursor, id } in paintings" :key="id">
-      <NuxtImg
-        ref="images"
-        :class="cursorImage === cursor ? 'shown' : 'hidden'"
-        :src="cursor"
-        aria-hidden="true"
-      />
+      <NuxtImg ref="images" :class="cursorImage === cursor ? 'shown' : 'hidden'" :src="cursor" aria-hidden="true" />
     </template>
   </div>
 </template>

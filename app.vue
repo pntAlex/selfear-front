@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useNuxtApp } from 'nuxt/app';
+import { onMounted } from 'vue';
+
 const { $gsap } = useNuxtApp()
 
 onMounted(() => {
@@ -7,7 +10,7 @@ onMounted(() => {
 
 const _initScrollAnimations = () => {
   document
-    .querySelectorAll(
+    .querySelectorAll<HTMLElement>(
       '[data-scroll-x], [data-scroll-y], [data-scroll-top], [data-scroll-bottom], [data-scroll-scale], [data-scroll-alpha], [data-scroll-speed]',
     )
     .forEach((el) => {
