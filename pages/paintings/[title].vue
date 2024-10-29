@@ -95,7 +95,7 @@ const cursorPath = ref(`url(${nextPaintingCursor})`)
 
 <template>
     <section v-if="painting" :class="`${ROOT_CLASS}`">
-        <NuxtImg data-scroll-scale="1.05" data-scroll-end="max" :class="`${ROOT_CLASS}__image`" :alt
+        <NuxtImg loading="lazy" data-scroll-scale="1.05" data-scroll-end="max" :class="`${ROOT_CLASS}__image`" :alt
             :src="src_full ?? src" />
 
         <section :class="`${ROOT_CLASS}__content column-border column-border-left column-border-padded`">
