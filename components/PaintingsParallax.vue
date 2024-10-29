@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { usePaintingsStore } from '@/composables/usePaintingsStore';
+import { useNuxtApp } from 'nuxt/app';
+import { computed, onMounted, ref } from 'vue';
+
 const { $gsap } = useNuxtApp();
 const { paintings } = usePaintingsStore();
 

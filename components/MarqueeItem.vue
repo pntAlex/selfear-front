@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useCursorStore } from "@/composables/useCursorStore";
 import { ref } from "vue";
 
 const ROOT_CLASS = "marquee";
@@ -16,12 +17,10 @@ const props = withDefaults(defineProps<Props>(), {
   link: null,
   cursor: null
 })
-
 const { title, item, link, cursor } = props;
-
 const cursorPath = ref(`url(${cursor})`);
-
 const { setCursorImage } = useCursorStore();
+
 </script>
 
 <template>

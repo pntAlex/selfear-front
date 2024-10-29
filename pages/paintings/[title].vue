@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { useCursorStore } from '@/composables/useCursorStore';
+import { usePaintingsStore } from '@/composables/usePaintingsStore';
+import { useNuxtApp, useRoute, useSeoMeta } from 'nuxt/app';
+import { onMounted } from 'vue';
 
-interface TimelineInstance {
-  to: (target: string, props: any) => TimelineInstance
-  fromTo: (target: string, from: any, to: any) => TimelineInstance
-}
 const { $gsap } = useNuxtApp()
 
 const ROOT_CLASS = "painting";
@@ -73,7 +73,7 @@ const _initAnimations = () => {
             pictureObserver.observe(item);
         });
 
-        navObserver.observe(document.querySelector(nav));
+        navObserver.observe(document.querySelector<Element>(nav));
     }
 
     const initAbsolute = () => {
