@@ -56,7 +56,15 @@ export default defineNuxtConfig({
     "@hypernym/nuxt-gsap",
     "@nuxtjs/device",
     "@nuxt/icon",
+    "@nuxtjs/strapi"
   ],
+  strapi: {
+    url: process.env.NUXT_STRAPI_URL || 'http://localhost:1337/api',
+    prefix: '/api',
+    version: 'v5',
+    cookie: {},
+    cookieName: 'strapi_jwt'
+  },
   gsap: {
     extraPlugins: {
       scrollTrigger: true,

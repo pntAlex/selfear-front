@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const { $gsap } = useNuxtApp();
 
 const { cursorImage } = useCursorStore();
@@ -6,7 +6,7 @@ const { paintings } = usePaintingsStore();
 
 const { isMobile } = useDevice();
 
-const image = ref([]);
+const image = ref<HTMLImageElement[]>([]);
 
 const ROOT_CLASS = "cursor";
 
@@ -18,10 +18,10 @@ onMounted(() => {
 });
 
 const init = () => {
-  let posX = null;
-  let posY = null;
+  let posX: number | null = null;
+  let posY: number | null = null;
 
-  const initPos = ({ pageX, pageY }) => {
+  const initPos = ({ pageX, pageY }: { pageX: number; pageY: number }) => {
     posX = pageX || posX;
     posY = pageY || posY;
 
@@ -32,7 +32,6 @@ const init = () => {
     });
   };
 
-  // TODO Init cursor on load
   document.addEventListener("pointermove", initPos);
 };
 </script>

@@ -1,12 +1,18 @@
-<script setup>
+<script setup lang="ts">
 const { $gsap } = useNuxtApp();
 const { paintings } = usePaintingsStore();
 
-const root = ref(null)
+const root = ref<HTMLElement | null>(null)
 
 const ROOT_CLASS = "paintings-parallax";
 
-const shuffledPaintings = computed(() => paintings.value.toSorted(() => Math.random() - 0.5))
+// Use a stable seed for server/client consistency
+const shuffledPaintings = computed(() => {
+  // Create a copy to avoid mutating the original
+  const paintingsCopy = [...paintings.value]
+  // Use index as stable sort key
+  return paintingsCopy.sort((a, b) => a.id - b.id)
+})
 
 onMounted(() => {
   if (root.value) {
@@ -30,16 +36,15 @@ const initGsap = () => {
 
   $gsap.to(textLetters, {
     color: "#000000",
-    stagger: 0.1, // Délai entre chaque lettre
+    stagger: 0.1,
     scrollTrigger: {
       trigger: root.value,
-      start: "-20%", // Commence quand le haut de l'élément atteint 80% de la hauteur de la fenêtre
-      end: "50%", // Termine quand le bas de l'élément atteint 20% de la hauteur de la fenêtre
-      scrub: true, // Animation liée au scroll,
+      start: "-20%",
+      end: "50%",
+      scrub: true,
     },
   });
-};
-</script>
+};</script>
 
 <template>
   <section ref="root" :class="`${ROOT_CLASS} column-border`">
@@ -87,6 +92,7 @@ const initGsap = () => {
     transform-origin: top center;
     transform: scaleY(var(--column-scale-Y));
   }
+
 
   &__text {
     @include middle-text;

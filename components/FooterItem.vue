@@ -1,5 +1,5 @@
 <!-- eslint-disable vue/html-self-closing -->
-<script setup>
+<script setup lang="ts">
 const { $gsap } = useNuxtApp();
 
 const ROOT_CLASS = "footer";
@@ -48,7 +48,10 @@ const _initAnimations = () => {
     });
   });
 
-  footerObserver.observe(document.querySelector(footer));
+  const footerElement = document.querySelector(footer);
+  if (footerElement) {
+    footerObserver.observe(footerElement);
+  }
 };
 </script>
 

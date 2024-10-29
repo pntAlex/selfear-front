@@ -3,12 +3,21 @@ import { ref } from "vue";
 
 const ROOT_CLASS = "marquee";
 
-const { title, item, link, cursor } = defineProps({
-  title: { type: String, default: null },
-  item: { type: Boolean, default: false },
-  link: { type: String, default: null },
-  cursor: { type: String, default: null },
-});
+interface Props {
+  title: string | null
+  item: boolean
+  link: string | null
+  cursor: string | null
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  title: null,
+  item: false,
+  link: null,
+  cursor: null
+})
+
+const { title, item, link, cursor } = props;
 
 const cursorPath = ref(`url(${cursor})`);
 
@@ -16,20 +25,9 @@ const { setCursorImage } = useCursorStore();
 </script>
 
 <template>
-  <component
-    :is="item ? 'li' : 'div'"
-    ref="marqueeItem"
-    :class="ROOT_CLASS"
-    :data-cursor="title"
-  >
-    <NuxtLink
-      :title="`Lien vers la page dédiée à l'oeuvre '${title}'`"
-      :class="`${ROOT_CLASS}__link typed`"
-      :to="link"
-      @mouseenter="setCursorImage(cursor)"
-      @mouseleave="setCursorImage(null)"
-      >{{ title }}</NuxtLink
-    >
+  <component :is="item ? 'li' : 'div'" ref="marqueeItem" :class="ROOT_CLASS" :data-cursor="title">
+    <NuxtLink :title="`Lien vers la page dédiée à l'oeuvre '${title}'`" :class="`${ROOT_CLASS}__link typed`" :to="link"
+      @mouseenter="setCursorImage(cursor)" @mouseleave="setCursorImage(null)">{{ title }}</NuxtLink>
     <div :class="`${ROOT_CLASS}__wrapper`" aria-hidden="true">
       <ul :class="`${ROOT_CLASS}__content`">
         <li v-for="n in 12" :key="n" class="typed">{{ title }}</li>
@@ -53,7 +51,8 @@ const { setCursorImage } = useCursorStore();
   overflow: hidden;
 
   &:hover {
-    & > div {
+    &>div {
+
       &:after,
       &:before {
         transform: scaleY(1);
