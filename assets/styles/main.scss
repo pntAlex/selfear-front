@@ -19,7 +19,7 @@ body {
   position: relative;
   font-weight: normal;
   background-color: var(--dark);
-  width: 100vw;
+  max-width: 100svw;
 }
 
 .column-border {
