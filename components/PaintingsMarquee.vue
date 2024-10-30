@@ -1,19 +1,14 @@
 <script setup lang="ts">
-const { paintings } = usePaintingsStore();
+
+const { data: paintings } = useNuxtData('paintings')
 
 const ROOT_CLASS = "paintings-marquee";
 </script>
 
 <template>
-  <ol :class="`${ROOT_CLASS}`">
-    <MarqueeItem
-      v-for="({ title, cursor }, index) in paintings"
-      :key="index"
-      :item="true"
-      :link="`/paintings/${title}`"
-      :cursor
-      :title
-    />
+  <ol :class="`${ROOT_CLASS}`" v-if="paintings.data">
+    <MarqueeItem v-for="({ id: key, name, slug, picture: { url: pictureURL } }) in paintings.data" :key :item="true"
+      :link="`/paintings/${slug}`" :cursor="key" :name :pictureURL />
   </ol>
 </template>
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { SpeedInsights } from "@vercel/speed-insights/nuxt";
 
-const { setCursorImage } = useCursorStore();
+const { setCursorImageId } = useCursorStore();
 
 const ROOT_CLASS = "default-layout";
 const TITLE = `.${ROOT_CLASS}__nav__title`;
@@ -23,12 +23,7 @@ const initAnimation = () => {
 <template>
   <section :class="ROOT_CLASS">
     <nav :class="`${ROOT_CLASS}__nav`">
-      <NuxtLink
-        :class="`${ROOT_CLASS}__nav__title`"
-        to="/"
-        @click="setCursorImage(null)"
-        >Selfear</NuxtLink
-      >
+      <NuxtLink :class="`${ROOT_CLASS}__nav__title`" to="/" @click="setCursorImageId(null)">Selfear</NuxtLink>
     </nav>
 
     <main>
@@ -73,7 +68,7 @@ const initAnimation = () => {
     place-content: center;
     place-items: center;
 
-    & > * {
+    &>* {
       margin: 0;
     }
   }

@@ -1,30 +1,29 @@
 <script setup lang="ts">
-import { usePaintingsStore } from '@/composables/usePaintingsStore';
 import { useNuxtApp } from 'nuxt/app';
-import { computed, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 const { $gsap } = useNuxtApp();
-const { paintings } = usePaintingsStore();
+
+const { data: paintings } = useNuxtData('paintings')
 
 const root = ref<HTMLElement | null>(null)
 
 const ROOT_CLASS = "paintings-parallax";
 
-// Use a stable seed for server/client consistency
-const shuffledPaintings = computed(() => {
-  // Create a copy to avoid mutating the original
-  const paintingsCopy = [...paintings.value]
-  // Use index as stable sort key
-  return paintingsCopy.sort((a, b) => a.id - b.id)
-})
+// const paintings.data = computed(() => {
+//   // Create a copy to avoid mutating the original
+//   const paintingsCopy = [...paintings.data]
+//   // Use index as stable sort key
+//   return paintingsCopy.sort((a, b) => a.id - b.id)
+// })
 
 onMounted(() => {
   if (root.value) {
-    initGsap();
+    initAnimations();
   }
 });
 
-const initGsap = () => {
+const initAnimations = () => {
   const textLetters = `.${ROOT_CLASS}__text span`;
 
   $gsap.to(root.value, {
@@ -48,7 +47,8 @@ const initGsap = () => {
       scrub: true,
     },
   });
-};</script>
+};
+</script>
 
 <template>
   <section ref="root" :class="`${ROOT_CLASS} column-border`">
@@ -68,10 +68,11 @@ const initGsap = () => {
       </p>
     </div>
 
-    <ul :class="`${ROOT_CLASS}__wrapper`">
-      <li v-for="({ src, alt }, index) in shuffledPaintings" :key="index" data-scroll-start="-30%" data-scroll-end="max"
-        :data-scroll-speed="Math.random() * (1.4 - 0.8) + 0.8" :data-scroll-trigger-parent="`.${ROOT_CLASS}`">
-        <NuxtImg loading="lazy" :alt :src />
+    <ul :class="`${ROOT_CLASS}__wrapper`" v-if="paintings">
+      <li v-for="({ id, picture: { url: src, alternativeText: alt } }) in paintings.data" :key="id"
+        data-scroll-start="-30%" data-scroll-end="max" :data-scroll-speed="Math.random() * (1.4 - 0.8) + 0.8"
+        :data-scroll-trigger-parent="`.${ROOT_CLASS}`">
+        <NuxtImg provider="cloudinary" loading="lazy" :src :alt width="900" />
       </li>
     </ul>
   </section>
@@ -96,7 +97,6 @@ const initGsap = () => {
     transform-origin: top center;
     transform: scaleY(var(--column-scale-Y));
   }
-
 
   &__text {
     @include middle-text;

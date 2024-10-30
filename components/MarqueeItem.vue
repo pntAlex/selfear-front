@@ -5,34 +5,44 @@ import { ref } from "vue";
 const ROOT_CLASS = "marquee";
 
 interface Props {
-  title: string | null
+  name: string | null
   item: boolean
   link: string | null
-  cursor: string | null
+  cursor: number | null
+  pictureURL: string | null
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  title: null,
+  name: null,
   item: false,
   link: null,
-  cursor: null
+  cursor: null,
+  picture: null
 })
-const { title, item, link, cursor } = props;
-const cursorPath = ref(`url(${cursor})`);
-const { setCursorImage } = useCursorStore();
 
+const { name, item, link } = props;
+const { setCursorImageId } = useCursorStore();
+
+const img = useImage()
+
+let paintingSmallPicture = ref<string | null>(null)
+
+if (props.pictureURL) {
+  const paintingSmallPictureURL = img(props.pictureURL, { width: 100 }, { provider: 'cloudinary' })
+  paintingSmallPicture = ref(`url(${paintingSmallPictureURL})`);
+}
 </script>
 
 <template>
-  <component :is="item ? 'li' : 'div'" ref="marqueeItem" :class="ROOT_CLASS" :data-cursor="title">
-    <NuxtLink :title="`Lien vers la page dédiée à l'oeuvre '${title}'`" :class="`${ROOT_CLASS}__link typed`" :to="link"
-      @mouseenter="setCursorImage(cursor)" @mouseleave="setCursorImage(null)">{{ title }}</NuxtLink>
+  <component :is="item ? 'li' : 'div'" ref="marqueeItem" :class="ROOT_CLASS" :data-cursor="name">
+    <NuxtLink :title="`Lien vers la page dédiée à l'oeuvre '${name}'`" :class="`${ROOT_CLASS}__link typed`" :to="link"
+      @mouseenter="setCursorImageId(cursor)" @mouseleave="setCursorImageId(null)">{{ name }}</NuxtLink>
     <div :class="`${ROOT_CLASS}__wrapper`" aria-hidden="true">
       <ul :class="`${ROOT_CLASS}__content`">
-        <li v-for="n in 12" :key="n" class="typed">{{ title }}</li>
+        <li v-for="n in 12" :key="n" class="typed">{{ name }}</li>
       </ul>
       <ul :class="`${ROOT_CLASS}__content`">
-        <li v-for="n in 12" :key="n" class="typed">{{ title }}</li>
+        <li v-for="n in 12" :key="n" class="typed">{{ name }}</li>
       </ul>
     </div>
   </component>
@@ -41,7 +51,6 @@ const { setCursorImage } = useCursorStore();
 <style scoped lang="scss">
 .marquee {
   --gap: 3rem;
-  --cursor-path: v-bind(cursorPath);
 
   display: flex;
   flex-direction: column;
@@ -84,7 +93,7 @@ const { setCursorImage } = useCursorStore();
       width: 1em;
       position: relative;
 
-      background: v-bind("cursorPath") center;
+      background: v-bind("paintingSmallPicture") center;
       background-size: contain;
       background-repeat: no-repeat;
       z-index: 0;
@@ -96,7 +105,7 @@ const { setCursorImage } = useCursorStore();
     display: block;
     width: 1em;
 
-    background: v-bind("cursorPath") center;
+    background: v-bind("paintingSmallPicture") center;
     background-size: contain;
     background-repeat: no-repeat;
   }

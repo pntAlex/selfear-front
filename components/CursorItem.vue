@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const { $gsap } = useNuxtApp();
 
-const { cursorImage } = useCursorStore();
-const { paintings } = usePaintingsStore();
+const { cursorImageId } = useCursorStore();
+const { data: paintings } = useNuxtData('paintings')
 
 const { isMobile } = useDevice();
 
@@ -38,9 +38,9 @@ const init = () => {
 
 <template>
   <div v-if="!isMobile" ref="image" :class="ROOT_CLASS">
-    <template v-for="{ cursor, id } in paintings" :key="id">
-      <NuxtImg loading="lazy" ref="images" :class="cursorImage === cursor ? 'shown' : 'hidden'" :src="cursor"
-        aria-hidden="true" />
+    <template v-for="({ id, picture: { url: src } }) in paintings.data">
+      <NuxtImg provider="cloudinary" loading="lazy" ref="images" :class="cursorImageId === id ? 'shown' : 'hidden'" :src
+        aria-hidden="true" width="300" />
     </template>
   </div>
 </template>

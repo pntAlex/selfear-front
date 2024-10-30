@@ -1,3 +1,5 @@
+import { defineNuxtConfig } from "nuxt/config";
+
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   // devtools: { enabled: true },
@@ -48,7 +50,9 @@ export default defineNuxtConfig({
     },
   },
   image: {
-    // Options
+    cloudinary: {
+      baseURL: `https://res.cloudinary.com/${process.env.NUXT_CLOUDINARY_CLOUD_NAME}/image/upload/`,
+    },
   },
   modules: [
     "@nuxt/image",
@@ -56,6 +60,7 @@ export default defineNuxtConfig({
     "@hypernym/nuxt-gsap",
     "@nuxtjs/device",
     "@nuxt/icon",
+    "@nuxtjs/strapi",
   ],
   gsap: {
     extraPlugins: {
@@ -67,5 +72,27 @@ export default defineNuxtConfig({
       { name: "RibbonVF", provider: "local", weight: "0 1000" },
       { name: "RalewayVF", provider: "local", weight: "0 900" },
     ],
+  },
+  runtimeConfig: {
+    strapiURL: process.env.NUXT_STRAPI_URL,
+    strapiAPIKey: process.env.NUXT_STRAPI_API_KEY,
+  },
+  hooks: {
+    async "prerender:routes"(ctx) {
+      // const { data: pages } = await useFetch(
+      //   process.env.NUXT_STRAPI_URL as string
+      // );
+      // for (const page of pages) {
+      // ctx.routes.add(`/a`);
+      // }
+    },
+  },
+  strapi: {
+    url: process.env.NUXT_STRAPI_URL || "http://localhost:1337",
+    prefix: "/api",
+    admin: "/admin",
+    version: "v5",
+    // cookie: {},
+    // cookieName: "strapi_jwt",
   },
 });

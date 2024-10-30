@@ -60,11 +60,7 @@ const _initAnimations = () => {
     <div :class="`${ROOT_CLASS}__contact`">
       <div :class="`${ROOT_CLASS}__contact__mail__wrapper`">
         <!-- <span>for any inquiries&nbsp;:</span> -->
-        <NuxtLink
-          v-text-splitted
-          :class="`${ROOT_CLASS}__contact__mail`"
-          to="mailto:a_pinot@icloud.com"
-        >
+        <NuxtLink v-text-splitted :class="`${ROOT_CLASS}__contact__mail`" to="mailto:a_pinot@icloud.com">
           <span>a_pinot</span><span>@icloud.com</span>
         </NuxtLink>
       </div>
@@ -76,36 +72,22 @@ const _initAnimations = () => {
       <nav :class="`${ROOT_CLASS}__contact__socials`">
         <ul>
           <li>
-            <NuxtLink
-              title="Lien vers l'Instagram de l'artiste selfear"
-              to="https://www.instagram.com/selfearuv"
-              target="_blank"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                viewBox="0 0 50 50"
-              >
-                <path
-                  style="
+            <NuxtLink title="Lien vers l'Instagram de l'artiste selfear" to="https://www.instagram.com/selfearuv"
+              target="_blank">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50">
+                <path style="
                     fill: none;
                     stroke: var(--light);
                     stroke-width: 2;
                     stroke-miterlimit: 10;
                   "
-                  d="M16,46h18c6.627,0,12-5.373,12-12V16c0-6.627-5.373-12-12-12H16C9.373,4,4,9.373,4,16v18C4,40.627,9.373,46,16,46z"
-                />
-                <circle
-                  style="
+                  d="M16,46h18c6.627,0,12-5.373,12-12V16c0-6.627-5.373-12-12-12H16C9.373,4,4,9.373,4,16v18C4,40.627,9.373,46,16,46z" />
+                <circle style="
                     fill: none;
                     stroke: var(--light);
                     stroke-width: 2;
                     stroke-miterlimit: 10;
-                  "
-                  cx="25"
-                  cy="25"
-                  r="10"
-                />
+                  " cx="25" cy="25" r="10" />
                 <circle cx="37" cy="13" r="2" />
               </svg>
             </NuxtLink>
@@ -123,7 +105,7 @@ const _initAnimations = () => {
 
   overflow: hidden;
   position: relative;
-  background: var(--dark);
+  backdrop-filter: brightness(0.3);
   padding: 4rem 5vw 0;
 
   &::before,
@@ -139,7 +121,6 @@ const _initAnimations = () => {
     flex-direction: column;
     align-items: center;
     position: relative;
-    // padding-bottom: 10vh;
 
     @media screen and (max-width: 768px) {
       grid-template-areas: "mail mail mail" "copyright copyright socials";
@@ -193,7 +174,7 @@ const _initAnimations = () => {
       }
     }
 
-    & > span {
+    &>span {
       font-size: 1.2rem;
       margin-bottom: 1em;
     }

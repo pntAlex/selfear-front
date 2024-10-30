@@ -8,6 +8,22 @@ onMounted(() => {
   _initScrollAnimations()
 })
 
+const { strapiAPIKey } = useRuntimeConfig()
+
+const client = useStrapiClient()
+await useAsyncData(
+  'paintings',
+  () => client('/paintings', {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${strapiAPIKey}`,
+    },
+    params: {
+      populate: '*'
+    }
+  }),
+)
+
 const _initScrollAnimations = () => {
   document
     .querySelectorAll<HTMLElement>(

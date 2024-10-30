@@ -1,30 +1,39 @@
 <script setup lang="ts">
-import { useCursorStore } from '@/composables/useCursorStore';
-import { usePaintingsStore } from '@/composables/usePaintingsStore';
+import type { Painting } from '@/composables/usePaintingsStore';
 import { useNuxtApp, useRoute, useSeoMeta } from 'nuxt/app';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 
 const { $gsap } = useNuxtApp()
 
 const ROOT_CLASS = "painting";
 
-const { getPaintingByTitle, getNextPainting } = usePaintingsStore();
-const { setCursorImage } = useCursorStore()
+//  const { getPaintingByTitle, getNextPainting } = usePaintingsStore();
+const { setCursorImageId } = useCursorStore()
 
 const route = useRoute()
+const { data: paintings } = useNuxtData('paintings')
 
-const { index, painting } = getPaintingByTitle(route?.params?.title)
-const { alt, src, src_full, title, date, dimensions, support, paint_type, cursor, pictures } = painting
+const index = paintings.value.data.findIndex(
+    ({ slug }: Painting) => slug === route?.params?.slug
+);
+const { id, name, date, width, length, depth, support, type, picture: { url, alternativeText }, pictures } = paintings.value.data[index]
 
-const nextPainting = getNextPainting(index)
-const { cursor: nextPaintingCursor, title: nextPaintingTitle } = nextPainting
+const nextPainting = paintings.value.data[(index + 1) % paintings.value.data.length]
+const { id: nextPaintingId, slug: nextPaintingSlug, name: nextPaintingName } = nextPainting
 
 useSeoMeta({
-    title: `${title} - Selfear | Peintre Fluo-Phosphorescent`,
-    description: `Peinture ${title}`
+    title: `${name} - Selfear | Peintre Fluo-Phosphorescent`,
+    description: `Peinture ${name}`
 })
 
-setCursorImage(cursor)
+setCursorImageId(id)
+
+const img = useImage()
+let paintingSmallPictureURL = ref<string | null>(null)
+
+if (url) {
+    paintingSmallPictureURL = ref(`url(${img(url, { width: 100 }, { provider: 'cloudinary' })})`);
+}
 
 onMounted(() => {
     _initAnimations()
@@ -73,7 +82,7 @@ const _initAnimations = () => {
             pictureObserver.observe(item);
         });
 
-        navObserver.observe(document.querySelector<Element>(nav));
+        navObserver.observe(document.querySelector(nav));
     }
 
     const initAbsolute = () => {
@@ -88,42 +97,39 @@ const _initAnimations = () => {
     initAbsolute()
     initObservers()
 }
-
-const cursorPath = ref(`url(${nextPaintingCursor})`)
-
 </script>
 
 <template>
-    <section v-if="painting" :class="`${ROOT_CLASS}`">
-        <NuxtImg loading="lazy" data-scroll-scale="1.05" data-scroll-end="max" :class="`${ROOT_CLASS}__image`" :alt
-            :src="src_full ?? src" />
+    <section v-if="url" :class="`${ROOT_CLASS}`">
+        <NuxtImg provider="cloudinary" loading="lazy" data-scroll-scale="1.05" data-scroll-end="max"
+            :class="`${ROOT_CLASS}__image`" :src="url" :alt="alternativeText" width="1400" />
 
         <section :class="`${ROOT_CLASS}__content column-border column-border-left column-border-padded`">
             <div :class="`${ROOT_CLASS}__content__headings`">
                 <span :class="`${ROOT_CLASS}__content__ headings__date`">{{ date }}</span>
-                <h1 v-text-splitted :class="`${ROOT_CLASS}__content__headings__title`">{{ title }}</h1>
+                <h1 v-text-splitted :class="`${ROOT_CLASS}__content__headings__title`">{{ name }}</h1>
             </div>
 
             <div :class="`${ROOT_CLASS}__content__info`">
-                <span v-text-splitted>{{ paint_type }}</span>
-                <span v-text-splitted>{{ support }}</span>
-                <span v-text-splitted>{{ dimensions }}</span>
+                <span v-text-splitted>{{ name.toLowerCase() }}</span>
+                <span v-text-splitted>{{ type.name.toLowerCase() }}</span>
+                <span v-text-splitted>{{ support.name.toLowerCase() }}</span>
+                <span v-text-splitted>{{ `${width} x ${length} x ${depth}` }}</span>
             </div>
 
             <ul :class="`${ROOT_CLASS}__content__paintings`" v-if="pictures?.length">
-                <li v-for="({ src, alt }) in pictures">
+                <li v-for="({ url: src, alternativeText: alt }) in pictures">
                     <div aria-hidden="true" />
-                    <NuxtImg :src :alt loading="lazy" />
+                    <NuxtImg provider="cloudinary" width="900" :src :alt loading="lazy" />
                 </li>
             </ul>
 
-            <!-- <nav> -->
             <nav :class="`${ROOT_CLASS}__nav`">
-                <NuxtLink :class="`${ROOT_CLASS}__nav__wrapper`" @mouseover="setCursorImage(nextPaintingCursor)"
-                    @mouseleave="setCursorImage(cursor)" replace :to="`/paintings/${nextPaintingTitle}`">
+                <NuxtLink :class="`${ROOT_CLASS}__nav__wrapper`" @mouseover="setCursorImageId(nextPaintingId)"
+                    @mouseleave="setCursorImageId(id)" replace :to="`/paintings/${nextPaintingSlug}`">
                     <span :class="`${ROOT_CLASS}__nav__disclaimer`">Voir aussi</span>
                     <span :class="`${ROOT_CLASS}__nav__next-painting typed`">
-                        {{ nextPainting.title }}
+                        {{ nextPaintingName }}
                     </span>
                     <Icon :class="`${ROOT_CLASS}__nav__next`" name="ic:sharp-keyboard-arrow-right"
                         style="color: black" />
@@ -131,16 +137,7 @@ const cursorPath = ref(`url(${nextPaintingCursor})`)
             </nav>
 
 
-            <!-- </nav> -->
         </section>
-
-        <!-- <aside :class="`${ROOT_CLASS}__aside`">
-            <nav>
-                <NuxtLink @mouseover="setCursorImage(nextPaintingCursor)" @mouseleave="setCursorImage(cursor)"
-                    :class="`${ROOT_CLASS}__aside__nav__next`" replace :to="`/paintings/${nextPaintingTitle}`">
-                </NuxtLink>
-            </nav>
-        </aside> -->
     </section>
 </template>
 
@@ -300,7 +297,7 @@ const cursorPath = ref(`url(${nextPaintingCursor})`)
                 align-self: center;
                 margin-right: 1rem;
 
-                background: v-bind(cursorPath) center;
+                background: v-bind(paintingSmallPictureURL) center;
                 background-size: contain;
                 background-repeat: no-repeat;
                 opacity: 0;

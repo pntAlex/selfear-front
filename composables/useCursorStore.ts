@@ -1,14 +1,14 @@
-import { Ref } from 'vue'
+import { Ref } from "vue";
 
 export const useCursorStore = () => {
-  const cursorImage: Ref<string | null> = useState('cursorImage', () => null)
+  const cursorImageId: Ref<number | null> = useState("cursorImage", () => null);
 
-  const setCursorImage = (image: string | null): void => {
-    cursorImage.value = image
-  }
+  const setCursorImageId = (id: number | null): void => {
+    cursorImageId.value = id;
+  };
 
   return {
-    cursorImage,
-    setCursorImage
-  }
-}
+    cursorImageId,
+    setCursorImageId,
+  };
+};
