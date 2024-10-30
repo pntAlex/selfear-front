@@ -77,16 +77,6 @@ export default defineNuxtConfig({
     strapiURL: process.env.NUXT_STRAPI_URL,
     strapiAPIKey: process.env.NUXT_STRAPI_API_KEY,
   },
-  hooks: {
-    async "prerender:routes"(ctx) {
-      // const { data: pages } = await useFetch(
-      //   process.env.NUXT_STRAPI_URL as string
-      // );
-      // for (const page of pages) {
-      // ctx.routes.add(`/a`);
-      // }
-    },
-  },
   strapi: {
     url: process.env.NUXT_STRAPI_URL || "http://localhost:1337",
     prefix: "/api",
