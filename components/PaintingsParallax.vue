@@ -10,13 +10,6 @@ const root = ref<HTMLElement | null>(null)
 
 const ROOT_CLASS = "paintings-parallax";
 
-// const paintings.data = computed(() => {
-//   // Create a copy to avoid mutating the original
-//   const paintingsCopy = [...paintings.data]
-//   // Use index as stable sort key
-//   return paintingsCopy.sort((a, b) => a.id - b.id)
-// })
-
 onMounted(() => {
   if (root.value) {
     initAnimations();

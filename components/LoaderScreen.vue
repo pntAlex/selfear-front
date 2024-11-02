@@ -3,7 +3,7 @@ import { useLoaderStore } from '@/composables/useLoaderStore';
 import { useNuxtApp } from 'nuxt/app';
 
 const ROOT_CLASS = "loader";
-const URL = "https://res.cloudinary.com/notaln/image/upload/v1730557827/fluid_uv_4786bd4ce1.webp"
+const URL = "https://res.cloudinary.com/notaln/image/upload/v1730567225/fluid_uv_75fe24d484.webp"
 
 const { $gsap, $lenis } = useNuxtApp();
 const { loaderInit, setLoaderInit } = useLoaderStore();
