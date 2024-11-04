@@ -49,11 +49,6 @@ export default defineNuxtConfig({
       },
     },
   },
-  image: {
-    cloudinary: {
-      baseURL: `https://res.cloudinary.com/${process.env.NUXT_CLOUDINARY_CLOUD_NAME}/image/upload/`,
-    },
-  },
   modules: [
     "@nuxt/image",
     "@nuxt/fonts",
@@ -80,9 +75,6 @@ export default defineNuxtConfig({
   strapi: {
     url: process.env.NUXT_STRAPI_URL || "http://localhost:1337",
     prefix: "/api",
-    admin: "/admin",
     version: "v5",
-    // cookie: {},
-    // cookieName: "strapi_jwt",
   },
 });
