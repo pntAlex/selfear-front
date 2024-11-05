@@ -14,12 +14,22 @@ h3,
   font-family: RibbonVF;
 }
 
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::webkit-scrollbar {
+    display: none;
+  }
+}
+
 body {
   margin: 0;
   position: relative;
   font-weight: normal;
   background-color: var(--dark);
   max-width: 100svw;
+  overflow-x: hidden;
 }
 
 .column-border {

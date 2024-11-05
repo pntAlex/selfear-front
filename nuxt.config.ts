@@ -12,26 +12,25 @@ export default defineNuxtConfig({
       loader: {
         modifiers: {
           format: "webp",
-          width: 1200,
+          width: 1500,
         },
       },
       small: {
         modifiers: {
           format: "webp",
-          width: 300,
-          height: 300,
+          width: 400,
         },
       },
       medium: {
         modifiers: {
           format: "webp",
-          width: 900,
+          width: 1000,
         },
       },
       full: {
         modifiers: {
           format: "webp",
-          width: 1400,
+          width: 2000,
         },
       },
     },
