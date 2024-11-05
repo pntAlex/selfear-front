@@ -9,12 +9,6 @@ export default defineNuxtConfig({
   },
   image: {
     presets: {
-      loader: {
-        modifiers: {
-          format: "webp",
-          width: 1500,
-        },
-      },
       small: {
         modifiers: {
           format: "webp",

@@ -94,7 +94,7 @@ const initAnimation = (init: boolean) => {
 
     <div aria-hidden="true" :class="`${ROOT_CLASS}__progress`" />
 
-    <NuxtImg preset="loader" data-scroll-scale="1.5" data-scroll-start="0%" data-scroll-end="40%"
+    <NuxtImg preset="full" data-scroll-scale="1.5" data-scroll-start="0%" data-scroll-end="40%"
       :class="`${ROOT_CLASS}__image`" :src="URL"
       alt="'fluid' - peinture acrylique Fluo - 20x14cm - toile en coton | selfear 2022" />
   </section>
