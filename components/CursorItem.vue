@@ -39,8 +39,8 @@ const initAnimation = () => {
 <template>
   <div v-if="!isMobile" ref="image" :class="ROOT_CLASS">
     <template v-for="({ id, picture: { url: src } }) in paintings.data">
-      <NuxtImg loading="lazy" ref="images" :class="cursorImageId === id ? 'shown' : 'hidden'" :src aria-hidden="true"
-        width="300" />
+      <NuxtImg preset="small" loading="lazy" ref="images" :class="cursorImageId === id ? 'shown' : 'hidden'" :src
+        aria-hidden="true" />
     </template>
   </div>
 </template>

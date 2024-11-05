@@ -65,7 +65,7 @@ const initAnimations = () => {
       <li v-for="({ id, picture: { url: src, alternativeText: alt } }) in paintings.data" :key="id"
         data-scroll-start="-30%" data-scroll-end="max" :data-scroll-speed="Math.random() * (1.4 - 0.8) + 0.8"
         :data-scroll-trigger-parent="`.${ROOT_CLASS}`">
-        <NuxtImg loading="lazy" :src :alt width="900" />
+        <NuxtImg preset="medium" loading="lazy" :src :alt />
       </li>
     </ul>
   </section>

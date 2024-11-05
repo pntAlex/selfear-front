@@ -101,8 +101,8 @@ const _initAnimations = () => {
 
 <template>
     <section v-if="url" :class="`${ROOT_CLASS}`">
-        <NuxtImg loading="lazy" data-scroll-scale="1.05" data-scroll-end="max" :class="`${ROOT_CLASS}__image`"
-            :src="url" :alt="alternativeText" width="1400" />
+        <NuxtImg preset="full" loading="lazy" data-scroll-scale="1.05" data-scroll-end="max"
+            :class="`${ROOT_CLASS}__image`" :src="url" :alt="alternativeText" />
 
         <section :class="`${ROOT_CLASS}__content column-border column-border-left column-border-padded`">
             <div :class="`${ROOT_CLASS}__content__headings`">
@@ -120,7 +120,7 @@ const _initAnimations = () => {
             <ul :class="`${ROOT_CLASS}__content__paintings`" v-if="pictures?.length">
                 <li v-for="({ url: src, alternativeText: alt }) in pictures">
                     <div aria-hidden="true" />
-                    <NuxtImg width="900" :src :alt loading="lazy" />
+                    <NuxtImg preset="medium" width="900" :src :alt loading="lazy" />
                 </li>
             </ul>
 

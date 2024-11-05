@@ -2,10 +2,39 @@ import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
-  // devtools: { enabled: true },
+  devtools: { enabled: true },
   sourcemap: {
     server: false,
     client: false,
+  },
+  image: {
+    presets: {
+      small: {
+        modifiers: {
+          format: "webp",
+          width: 300,
+          height: 300,
+        },
+      },
+      loader: {
+        modifiers: {
+          format: "webp",
+          width: 1200,
+        },
+      },
+      medium: {
+        modifiers: {
+          format: "webp",
+          width: 900,
+        },
+      },
+      full: {
+        modifiers: {
+          format: "webp",
+          width: 1400,
+        },
+      },
+    },
   },
   app: {
     pageTransition: { name: "page", mode: "out-in" },
