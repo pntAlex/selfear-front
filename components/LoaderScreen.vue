@@ -8,11 +8,28 @@ const URL = "https://res.cloudinary.com/notaln/image/upload/v1730567225/fluid_uv
 const { $gsap, $lenis } = useNuxtApp();
 const { loaderInit, setLoaderInit } = useLoaderStore();
 
+const { strapiAPIKey } = useRuntimeConfig()
+
+const client = useStrapiClient()
+const { data: home } = await useAsyncData(
+  'home',
+  () => client('/home', {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${strapiAPIKey}`,
+    },
+    params: {
+      populate: '*'
+    }
+  }),
+)
+
+
 onMounted(async () => {
-  initAnimation(loaderInit.value);
+  initAnimations(loaderInit.value);
 });
 
-const initAnimation = (init: boolean) => {
+const initAnimations = (init: boolean) => {
   const root = `.${ROOT_CLASS}`;
 
   const maskedTitle = `.${ROOT_CLASS}__mask__heading`;
@@ -95,8 +112,7 @@ const initAnimation = (init: boolean) => {
     <div aria-hidden="true" :class="`${ROOT_CLASS}__progress`" />
 
     <NuxtImg preset="full" data-scroll-scale="1.5" data-scroll-start="0%" data-scroll-end="40%"
-      :class="`${ROOT_CLASS}__image`" :src="URL"
-      alt="'fluid' - peinture acrylique Fluo - 20x14cm - toile en coton | selfear 2022" />
+      :class="`${ROOT_CLASS}__image`" :src="home.data.picture.url" :alt="home.data.picture.alternativeText" />
   </section>
 </template>
 

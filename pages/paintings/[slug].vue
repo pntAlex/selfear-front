@@ -32,7 +32,7 @@ const img = useImage()
 let paintingSmallPictureURL = ref<string | null>(null)
 
 if (url) {
-    paintingSmallPictureURL = ref(`url(${img(url, { width: 100 })})`);
+    paintingSmallPictureURL = ref(`url(${img(url, null, { preset: 'thumbnail' })})`);
 }
 
 onMounted(() => {

@@ -28,8 +28,7 @@ const img = useImage()
 let paintingSmallPicture = ref<string | null>(null)
 
 if (props.pictureURL) {
-  const paintingSmallPictureURL = img(props.pictureURL, { width: 100 })
-  paintingSmallPicture = ref(`url(${paintingSmallPictureURL})`);
+  paintingSmallPicture = ref(`url(${img(props.pictureURL, null, { preset: 'thumbnail' })})`);
 }
 </script>
 

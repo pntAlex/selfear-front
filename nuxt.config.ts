@@ -1,6 +1,9 @@
 import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
+  nitro: {
+    static: true,
+  },
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
   sourcemap: {
@@ -8,28 +11,37 @@ export default defineNuxtConfig({
     client: false,
   },
   image: {
+    format: "webp",
+    alias: {
+      [process.env.NUXT_PUBLIC_IMAGE_ALIAS as string]:
+        process.env.NUXT_IMAGE_DOMAINS,
+    },
     presets: {
+      thumbnail: {
+        modifiers: {
+          width: 100,
+          quality: 50,
+        },
+      },
       small: {
         modifiers: {
-          format: "webp",
           width: 400,
         },
       },
       medium: {
         modifiers: {
-          format: "webp",
           width: 1000,
         },
       },
       full: {
         modifiers: {
-          format: "webp",
           width: 2000,
         },
       },
     },
   },
   app: {
+    keepalive: true,
     pageTransition: { name: "page", mode: "out-in" },
     head: {
       charset: "utf-8",
@@ -93,6 +105,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     strapiURL: process.env.NUXT_STRAPI_URL,
     strapiAPIKey: process.env.NUXT_STRAPI_API_KEY,
+    public: {
+      imageAlias: process.env.NUXT_PUBLIC_IMAGE_ALIAS,
+    },
   },
   strapi: {
     url: process.env.NUXT_STRAPI_URL || "http://localhost:1337",
