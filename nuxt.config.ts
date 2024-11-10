@@ -11,7 +11,6 @@ export default defineNuxtConfig({
     client: false,
   },
   image: {
-    format: "webp",
     alias: {
       [process.env.NUXT_PUBLIC_IMAGE_ALIAS as string]:
         process.env.NUXT_IMAGE_DOMAINS,
@@ -19,22 +18,26 @@ export default defineNuxtConfig({
     presets: {
       thumbnail: {
         modifiers: {
+          format: "avif",
           width: 100,
           quality: 50,
         },
       },
       small: {
         modifiers: {
+          format: "avif",
           width: 400,
         },
       },
       medium: {
         modifiers: {
+          format: "avif",
           width: 1000,
         },
       },
       full: {
         modifiers: {
+          format: "avif",
           width: 2000,
         },
       },
