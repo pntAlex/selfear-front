@@ -11,10 +11,6 @@ export default defineNuxtConfig({
     client: false,
   },
   image: {
-    alias: {
-      [process.env.NUXT_PUBLIC_IMAGE_ALIAS as string]:
-        process.env.NUXT_IMAGE_DOMAINS,
-    },
     presets: {
       thumbnail: {
         modifiers: {
