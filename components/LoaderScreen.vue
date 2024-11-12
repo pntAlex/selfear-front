@@ -24,7 +24,6 @@ const { data: home } = await useAsyncData(
   }),
 )
 
-
 onMounted(async () => {
   initAnimations(loaderInit.value);
 });
@@ -102,21 +101,21 @@ const initAnimations = (init: boolean) => {
     </div>
 
     <div :class="`${ROOT_CLASS}__title__wrapper`">
-      <h1 v-text-splitted :class="`${ROOT_CLASS}__title`">selfear</h1>
-      <span :class="`${ROOT_CLASS}__subtitle`"><strong>fluo</strong>
+      <h1 v-text-splitted :class="`${ROOT_CLASS}__title hidden huge-text`">selfear</h1>
+      <span :class="`${ROOT_CLASS}__subtitle hidden`"><strong>fluo</strong>
         &
         <strong>phospho</strong> painter</span>
-      <span :class="`${ROOT_CLASS}__subtitle`"> based in France</span>
+      <span :class="`${ROOT_CLASS}__subtitle hidden`"> based in France</span>
     </div>
 
-    <div aria-hidden="true" :class="`${ROOT_CLASS}__progress`" />
+    <div aria-hidden="true" :class="`${ROOT_CLASS}__progress hidden`" />
 
     <NuxtImg preset="full" data-scroll-scale="1.5" data-scroll-start="0%" data-scroll-end="40%"
-      :class="`${ROOT_CLASS}__image`" :src="home.data.picture.url" :alt="home.data.picture.alternativeText" />
+      :class="`${ROOT_CLASS}__image hidden`" :src="home.data.picture.url" :alt="home.data.picture.alternativeText" />
   </section>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .loader {
   --progress-scale: 0;
   --column-scale-Y: 0;
@@ -130,115 +129,130 @@ const initAnimations = (init: boolean) => {
   grid-template-rows: 1fr 0.5fr;
   position: relative;
   z-index: 0;
+}
 
-  &:after,
-  &:before {
-    transform-origin: top center;
-    transform: scaleY(var(--column-scale-Y));
+.loader::after,
+.loader::before {
+  transform-origin: top center;
+  transform: scaleY(var(--column-scale-Y));
+}
+
+.loader>* {
+  grid-area: content;
+}
+
+.loader__title {
+  font-family: RibbonVF;
+  opacity: 1;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  font-size: 30vw;
+  color: transparent;
+  font-weight: unset;
+  line-height: normal;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: var(--light);
+}
+
+.loader__title::deep(span) {
+  font-variation-settings: "wdth" 0;
+  transition: font-variation-settings 500ms, color 500ms;
+  color: inherit;
+}
+
+.loader__title::deep(span:hover) {
+  font-variation-settings: "wdth" 1000;
+  color: var(--light);
+}
+
+.loader__title {
+  text-align: center;
+  transform: scale(1.1);
+}
+
+.loader__title__wrapper {
+  position: fixed;
+  top: 50%;
+  left: 5vw;
+  right: 5vw;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.loader__subtitle {
+  align-self: flex-end;
+  font-size: 0.8em;
+}
+
+.loader__subtitle strong {
+  color: blue;
+}
+
+.loader__subtitle strong:last-of-type {
+  color: yellow;
+}
+
+.loader__mask {
+  font-size: 1.5rem;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.loader__mask__heading {
+  display: block;
+  font-family: RibbonVF;
+  letter-spacing: 0.22em;
+  background: linear-gradient(to right, grey 50%, var(--light) 50%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transform: translateY(100%);
+}
+
+.loader__image {
+  height: 25vh;
+  width: 45vw;
+  object-fit: cover;
+  filter: blur(50px);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+@media screen and (max-width: 768px) {
+  .loader__image {
+    height: 50vh;
+    width: 30vw;
   }
+}
 
-  & {
-    >* {
-      grid-area: content;
-    }
-  }
+.loader__progress {
+  display: block;
+  width: max(25vw, 10rem);
+  height: 0.5ch;
+  background-color: grey;
+  border-radius: 20px;
+  position: absolute;
+  align-self: center;
+  bottom: 2rem;
+  overflow: hidden;
+}
 
-  &__title {
-    @include title(30vw);
-    @include huge-text;
-    @include hidden;
-
-    text-align: center;
-    transform: scale(1.1);
-
-    &__wrapper {
-      position: fixed;
-      top: 50%;
-      left: 5vw;
-      right: 5vw;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      z-index: 10;
-    }
-  }
-
-  &__subtitle {
-    @include hidden;
-
-    align-self: flex-end;
-    font-size: 0.8em;
-
-    strong {
-      color: blue;
-
-      &:last-of-type {
-        color: yellow;
-      }
-    }
-  }
-
-  &__mask {
-    font-size: 1.5rem;
-    overflow: hidden;
-    z-index: 100;
-
-    &__heading {
-      display: block;
-      font-family: RibbonVF;
-      letter-spacing: 0.22em;
-      background: linear-gradient(to right, grey 50%, var(--light) 50%);
-      background-size: 200% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      transform: translateY(100%);
-    }
-  }
-
-  &__image {
-    @include hidden;
-
-    height: 25vh;
-    width: 45vw;
-    object-fit: cover;
-    filter: blur(50px);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-
-    @media screen and (max-width: 768px) {
-      height: 50vh;
-      width: 30vw;
-    }
-  }
-
-  &__progress {
-    @include hidden;
-
-    display: block;
-    width: max(25vw, 10rem);
-    height: 0.5ch;
-    background-color: grey;
-    border-radius: 20px;
-    position: absolute;
-    align-self: center;
-    bottom: 2rem;
-    overflow: hidden;
-
-    &:after {
-      content: "";
-      display: block;
-      position: absolute;
-      inset: 0 auto 0 0;
-      border-radius: 20px;
-      width: 100%;
-      background-color: white;
-      transform-origin: left;
-      transform: scaleX(var(--progress-scale));
-    }
-  }
+.loader__progress::after {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 20px;
+  width: 100%;
+  background-color: white;
+  transform-origin: left;
+  transform: scaleX(var(--progress-scale));
 }
 </style>

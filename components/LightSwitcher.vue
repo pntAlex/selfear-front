@@ -9,7 +9,7 @@ const ROOT_CLASS = "light-switcher";
   </div>
 </template>
 
-<style lang="scss">
+<style scoped>
 .light-switcher {
   position: fixed;
   inset: auto calc(50% - 5ch) 2vh;
@@ -20,13 +20,13 @@ const ROOT_CLASS = "light-switcher";
   height: 3ch;
   display: flex;
   z-index: 1000;
+}
 
-  & > span {
-    flex: 1;
-    display: flex;
-    place-items: center;
-    place-content: center;
-    border-radius: 2ch;
-  }
+.light-switcher>span {
+  flex: 1;
+  display: flex;
+  place-items: center;
+  place-content: center;
+  border-radius: 2ch;
 }
 </style>

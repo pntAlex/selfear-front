@@ -12,7 +12,7 @@ const ROOT_CLASS = "paintings-marquee";
   </ol>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .paintings-marquee {
   list-style: none;
   margin: 0;

@@ -59,21 +59,12 @@ export default defineNuxtConfig({
       ],
     },
   },
-  vite: {
-    css: {
-      preprocessorOptions: {
-        scss: {
-          api: "modern-compiler",
-          additionalData: `
-          @use "~/assets/styles/main.scss" as *;
-          @use "~/assets/styles/_lenis.scss" as *;
-          @use "~/assets/styles/_mixins.scss" as *;
-          @use "~/assets/styles/_animations.scss" as *;
-          `,
-        },
-      },
-    },
-  },
+  css: [
+    "~/assets/styles/main.css",
+    "~/assets/styles/_lenis.css",
+    "~/assets/styles/_mixins.css",
+    "~/assets/styles/_animations.css",
+  ],
   modules: [
     "@nuxt/image",
     "@nuxt/fonts",

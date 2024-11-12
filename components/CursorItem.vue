@@ -44,7 +44,7 @@ const initAnimation = () => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .cursor {
   position: absolute;
   top: 0;
@@ -54,65 +54,63 @@ const initAnimation = () => {
   pointer-events: none;
   display: grid;
   z-index: 1000;
+}
 
-  &.outside {
-    img {
-      transform: translateX(-100%);
-    }
+.cursor.outside img {
+  transform: translateX(-100%);
+}
+
+.cursor::before {
+  content: "";
+  display: block;
+  inline-size: 2ch;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid white;
+  position: absolute;
+  top: -1ch;
+  left: -1ch;
+}
+
+.cursor img {
+  bottom: 100%;
+  position: absolute;
+  width: 100%;
+  animation: fadeOut 0.3s;
+  transition: transform 0.5s ease-in-out;
+}
+
+.cursor img.shown {
+  display: block;
+  animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    display: none;
   }
 
-  &:before {
-    content: "";
+  to {
+    opacity: 1;
     display: block;
-    inline-size: 2ch;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    border: 1px solid white;
-    position: absolute;
-    top: -1ch;
-    left: -1ch;
+  }
+}
+
+.cursor img.hidden {
+  display: none;
+  animation: fadeOut 0.2s;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    display: block;
   }
 
-  img {
-    bottom: 100%;
-    position: absolute;
-    width: 100%;
-    animation: fadeOut 0.3s;
-    transition: transform 0.5s ease-in-out;
-
-    &.shown {
-      display: block;
-      animation: fadeIn 0.2s;
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          display: none;
-        }
-
-        to {
-          opacity: 1;
-          display: block;
-        }
-      }
-    }
-
-    &.hidden {
-      display: none;
-      animation: fadeOut 0.2s;
-
-      @keyframes fadeOut {
-        from {
-          opacity: 1;
-          display: block;
-        }
-
-        to {
-          opacity: 0;
-          display: none;
-        }
-      }
-    }
+  to {
+    opacity: 0;
+    display: none;
   }
 }
 </style>

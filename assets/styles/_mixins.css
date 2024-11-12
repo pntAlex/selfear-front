@@ -1,0 +1,16 @@
+.huge-text {
+  font-size: clamp(6rem, 30vw + 0.0083rem, 30rem);
+}
+
+.middle-text {
+  font-size: clamp(1.4rem, 2.5vw + 0.0083rem, 3rem);
+}
+
+.small-text {
+  font-size: clamp(1.2rem, 3vw + 0.0083rem, 1.6rem);
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+}

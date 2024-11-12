@@ -1,0 +1,70 @@
+:root {
+  --dark: #050505;
+  --light: #fee7dd;
+  --text-color: white;
+}
+
+:root {
+  font-family: Raleway;
+  color: var(--text-color);
+}
+
+h1,
+h2,
+h3,
+.typed {
+  font-family: RibbonVF;
+}
+
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::webkit-scrollbar {
+  display: none;
+}
+
+body {
+  margin: 0;
+  position: relative;
+  font-weight: normal;
+  background-color: var(--dark);
+  max-width: 100svw;
+  overflow-x: hidden;
+}
+
+.column-border {
+  --column-width: calc(1 / 6 * 100vw);
+  --border-color: var(--dark);
+}
+
+.column-border-gray {
+  --border-color: var(--light);
+}
+
+.column-border:not(.column-border-left):after,
+.column-border:not(.column-border-right):before {
+  content: "";
+  display: block;
+  position: absolute;
+  opacity: 0.15;
+  width: var(--column-width);
+  border-left: 2px solid var(--border-color);
+  border-right: 2px solid var(--border-color);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.column-border:not(.column-border-right):before {
+  inset: 0 auto 0 5vw;
+}
+
+.column-border:not(.column-border-left):after {
+  inset: 0 5vw 0 auto;
+}
+
+.column-border-padded {
+  padding: calc(5vw + var(--column-width) / 4)
+    calc(5vw + var(--column-width) / 2);
+}
