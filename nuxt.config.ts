@@ -72,6 +72,7 @@ export default defineNuxtConfig({
     "@nuxtjs/device",
     "@nuxt/icon",
     "@nuxtjs/strapi",
+    "@nuxtjs/tailwindcss",
   ],
   gsap: {
     extraPlugins: {
