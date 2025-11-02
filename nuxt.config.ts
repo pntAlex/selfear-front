@@ -94,14 +94,14 @@ export default defineNuxtConfig({
     ],
   },
   runtimeConfig: {
-    strapiURL: process.env.NUXT_STRAPI_URL,
+    strapiURL: process.env.NUXT_STRAPI_URL ?? "http://selfear:1337",
     strapiAPIKey: process.env.NUXT_STRAPI_API_KEY,
     public: {
-      imageAlias: process.env.NUXT_PUBLIC_IMAGE_ALIAS,
+      imageAlias: process.env.NUXT_PUBLIC_IMAGE_ALIAS ?? "/uploads",
     },
   },
   strapi: {
-    url: process.env.NUXT_STRAPI_URL || "http://localhost:1337",
+    url: process.env.NUXT_STRAPI_URL || "http://selfear:1337",
     prefix: "/api",
     version: "v5",
   },
